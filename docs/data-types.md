@@ -23,3 +23,7 @@ Code: https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types
 - Still need to do more validation, things like a string is a strong password, or email validation? Then you need to write your own custom validator.
 
 Code: https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16
+
+# Define custom types
+
+- Define a new object type.

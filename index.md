@@ -1,6 +1,6 @@
 # GraphQL
 
-You can find a good definition usually in [glossary](./.github/glossary.md).
+You can find a good definition usually in [glossary](./docs/glossary.md).
 
-1. [Intro](./.github/intro.md).
-2. [Data types](./.github/data-types.md).
+1. [Intro](./docs/intro.md).
+2. [Data types](./docs/data-types.md).
