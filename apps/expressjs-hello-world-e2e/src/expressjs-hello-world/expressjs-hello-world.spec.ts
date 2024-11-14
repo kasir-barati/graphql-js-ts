@@ -4,7 +4,6 @@ describe('GET /', () => {
   it('should return "Hello world"', async () => {
     const query = `{ hello }`;
 
-    // http://localhost:4000/graphql
     const res = await axios.post(
       '/graphql',
       { query },

@@ -92,3 +92,77 @@ Code: https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/mai
    BTW To learn more about my thought processes and why I did test it this way you can [read this](https://github.com/kasir-barati/you-say/tree/main/.github/docs/testing#how-to-write-good-integration-tests).
 
 Code: https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world
+
+> [!TIP]
+>
+> - Use [Relay](https://relay.dev/) as your client in your ReactJS app.
+> - Or use `graphql-http` to just invoke your GraphQL endpoints over HTTP `POST` requests.
+
+## Dynamic values
+
+To construct GraphQL queries first we need to defined the schema:
+
+```graphql
+type Query {
+  rollDice(numDice: Int!, numSides: Int): [Int]
+}
+```
+
+Then:
+
+```js
+const dice = 3;
+const sides = 6;
+const query = /* GraphQL */ `
+  query RollDice($dice: Int!, $sides: Int) {
+    rollDice(numDice: $dice, numSides: $sides)
+  }
+`;
+
+fetch('/graphql', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+  body: JSON.stringify({
+    query,
+    variables: { dice, sides },
+  }),
+})
+  .then((r) => r.json())
+  .then((data) => console.log('data returned:', data));
+```
+
+### Let's break down
+
+```graphql
+query RollDice($dice: Int!, $sides: Int) {
+  rollDice(numDice: $dice, numSides: $sides)
+}
+```
+
+- A word prefixed with a **dollar sign** is a variable in the query.
+- `RollDice`:
+  - Optional.
+  - Serves as an identifier for the query.
+  - The **name of the query operation** in the GraphQL syntax.
+- `rollDice`:
+  - Query type defined in the schema.
+
+```js
+body: JSON.stringify({
+  query,
+  variables: { dice, sides },
+}),
+```
+
+`variables`:
+
+- Passes field values to the payload.
+- The server will replace `$dice` and `$sides` with the values inside the request body.
+- No need to escape characters, e.g.:
+  - If you embed a value like "O'Hara" directly into a GraphQL query.
+  - The apostrophe interfere with the query syntax (parsing error).
+  - To prevent this, you’d have to escape it by adding a backslash to ensure the character is read correctly.
+  - Like so: "O\'Hara".

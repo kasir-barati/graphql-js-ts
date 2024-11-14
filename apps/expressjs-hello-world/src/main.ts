@@ -22,6 +22,7 @@ app.get('/', (_req, res) => {
   res.type('html');
   res.end(ruruHTML({ endpoint: '/graphql' }));
 });
+// Mounting our GraphQL API to the /graphql endpoint.
 app.all(
   '/graphql',
   createHandler({ schema, rootValue: rootResolver }),
