@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "paths": {}
+  },
+  "extends": "../../../../apps/hello-world/tsconfig.app.json"
+}
