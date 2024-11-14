@@ -32,6 +32,6 @@ app.listen(
   4000,
   console.log.bind(
     this,
-    'Server is listening on http://localhost:4000/graphql',
+    'Server is listening on http://localhost:4000',
   ),
 );

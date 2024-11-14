@@ -81,5 +81,10 @@ Code: https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/mai
 3. ExpressJS to run a web server.
 4. `graphql-http` lib to mount a GraphQL API server on the `/graphql` HTTP endpoint.
 5. `pnpm add ruru`.
+
    - GraphiQL is GraphQL's IDE.
    - You can query and explore your GraphQL API with it.
+
+   ![GraphiQL IDE issued a GraphQL query to our hello endpoint](./assets/expressjs-hello-world-graphiql.png)
+
+Code: https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world
