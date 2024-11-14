@@ -69,3 +69,17 @@ Here is another example of fetching user info when we are only interested in use
 5. Make a call to your GraphQL.
 
 Code: https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/main.ts
+
+## ExpressJS + GraphQL
+
+1. `pnpm add "express@>=5.0.1" graphql-http graphql`.
+2. `nx g @nx/express:application apps/expressjs-hello-world`.
+   - `pnpm rm @nx/web @nx/webpack @pmmmwh/react-refresh-webpack-plugin @svgr/webpack webpack-cli react-refresh`.
+   - Remove webpack plugin from `nx.json`. And from `project.json` + its files.
+   - `nx add @ns/esbuild`.
+   - Update your `project.json` to use esbuild instead of webpack.
+3. ExpressJS to run a web server.
+4. `graphql-http` lib to mount a GraphQL API server on the `/graphql` HTTP endpoint.
+5. `pnpm add ruru`.
+   - GraphiQL is GraphQL's IDE.
+   - You can query and explore your GraphQL API with it.

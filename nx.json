@@ -21,7 +21,10 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/hello-world-e2e/**/*"]
+      "exclude": [
+        "apps/hello-world-e2e/**/*",
+        "apps/expressjs-hello-world-e2e/**/*"
+      ]
     }
   ]
 }
