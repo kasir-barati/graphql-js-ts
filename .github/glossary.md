@@ -33,4 +33,17 @@ Describes what kind of data can be requested,
           how different data pieces are connected.
     </pre>
   </dd>
+  <dt id="scalarValueDefinition">
+    <a href="#scalarValueDefinition">#</a>
+    Scalar value
+  </dt>
+  <dd>
+    It comes from linear algebra.
+  </dd>
+  <dd>
+    We use it to differentiate a single number from a vector or matrix. 
+  </dd>
+  <dd>
+    <a href="https://softwareengineering.stackexchange.com/q/238033/408819">Read more</a>.
+  </dd>
 <dl>

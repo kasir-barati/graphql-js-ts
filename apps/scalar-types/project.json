@@ -1,0 +1,59 @@
+{
+  "name": "scalar-types",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/scalar-types/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "target": "node20.10.0",
+        "outputPath": "dist/apps/scalar-types",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/scalar-types/src/main.ts",
+        "tsConfig": "apps/scalar-types/tsconfig.app.json",
+        "assets": ["apps/scalar-types/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "scalar-types:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "scalar-types:build:development"
+        },
+        "production": {
+          "buildTarget": "scalar-types:build:production"
+        }
+      }
+    }
+  }
+}
