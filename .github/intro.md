@@ -87,4 +87,8 @@ Code: https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/mai
 
    ![GraphiQL IDE issued a GraphQL query to our hello endpoint](./assets/expressjs-hello-world-graphiql.png)
 
+6. Or you can run the e2e tests for it: `nx e2e expressjs-hello-world-e2e`.
+
+   BTW To learn more about my thought processes and why I did test it this way you can [read this](https://github.com/kasir-barati/you-say/tree/main/.github/docs/testing#how-to-write-good-integration-tests).
+
 Code: https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world

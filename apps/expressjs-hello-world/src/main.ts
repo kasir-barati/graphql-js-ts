@@ -1,7 +1,6 @@
 import express from 'express';
 import { buildSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
-// @ts-ignore
 import { ruruHTML } from 'ruru/server';
 
 const schema = buildSchema(`
