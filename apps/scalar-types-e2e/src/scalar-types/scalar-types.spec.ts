@@ -55,7 +55,7 @@ describe('GET /graphql', () => {
     expect(typeof res.data.data.isItNightOnTheServer).toBe('boolean');
   });
 
-  it('should return the result of rolled dices', async () => {
+  it('should return the result of 3 rolled dice', async () => {
     const query = `{ rollThreeDice }`;
 
     const res = await axios.post(
@@ -71,6 +71,33 @@ describe('GET /graphql', () => {
     expect(res.status).toBe(200);
     expect(res.data.data.rollThreeDice.length).toBe(3);
     for (const die of res.data.data.rollThreeDice) {
+      expect(Number.isInteger(die)).toBeTruthy();
+    }
+  });
+
+  it('should return the result of rolling 5 dice', async () => {
+    const query = /* GraphQL */ `
+      query RollDice($dice: Int!, $sides: Int) {
+        rollDice(howManyDice: $dice, howManySidesDoTheyHave: $sides)
+      }
+    `;
+
+    const res = await axios.post(
+      '/graphql',
+      {
+        query,
+        variables: { sides: 7, dice: 5 },
+      },
+      {
+        headers: {
+          'content-type': 'application/json',
+        },
+      },
+    );
+
+    expect(res.status).toBe(200);
+    expect(res.data.data.rollDice.length).toBe(5);
+    for (const die of res.data.data.rollDice) {
       expect(Number.isInteger(die)).toBeTruthy();
     }
   });

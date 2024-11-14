@@ -4,6 +4,7 @@ import express from 'express';
 import { buildSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { ruruHTML } from 'ruru/server';
+import { rollTheDie } from './utils/roll-the-dice.util';
 
 const port = 4001;
 const schema = buildSchema(/* GraphQL */ `
@@ -12,6 +13,7 @@ const schema = buildSchema(/* GraphQL */ `
     rollThreeDice: [Int]
     genRandomMnemonic: String!
     isItNightOnTheServer: Boolean!
+    rollDice(howManyDice: Int!, howManySidesDoTheyHave: Int): [Int]
   }
 `);
 
@@ -20,9 +22,7 @@ const rootApi = {
     return randomUUID();
   },
   rollThreeDice() {
-    return new Array(3)
-      .fill(0)
-      .map(() => 1 + Math.floor(Math.random() * 6));
+    return new Array(3).fill(0).map(() => rollTheDie());
   },
   genRandomMnemonic() {
     return generateMnemonic();
@@ -31,6 +31,15 @@ const rootApi = {
     const hours = new Date().getHours();
 
     return hours > 18 && hours < 1;
+  },
+  // TODO: no type safety!
+  // Resolver receives variables= as its first argument which is called args usually.
+  rollDice(args) {
+    const { howManySidesDoTheyHave, howManyDice } = args;
+
+    return new Array(howManyDice)
+      .fill([])
+      .map((die) => die.push(rollTheDie(howManySidesDoTheyHave)));
   },
 };
 
