@@ -1,7 +1,7 @@
 # Data types
 
 - Specify the types for your API using the GraphQL schema language.
-- Supports the [scalar types](./glossary.md#scalarValueDefinition) and we can use them directly in our schema:
+- <a href="basicScalarTypes">#</a> Supports the [scalar types](./glossary.md#scalarValueDefinition) and we can use them directly in our schema:
   - `Int`.
   - `Float`.
   - `String`.
@@ -14,7 +14,9 @@
 
 Code: https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types
 
-# Passing arguments
+# Fetch data
+
+## Passing arguments
 
 - Define the arguments in the schema language.
 - Typechecking happens automatically. No need to write extra code to:
@@ -24,7 +26,7 @@ Code: https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types
 
 Code: https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16
 
-# Define custom types
+## Define custom types
 
 - Define a new object type.
 - The same way we define the `Query` type.
@@ -51,3 +53,26 @@ Code: https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498df
   4. Better UX since user do not have to wait a long time for the data.
 
 Code: https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts
+
+# Mutate data
+
+- Use a `Mutation` endpoint instead of `Query`.
+- Define the API endpoint as part of the top-level `Mutation` type.
+- E.g. a profile endpoint where you can change your info or fetch it.
+- In NestJS we usually have this concept of DTOs where we define incoming data's structure for create endpoint and reuse the same DTO for the update endpoint since they accept the same stuff.
+
+  In GraphQL we can do the same thing, but within the GraphQL syntax; i.e. we can use `input` keyword to define our incoming data type.
+
+  > [!CAUTION]
+  >
+  > `Input` types can **NOT** have fields that are other objects, only:
+  >
+  > - [Basic scalar types](#basicScalarTypes).
+  > - List types.
+  > - Or other input types (this is the same concept of nested objects that we have in NestJS).
+
+  > [!TIP]
+  >
+  > Naming convention for `input` types: add `Input` postfix to the base name.
+
+![Some notes about how to send mutation queries](./assets/mutation-example-notes.png)

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-describe('GET /graphql', () => {
+describe('POST /graphql', () => {
   it('should return a random ID', async () => {
     const query = `{ genRandomId }`;
 
