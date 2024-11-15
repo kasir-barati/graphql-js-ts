@@ -1,0 +1,3 @@
+query GetDie($sides: Int) {
+  getDie(numberOfSides: $sides)
+}

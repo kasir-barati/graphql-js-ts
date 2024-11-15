@@ -1,0 +1,6 @@
+{
+  getDie(numSides: 6) {
+    rollOnce
+    roll(count: 3)
+  }
+}
