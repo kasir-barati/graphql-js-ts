@@ -76,3 +76,5 @@ Code: https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/ma
   > Naming convention for `input` types: add `Input` postfix to the base name.
 
 ![Some notes about how to send mutation queries](./assets/mutation-example-notes.png)
+
+Code: https://github.com/kasir-barati/graphql/tree/main/apps/profile

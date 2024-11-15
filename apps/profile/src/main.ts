@@ -2,6 +2,7 @@ import express from 'express';
 import { buildSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { ruruHTML } from 'ruru/server';
+import { ipLoggerMiddleware } from './middlewares/ip-logger.middleware';
 import { ProfileResolver } from './resolvers/profile.resolver';
 
 const port = 4002;
@@ -31,6 +32,7 @@ const schema = buildSchema(/* GraphQL */ `
   }
   type Query {
     getProfile(id: ID!): Profile
+    ip: String!
   }
   type Mutation {
     # Wrong usage:
@@ -48,6 +50,10 @@ const rootResolver = {
     const profile = profiles.find((p) => p.id === args.id);
 
     return profile;
+  },
+  // Poor typing
+  ip(_, context) {
+    return context.ip;
   },
   createProfile(args) {
     const { name, email, avatar, username } = args.input;
@@ -81,6 +87,7 @@ const rootResolver = {
 
 const app = express();
 
+app.use(ipLoggerMiddleware);
 // Serve the GraphiQL IDE.
 app.get('/', (_req, res) => {
   res.type('html');
@@ -89,7 +96,13 @@ app.get('/', (_req, res) => {
 // Mounting our GraphQL API to the /graphql endpoint.
 app.all(
   '/graphql',
-  createHandler({ schema, rootValue: rootResolver }),
+  createHandler({
+    schema,
+    rootValue: rootResolver,
+    context(req) {
+      return { id: req.raw.ip };
+    },
+  }),
 );
 
 app.listen(
