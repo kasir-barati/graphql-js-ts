@@ -12,4 +12,8 @@
   - [express-js](https://github.com/auth0/express-jwt).
   - [expressjs-session](https://github.com/expressjs/session).
 
-Code: https://github.com/kasir-barati/graphql/tree/main/apps/profile
+Code: [https://github.com/kasir-barati/graphql/tree/main/apps/profile](https://github.com/kasir-barati/graphql/tree/main/apps/profile).
+
+## Ref
+
+- [https://graphql.org/graphql-js/authentication-and-express-middleware/](https://graphql.org/graphql-js/authentication-and-express-middleware/).

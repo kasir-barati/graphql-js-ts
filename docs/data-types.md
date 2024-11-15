@@ -12,7 +12,7 @@
 - `[String]` means a list of strings.
 - Just return plain old JavaScript objects in APIs that return scalar types.
 
-Code: https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types
+Code: [https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types](https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types).
 
 # Fetch data
 
@@ -24,7 +24,7 @@ Code: https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types
   - Enforce basic type enforcements.
 - Still need to do more validation, things like a string is a strong password, or email validation? Then you need to write your own custom validator.
 
-Code: https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16
+Code: [https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16](https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16).
 
 ## Define custom types
 
@@ -52,7 +52,7 @@ Code: https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498df
      - In our frontend we get a much cleaner way to fetch data.
   4. Better UX since user do not have to wait a long time for the data.
 
-Code: https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts
+Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts](https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts).
 
 # Mutate data
 
@@ -77,4 +77,8 @@ Code: https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/ma
 
 ![Some notes about how to send mutation queries](./assets/mutation-example-notes.png)
 
-Code: https://github.com/kasir-barati/graphql/tree/main/apps/profile
+Code: [https://github.com/kasir-barati/graphql/tree/main/apps/profile](https://github.com/kasir-barati/graphql/tree/main/apps/profile).
+
+## Ref
+
+- [https://graphql.org/graphql-js/authentication-and-express-middleware/](https://graphql.org/graphql-js/authentication-and-express-middleware/).

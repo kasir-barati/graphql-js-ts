@@ -68,7 +68,7 @@ Here is another example of fetching user info when we are only interested in use
 4. Define the query.
 5. Make a call to your GraphQL.
 
-Code: https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/main.ts
+Code: [https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/main.ts](https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/main.ts).
 
 ## ExpressJS + GraphQL
 
@@ -91,7 +91,7 @@ Code: https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/mai
 
    BTW To learn more about my thought processes and why I did test it this way you can [read this](https://github.com/kasir-barati/you-say/tree/main/.github/docs/testing#how-to-write-good-integration-tests).
 
-Code: https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world
+Code: [https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world](https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world).
 
 > [!TIP]
 >
@@ -166,3 +166,7 @@ body: JSON.stringify({
   - The apostrophe interfere with the query syntax (parsing error).
   - To prevent this, you’d have to escape it by adding a backslash to ensure the character is read correctly.
   - Like so: "O\'Hara".
+
+## Ref
+
+- [https://graphql.org/graphql-js/authentication-and-express-middleware/](https://graphql.org/graphql-js/authentication-and-express-middleware/).
