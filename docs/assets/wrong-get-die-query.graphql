@@ -1,3 +1,5 @@
+# This is the error message you'll get if you do call it like this.
+# message: 'Field "getDie" of type "RandomDie" must have a selection of subfields. Did you mean "getDie { ... }"?',
 query GetDie($sides: Int) {
   getDie(numberOfSides: $sides)
 }
