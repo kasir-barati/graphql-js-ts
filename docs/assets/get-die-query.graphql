@@ -1,5 +1,8 @@
 {
   getDie(numSides: 6) {
+    # Important
+    # You need to define rollOnce in your schema as well and it is not enough that they are public members of your class. What matters is that GraphQL did not get to know such a thing exits in your custom type
+    # message: 'Cannot query field "rollOnce" on type "RandomDie". Did you mean "roll"?'
     rollOnce
     roll(count: 3)
   }
