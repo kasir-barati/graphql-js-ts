@@ -49,3 +49,5 @@ Code: https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498df
      - On the backend we get to decide which method/property should be exposed.
      - In our frontend we get a much cleaner way to fetch data.
   4. Better UX since user do not have to wait a long time for the data.
+
+Code: https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts
