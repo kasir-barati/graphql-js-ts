@@ -100,7 +100,7 @@ app.all(
     schema,
     rootValue: rootResolver,
     context(req) {
-      return { id: req.raw.ip };
+      return { ip: req.raw.ip ?? req.raw.headers['x-forwarded-for'] };
     },
   }),
 );

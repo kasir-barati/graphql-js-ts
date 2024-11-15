@@ -1,7 +1,12 @@
 import axios from 'axios';
+import { cleanup } from '../support/cleanup';
 
 describe('POST /graphql', () => {
   const profileId = '15f3920f-a56e-4997-9763-09283dfbe36a';
+
+  afterAll(async () => {
+    await cleanup();
+  });
 
   it('should return profile with only an id name', async () => {
     const query = /* GraphQL */ `
@@ -95,5 +100,26 @@ describe('POST /graphql', () => {
       name: 'Mohammad Jawad (Kasir)',
       email: 'new@fancy.email',
     });
+  });
+
+  it('should return my IP', async () => {
+    const query = /* GraphQL */ `
+      {
+        ip
+      }
+    `;
+
+    const res = await axios.post(
+      '/graphql',
+      { query },
+      {
+        headers: {
+          'content-type': 'application/json',
+        },
+      },
+    );
+
+    expect(res.status).toBe(200);
+    expect(res.data.data.ip).toBe('::1');
   });
 });
