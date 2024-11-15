@@ -101,4 +101,32 @@ describe('GET /graphql', () => {
       expect(Number.isInteger(die)).toBeTruthy();
     }
   });
+
+  it('should return a random dice object type', async () => {
+    const query = /* GraphQL */ `
+      query GetDie($sides: Int) {
+        getDie(numberOfSides: $sides) {
+          rollOnce
+          roll(count: 2)
+        }
+      }
+    `;
+
+    const res = await axios.post(
+      '/graphql',
+      {
+        query,
+        variables: { sides: 12 },
+      },
+      {
+        headers: {
+          'content-type': 'application/json',
+        },
+      },
+    );
+
+    expect(res.status).toBe(200);
+    expect(typeof res.data.data.getRoll.roll.length).toBe(1);
+    expect(typeof res.data.data.getRoll.rollOnce).toBe('number');
+  });
 });
