@@ -1,7 +1,11 @@
 import { getDbClient } from '../repositories/db-client';
 import { TodoRepository } from '../repositories/todo.repository';
 import { TodoService } from '../services/todo.service';
-import { CreateTodoArg, GetTodoArg } from '../types/resolvers.type';
+import {
+  CreateTodoArg,
+  GetTodoArg,
+  UpdateTodoArg,
+} from '../types/resolvers.type';
 
 const dbClient = getDbClient();
 const todoRepository = new TodoRepository(dbClient);
@@ -16,6 +20,12 @@ export async function getTodo(args: GetTodoArg) {
 export async function createTodo(args: CreateTodoArg) {
   const { input } = args;
   const todo = await todoService.createTodo(input);
+
+  return todo;
+}
+export async function updateTodo(args: UpdateTodoArg) {
+  const { input, id } = args;
+  const todo = await todoService.updateTodo(id, input);
 
   return todo;
 }

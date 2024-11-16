@@ -9,7 +9,7 @@ describe('POST /graphql', () => {
   it('should create a todo assigned to nobody', async () => {
     const userId = await new UserBuilder().build();
     const query = /* GraphQL */ `
-      mutation CreateTodo($input: TodoInput) {
+      mutation CreateTodo($input: CreateTodoInput) {
         createTodo(input: $input) {
           id
           content
@@ -56,7 +56,7 @@ describe('POST /graphql', () => {
     const createdByUserId = await new UserBuilder().build();
     const assignedToUserId = await new UserBuilder().build();
     const query = /* GraphQL */ `
-      mutation CreateTodo($input: TodoInput) {
+      mutation CreateTodo($input: CreateTodoInput) {
         createTodo(input: $input) {
           id
           title

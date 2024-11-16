@@ -1,5 +1,8 @@
 import { TodoRepository } from '../repositories/todo.repository';
-import { CreateTodoArg } from '../types/resolvers.type';
+import {
+  CreateTodoArg,
+  UpdateTodoArg,
+} from '../types/resolvers.type';
 
 export class TodoService {
   constructor(private readonly todoRepository: TodoRepository) {}
@@ -11,6 +14,11 @@ export class TodoService {
   }
   async createTodo(data: CreateTodoArg['input']) {
     const todo = await this.todoRepository.create(data);
+
+    return todo;
+  }
+  async updateTodo(id: string, data: UpdateTodoArg['input']) {
+    const todo = await this.todoRepository.update(id, data);
 
     return todo;
   }

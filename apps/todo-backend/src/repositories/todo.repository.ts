@@ -43,6 +43,35 @@ export class TodoRepository {
       },
     });
   }
-  update() {}
+  update(
+    id: string,
+    {
+      title,
+      content,
+      createdById,
+      assignedToId,
+    }: {
+      title?: string;
+      content?: string;
+      createdById?: string;
+      assignedToId?: string;
+    },
+  ) {
+    return this.dbClient.todo.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        content,
+        createdById,
+        assignedToId,
+      },
+      include: {
+        CreatedBy: true,
+        AssignedTo: true,
+      },
+    });
+  }
   delete() {}
 }

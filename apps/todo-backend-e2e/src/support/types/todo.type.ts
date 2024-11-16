@@ -1,39 +1,46 @@
-export interface GetTodoResponse {
-  data: {
-    getTodo: {
-      id: string;
-      content: string;
-    };
-  };
+interface Response<T> {
+  data: T;
 }
-export interface CreateTodoResponse {
-  data: {
-    createTodo: {
-      CreatedBy: {
-        createdAt: number;
-        id: string;
-        username: string;
-      };
-      content: string;
-      id: string;
-    };
+
+export type GetTodoResponse = Response<{
+  getTodo: {
+    id: string;
+    content: string;
   };
-}
-export interface CreateTodoAssignedToSomeoneResponse {
-  data: {
-    createTodo: {
-      CreatedBy: {
-        createdAt: number;
-        id: string;
-        username: string;
-      };
-      AssignedTo: {
-        updatedAt: number;
-        id: string;
-        username: string;
-      };
-      title: string;
+}>;
+export type CreateTodoBuilderResponse = Response<{
+  createTodo: { id: string };
+}>;
+export type CreateTodoResponse = Response<{
+  createTodo: {
+    CreatedBy: {
+      createdAt: number;
       id: string;
+      username: string;
     };
+    content: string;
+    id: string;
   };
-}
+}>;
+export type CreateTodoAssignedToSomeoneResponse = Response<{
+  createTodo: {
+    CreatedBy: {
+      createdAt: number;
+      id: string;
+      username: string;
+    };
+    AssignedTo: {
+      updatedAt: number;
+      id: string;
+      username: string;
+    };
+    title: string;
+    id: string;
+  };
+}>;
+export type UpdateTodoResponse = Response<{
+  updateTodo: {
+    id: string;
+    title: string;
+  };
+}>;
