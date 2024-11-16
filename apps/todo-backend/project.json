@@ -1,0 +1,128 @@
+{
+  "name": "todo-backend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "{projectRoot}/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "compose:up": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose up -d",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compose:down": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/{projectRoot}",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "{projectRoot}/src/main.ts",
+        "tsConfig": "{projectRoot}/tsconfig.app.json",
+        "assets": ["{projectRoot}/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["compose:up", "build"],
+      "options": {
+        "buildTarget": "todo-backend:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "todo-backend:build:development"
+        },
+        "production": {
+          "buildTarget": "todo-backend:build:production"
+        }
+      }
+    },
+    "prisma-deploy": {
+      "executor": "@nx-tools/nx-prisma:deploy"
+    },
+    "prisma-format": {
+      "executor": "@nx-tools/nx-prisma:format"
+    },
+    "prisma-generate": {
+      "executor": "@nx-tools/nx-prisma:generate"
+    },
+    "prisma-migrate": {
+      "executor": "@nx-tools/nx-prisma:migrate",
+      "dependsOn": ["compose:up"]
+    },
+    "prisma-pull": {
+      "executor": "@nx-tools/nx-prisma:pull"
+    },
+    "prisma-push": {
+      "executor": "@nx-tools/nx-prisma:push"
+    },
+    "prisma-reset": {
+      "executor": "@nx-tools/nx-prisma:reset"
+    },
+    "prisma-resolve": {
+      "executor": "@nx-tools/nx-prisma:resolve"
+    },
+    "prisma-seed": {
+      "executor": "@nx-tools/nx-prisma:seed",
+      "options": {
+        "script": "{projectRoot}/prisma/seed.ts",
+        "tsConfig": "{projectRoot}/tsconfig.app.json",
+        "executeWith": "ts-node"
+      }
+    },
+    "prisma-status": {
+      "executor": "@nx-tools/nx-prisma:status"
+    },
+    "prisma-studio": {
+      "executor": "@nx-tools/nx-prisma:studio"
+    },
+    "prisma-validate": {
+      "executor": "@nx-tools/nx-prisma:validate"
+    }
+  }
+}
