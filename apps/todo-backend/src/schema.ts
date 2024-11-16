@@ -4,17 +4,26 @@ export const schema = /* GraphQL */ `
   type User {
     id: ID!
     username: String!
+    createdAt: String
+    updatedAt: String
   }
   type Todo {
     id: String!
+    title: String!
     content: String!
-    assignedTo: User
-    createdBy: User!
+    AssignedTo: User
+    assignedToId: ID
+    CreatedBy: User!
+    createdById: ID!
     createdAt: String!
     updatedAt: String!
   }
 
+  input UserInput {
+    username: String!
+  }
   input TodoInput {
+    title: String!
     content: String!
     assignedToId: ID
     createdById: ID!
@@ -26,6 +35,7 @@ export const schema = /* GraphQL */ `
   }
 
   type Mutation {
+    createUser(input: UserInput): User
     createTodo(input: TodoInput): Todo
     updateTodo(input: TodoInput): Todo
     # There is not void in GraphQL. But the primitive types are nullable.

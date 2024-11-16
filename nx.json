@@ -1,5 +1,7 @@
 {
-  "installation": { "version": "20.1.0" },
+  "installation": {
+    "version": "20.1.0"
+  },
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
       "cache": true,
@@ -10,11 +12,15 @@
   "plugins": [
     {
       "plugin": "@nx/eslint/plugin",
-      "options": { "targetName": "lint" }
+      "options": {
+        "targetName": "lint"
+      }
     },
     {
       "plugin": "@nx/jest/plugin",
-      "options": { "targetName": "test" },
+      "options": {
+        "targetName": "test"
+      },
       "exclude": [
         "apps/hello-world-e2e/**/*",
         "apps/expressjs-hello-world-e2e/**/*",

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { GetTodoResponse } from '../support/types/todo.type';
 
 describe('POST /graphql', () => {
   it('should get a todo', async () => {
@@ -11,11 +12,14 @@ describe('POST /graphql', () => {
       }
     `;
 
-    const res = await axios.post(`/graphql`, { query });
+    const {
+      data: { data },
+      status,
+    } = await axios.post<GetTodoResponse>(`/graphql`, {
+      query,
+    });
 
-    console.log(res.data);
-
-    expect(res.status).toBe(200);
-    expect(res.data).toMatchSnapshot();
+    expect(status).toBe(200);
+    expect(data).toMatchSnapshot();
   });
 });

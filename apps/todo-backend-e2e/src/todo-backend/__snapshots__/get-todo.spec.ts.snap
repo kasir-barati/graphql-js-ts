@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /graphql should get a todo 1`] = `
+{
+  "getTodo": {
+    "content": "Some content",
+    "id": "eec5e3aa-7137-4c9c-a723-ec2f43d4daa4",
+  },
+}
+`;

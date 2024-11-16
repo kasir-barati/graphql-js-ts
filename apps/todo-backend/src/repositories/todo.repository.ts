@@ -10,10 +10,39 @@ export class TodoRepository {
     //   WHERE id = ${id}`;
     return this.dbClient.todo.findFirst({
       where: { id },
-      include: { assignedTo: true, createdBy: true },
+      include: { AssignedTo: true, CreatedBy: true },
     });
   }
-  create() {}
+  create({
+    title,
+    content,
+    createdById,
+    assignedToId,
+  }: {
+    title: string;
+    content: string;
+    createdById: string;
+    assignedToId?: string;
+  }) {
+    return this.dbClient.todo.create({
+      data: {
+        title,
+        content,
+        createdById,
+        assignedToId,
+      },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true,
+        updatedAt: true,
+        CreatedBy: true,
+        createdById: true,
+        ...(assignedToId && { AssignedTo: true, assignedToId: true }),
+      },
+    });
+  }
   update() {}
   delete() {}
 }
