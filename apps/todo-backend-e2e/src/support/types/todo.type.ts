@@ -44,3 +44,12 @@ export type UpdateTodoResponse = Response<{
     title: string;
   };
 }>;
+export type UpdateTodoAndAssignedToResponse = Response<{
+  updateTodo: {
+    id: string;
+    content: string;
+    AssignedTo: {
+      id: string;
+    };
+  };
+}>;

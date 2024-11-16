@@ -16,14 +16,16 @@ export class TodoBuilder {
     this.title = title;
     return this;
   }
-
   setContent(content: string) {
     this.content = content;
     return this;
   }
-
   setCreatedById(userId: string) {
     this.createdById = userId;
+    return this;
+  }
+  setAssignedById(userId: string) {
+    this.assignedToId = userId;
     return this;
   }
 
