@@ -16,5 +16,6 @@
    4. Prepared service layer, and repository layer + seeding some data.
    5. Add docker compose related scripts in `apps/todo-backend/project.json`.
    6. Ran `nx prisma-migrate todo-backend --name init` to generate the migration files.
-   7. Wrote E2E tests.
-   8. Implement queries.
+   7. **T**est **D**riven **D**evelopment approach:
+      1. Wrote E2E tests.
+      2. Implement queries/mutations.
