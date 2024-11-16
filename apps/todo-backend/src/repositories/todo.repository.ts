@@ -73,5 +73,11 @@ export class TodoRepository {
       },
     });
   }
-  delete() {}
+  async delete(id: string) {
+    await this.dbClient.todo.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

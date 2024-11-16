@@ -8,6 +8,11 @@ export type GetTodoResponse = Response<{
     content: string;
   };
 }>;
+export type GetTodoFinderResponse = Response<{
+  getTodo: {
+    id: string;
+  };
+}>;
 export type CreateTodoBuilderResponse = Response<{
   createTodo: { id: string };
 }>;
@@ -53,3 +58,4 @@ export type UpdateTodoAndAssignedToResponse = Response<{
     };
   };
 }>;
+export type DeleteTodoResponse = Response<{ deleteTodo: null }>;

@@ -3,6 +3,7 @@ import { TodoRepository } from '../repositories/todo.repository';
 import { TodoService } from '../services/todo.service';
 import {
   CreateTodoArg,
+  DeleteTodoArg,
   GetTodoArg,
   UpdateTodoArg,
 } from '../types/resolvers.type';
@@ -28,4 +29,10 @@ export async function updateTodo(args: UpdateTodoArg) {
   const todo = await todoService.updateTodo(id, input);
 
   return todo;
+}
+export async function deleteTodo(args: DeleteTodoArg) {
+  const { id } = args;
+  await todoService.deleteTodo(id);
+
+  return;
 }

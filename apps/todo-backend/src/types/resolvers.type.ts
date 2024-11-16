@@ -19,6 +19,9 @@ export type UpdateTodoArg = IdWithInputArg<{
   createdById?: string;
   assignedToId?: string;
 }>;
+export type DeleteTodoArg = {
+  id: string;
+};
 export type CreateUserArg = InputArg<{
   username: string;
 }>;

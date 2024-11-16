@@ -22,4 +22,7 @@ export class TodoService {
 
     return todo;
   }
+  async deleteTodo(id: string) {
+    await this.todoRepository.delete(id);
+  }
 }
