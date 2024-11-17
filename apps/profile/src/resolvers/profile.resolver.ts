@@ -13,6 +13,7 @@ export class ProfileResolver {
   email?: string;
   avatar?: string;
   username?: string;
+  birthday?: Date;
 
   constructor() {
     this.id = randomUUID();

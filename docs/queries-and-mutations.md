@@ -33,7 +33,7 @@ You need to define fragments in your client-side app -- [ref](https://stackoverf
 By using variables:
 
 - Their type must be either:
-  - Enums.
+  - [Enums](./data-types.md#enums).
   - [Scalars](./data-types.md#basicScalarTypes).
   - [Input object](./data-types.md#inputObjectType).
 - You client code do not need to serialize them into a GraphQL-specific format.

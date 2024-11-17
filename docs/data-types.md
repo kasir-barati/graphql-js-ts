@@ -1,18 +1,32 @@
 # Data types
 
 - Specify the types for your API using the GraphQL schema language.
+  - In other word they describe what data can be queried from the API.
 - <a href="basicScalarTypes">#</a> Supports the [scalar types](./glossary.md#scalarValueDefinition) and we can use them directly in our schema:
-  - `Int`.
-  - `Float`.
-  - `String`.
-  - `Boolean`.
-  - `ID` (intended to convey meaning rather than dictate a format).
+  - `Int`: A signed 32‐bit integer.
+  - `Float`: A signed double-precision floating-point value.
+  - `String`: A UTF‐8 character sequence.
+  - `Boolean`: `true` or `false`.
+  - `ID`:
+    - Serialized in the same way as a `String`.
+    - Intended to convey meaning rather than dictate a format.
 - By default, every type is nullable.
-- Defined mandatory fields by adding exclamation mark at the end of a field name.
+- Define mandatory fields by adding exclamation mark (`!`) at the end of a field name.
 - `[String]` means a list of strings.
 - Just return plain old JavaScript objects in APIs that return scalar types.
+- Scalar types cannot have sub-selections in the query.
+- The leaf values of the query.
 
 Code: [https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types](https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types).
+
+## Define custom scalar types
+
+- You must define how the new custom scalar type should be:
+  - Serialized.
+  - Deserialized.
+  - Validated.
+- [E.g. `scalar Date`](../apps/profile/src/utils/date-scalar-type.util.ts).
+- Your client-side also knows how it should work with that custom scalar type.
 
 # Fetch data
 
@@ -79,9 +93,77 @@ Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/m
 
 Code: [https://github.com/kasir-barati/graphql/tree/main/apps/profile](https://github.com/kasir-barati/graphql/tree/main/apps/profile).
 
+# Enums
+
+- AKA enumeration types.
+- A special kind of scalar type.
+- Is restricted to a particular set of allowed values.
+
+```graphql
+enum TodoStatus {
+  CREATED
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+  DELETED
+}
+```
+
 # Interfaces & unions
 
-WIP
+These are what you might call _abstract types_.
+
+## Interface
+
+- A group of fields that must be included and implemented in either:
+  - **A concrete** Object type.
+  - Or other `Interface` types.
+- They can implement each other.
+- **NO** cyclic implementation is allowed!
+- **NO** self implementation is allowed!
+- They clarify shared behavior or purpose.
+- Do **NOT** use it just to enforce shared field names.
+- E.g. for a audit-log object I would have a very basic interface and some concrete types:
+
+  ```graphql
+  # Define a shared interface for received data
+  interface EventData {
+    after: String
+    before: String
+  }
+  # Define a shared interface for all sources
+  interface EventSource implements EventData {
+    id: ID!
+    name: String!
+    timestamp: Int!
+    requestId: String!
+    tags: [String!]!
+
+    data: EventData!
+  }
+  # Robot type implements the EventSource interface
+  type Robot implements EventSource {
+    id: ID!
+    name: String!
+    timestamp: Int!
+    requestId: String!
+    tags: [String!]!
+    data: EventData!
+
+    serialNumber: String!
+  }
+  # ML Application type implements the EventSource interface
+  type MLApp implements EventSource {
+    id: ID!
+    name: String!
+    timestamp: Int!
+    requestId: String!
+    tags: [String!]!
+    data: EventData!
+
+    appName: String!
+  }
+  ```
 
 ## Ref
 

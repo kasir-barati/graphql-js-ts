@@ -35,6 +35,28 @@ describe('POST /graphql', () => {
     expect(res.data).toMatchSnapshot();
   });
 
+  it('should return profile with custom Date scalar type', async () => {
+    const query = /* GraphQL */ `
+      query GetProfile($id: ID!) {
+        getProfile(id: $id) {
+          id
+          name
+          birthday
+        }
+      }
+    `;
+
+    const res = await axios.post('/graphql', {
+      query,
+      variables: { id: profileId },
+    });
+
+    console.log(res.data.data.getProfile.birthday);
+
+    expect(res.status).toBe(200);
+    expect(res.data.data.getProfile.birthday).toBeDefined();
+  });
+
   it('should create profile and return id + name', async () => {
     // This must be called query, no matter it is a mutation or query
     const query = /* GraphQL */ `

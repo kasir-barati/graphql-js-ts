@@ -4,6 +4,7 @@ import { createHandler } from 'graphql-http/lib/use/express';
 import { ruruHTML } from 'ruru/server';
 import { ipLoggerMiddleware } from './middlewares/ip-logger.middleware';
 import { ProfileResolver } from './resolvers/profile.resolver';
+import { GraphqlDateScalarType } from './utils/date-scalar-type.util';
 
 const port = 4002;
 const profiles: ProfileResolver[] = [
@@ -13,23 +14,29 @@ const profiles: ProfileResolver[] = [
     email: 'seed@mail.co',
     avatar: 'seed.avatar/asapoihj.png',
     username: 'seeded_profile_username',
+    birthday: new Date(),
   } as ProfileResolver,
 ];
 
 const schema = buildSchema(/* GraphQL */ `
+  scalar Date
+
   input ProfileInput {
     name: String
     email: String
     avatar: String
     username: String
   }
+
   type Profile {
     id: String
     name: String
     email: String
     avatar: String
     username: String
+    birthday: Date
   }
+
   type Query {
     getProfile(id: ID!): Profile
     ip: String!
@@ -46,6 +53,7 @@ const schema = buildSchema(/* GraphQL */ `
 `);
 
 const rootResolver = {
+  Date: GraphqlDateScalarType,
   getProfile(args) {
     const profile = profiles.find((p) => p.id === args.id);
 

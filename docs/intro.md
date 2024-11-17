@@ -1,6 +1,7 @@
 # Graph QL
 
 - A [query language](./glossary.md#queryLanguageDefinition) for your API.
+  - Note that GraphQL query language is basically about selecting fields on objects.
 - A [server-side runtime](./glossary.md#serverSideRuntimeDefinition) for executing queries using a [type system](./glossary.md#typeSystemDefinitionInGraphql) you define for your data.
 - The [GraphQL **specification**](https://spec.graphql.org) is open-source.
 - [GraphQL is not tied to any specific database or storage engine](https://www.reddit.com/r/graphql/comments/1gr13y6/why_graphql_is_phrasing_being_databaseagnostic_as/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) -- it is backed by your existing code and data.
