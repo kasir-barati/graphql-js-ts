@@ -59,7 +59,7 @@ Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/m
 - Use a `Mutation` endpoint instead of `Query`.
 - Define the API endpoint as part of the top-level `Mutation` type.
 - E.g. a profile endpoint where you can change your info or fetch it.
-- In NestJS we usually have this concept of DTOs where we define incoming data's structure for create endpoint and reuse the same DTO for the update endpoint since they accept the same stuff.
+- <a href="#inputObjectType" id="inputObjectType">#</a> In NestJS we usually have this concept of DTOs where we define incoming data's structure for create endpoint and reuse the same DTO for the update endpoint since they accept the same stuff.
 
   In GraphQL we can do the same thing, but within the GraphQL syntax; i.e. we can use `input` keyword to define our incoming data type.
 
@@ -78,6 +78,10 @@ Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/m
 ![Some notes about how to send mutation queries](./assets/mutation-example-notes.png)
 
 Code: [https://github.com/kasir-barati/graphql/tree/main/apps/profile](https://github.com/kasir-barati/graphql/tree/main/apps/profile).
+
+# Interfaces & unions
+
+WIP
 
 ## Ref
 

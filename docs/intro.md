@@ -37,6 +37,28 @@ A GraphQL service is running (typically at a URL on a web service):
 > - Responses in the expected shape.
 > - Receiving just the data with a single request (no roundtrip).
 
+> [!CAUTION]
+>
+> <a id="operationName" href="#operationName">#</a> **Operation name**
+>
+> Here we are omitting our query name and operation name. But when you're developing a real software better to include them to prevent any ambiguity.
+>
+> ```graphql
+> query FetchUserInfo {
+>   me {
+>     name
+>   }
+> }
+> ```
+>
+> - You can also have anonymous [`mutation` operations too](./data-types.md#mutate-data). But it is encourages to use named operations since they will give us an edge in:
+>   - Debugging.
+>   - Code readability.
+>   - Server-side logging.
+> - Similar to function names.
+>
+> [Learn more](https://graphql.org/learn/queries/#operation-name).
+
 ### No need to do API versioning
 
 - Change your API based on ever evolving client needs without the overhead of managing different API versions.
@@ -168,7 +190,7 @@ body: JSON.stringify({
   - If you embed a value like "O'Hara" directly into a GraphQL query.
   - The apostrophe interfere with the query syntax (parsing error).
   - To prevent this, you’d have to escape it by adding a backslash to ensure the character is read correctly.
-  - Like so: "O\'Hara".
+  - Like: "O\'Hara".
 
 ## Ref
 

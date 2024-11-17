@@ -46,4 +46,11 @@ Describes what kind of data can be requested,
   <dd>
     <a href="https://softwareengineering.stackexchange.com/q/238033/408819">Read more</a>.
   </dd>
+  <dt id="firstClassWayDefinition">
+    <a href="#firstClassWayDefinition">#</a>
+    First-class way
+  </dt>
+  <dd>
+    GraphQL provides a built-in, standardized, and recommended approach.
+  </dd>
 <dl>
