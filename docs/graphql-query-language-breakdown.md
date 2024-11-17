@@ -36,11 +36,7 @@
   <dd>All arguments are named.</dd>
   <dd>Every field on a GraphQL Object type can have zero or more arguments.</dd>
   <dd>Can be required or optional.</dd>
-  <dt id="Jargon"></dt>
-  <dd></dd>
-  <dt id="Jargon"></dt>
-  <dd></dd>
-<dl>
+</dl>
 
 > [!TIP]
 >
