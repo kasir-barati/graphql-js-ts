@@ -32,7 +32,10 @@ A GraphQL service is running (typically at a URL on a web service):
 
 > [!NOTE]
 >
-> Client can make queries to the API that mirror the structure of the data that they need and then receive just that data in the expected shape with a single request.
+> Client can make queries to the API, here we our client benefits from:
+>
+> - Responses in the expected shape.
+> - Receiving just the data with a single request (no roundtrip).
 
 ### No need to do API versioning
 

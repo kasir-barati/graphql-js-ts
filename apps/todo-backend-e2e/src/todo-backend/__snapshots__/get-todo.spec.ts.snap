@@ -8,3 +8,15 @@ exports[`POST /graphql should get a todo 1`] = `
   },
 }
 `;
+
+exports[`POST /graphql should get a todo and rename fields to snake_case 1`] = `
+{
+  "getTodo": {
+    "content": "Some content",
+    "created_by": {
+      "username": "kasir-barati",
+    },
+    "id": "eec5e3aa-7137-4c9c-a723-ec2f43d4daa4",
+  },
+}
+`;

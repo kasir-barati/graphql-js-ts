@@ -8,3 +8,4 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
 4. A simple todo app written with GraphQL + ReactJS + Relay:
    - [Backend](./apps/todo-backend/README.md).
    - [Frontend]().
+5. [Queries and mutations in depth](./docs/queries-and-mutations.md).
