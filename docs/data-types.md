@@ -1,4 +1,8 @@
-# Data types
+# An overview
+
+![GraphQL named type definitions in GraphQL](./assets/graphql-types.png)
+
+# Data types -- Scalar
 
 - Specify the types for your API using the GraphQL schema language.
   - In other word they describe what data can be queried from the API.
@@ -40,7 +44,7 @@ Code: [https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types](http
 
 Code: [https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16](https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16).
 
-## Define custom types
+## Define custom types -- Objects
 
 - Define a new object type.
 - The same way we define the `Query` type.
