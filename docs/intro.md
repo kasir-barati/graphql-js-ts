@@ -12,11 +12,13 @@ GraphQL is a structured way of talking to the backend and asking for data or per
 
 > [!NOTE]
 >
-> This is copied and pasted from GraphQL here, in fact this was a burning question for me that if I should stick to HTTP/S or should I use a different protocol. But in short we do not need to change our protocol.
+> - This is copied and pasted from GraphQL here, in fact this was a burning question for me that if I should stick to HTTP/S or should I use a different protocol. But in short we do not need to change our protocol.
 >
 > > ... the GraphQL specification doesn’t require the use of a particular transport protocol for requests ... it is common for HTTP to be used for stateless query and mutations operations. Long-lived, stateful subscription operations are often supported by WebSockets or server-sent events instead.
 > >
 > > &mdash; [Ref](https://graphql.org/learn/response/#data).
+>
+> - This was my second question that I was trying to find an answer to it and it was actually just a few links away from me. [In graphql.org they have a section for tools and libs](https://graphql.org/community/tools-and-libraries/). There I was able to compare and find the right tool for my next move, deciding on a lib for my backend app.
 
 ## How you create your API in GraphQL
 
