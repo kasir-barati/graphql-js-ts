@@ -124,14 +124,14 @@ We also have another directive which is `@skip`, but ATM I am failing to see any
 ## Side effects
 
 - In RESTful APIs we have the concept of side effects and there we say that [`GET` requests should not have any side effect](https://news.ycombinator.com/item?id=29242583). But other HTTP methods can have side effects (please do not confuse this with [idempotency](https://github.com/kasir-barati/you-say/tree/main/.github/docs/glossary#idempotency)).
-- In GraphQL we follow the same rule, `query` operation type should be side-effect-free while `mutation` can have side effects.
+- In GraphQL we follow the same rule, `query` [operation](./glossary.md#graphqlOperationDefinition) type should be side-effect-free while `mutation` can have side effects.
 
 # Order of execution for specified fields
 
-| Operation type | Execution order | Implications                                                          |
-| -------------- | --------------- | --------------------------------------------------------------------- |
-| `query`.       | Parallel.       |                                                                       |
-| `mutation`.    | Series.         | E.g. if you call `incrementCredits` twice they run one after another. |
+| Operation type | Execution order      | Implications                                                          |
+| -------------- | -------------------- | --------------------------------------------------------------------- |
+| `query`.       | Parallel/concurrent. |                                                                       |
+| `mutation`.    | Series.              | E.g. if you call `incrementCredits` twice they run one after another. |
 
 # Work with generic types and concrete ones -- inline `fragment`s
 

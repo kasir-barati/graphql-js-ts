@@ -1,4 +1,4 @@
-# Diagnose GraphQL query language
+# Diagnose GraphQL [query language](./glossary.md#queryLanguageDefinition)
 
 ![Breaking down a query](./assets/breakdown-a-query.png)
 
@@ -48,7 +48,7 @@
 
 > [!IMPORTANT]
 >
-> - Every GraphQL schema must support `query` operations.
+> - Every GraphQL schema must support `query` [operations](./glossary.md#graphqlOperationDefinition).
 > - The entry point of a "root" operation type is a regular Object type called `Query` by default.
 >
 > ![Mandatory Query object type in GraphQL](./assets/mandatory-query-object-type.png)

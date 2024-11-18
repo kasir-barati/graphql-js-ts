@@ -188,7 +188,10 @@ These are what you might call _abstract types_.
 - Cannot use `interface` or another `union` inside a `union`.
 - Examples:
 
-  - ![When you have an interface you can utilize it to prevent repetitive work](./assets/unions-example1.png)
+  - <a href="#auditLogUnionExample" id="auditLogUnionExample">#</a> audit-log example
+
+    ![When you have an interface you can utilize it to prevent repetitive work](./assets/unions-example1.png)
+
   - ```graphql
     union SearchResult = Issue | Code
     type Issue {

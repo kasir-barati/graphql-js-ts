@@ -9,6 +9,13 @@
   <dd>
     Allows clients (e.g. web or mobile apps) to ask for exactly the data they need from the server by writing queries.
   </dd>
+  <dt id="graphqlOperationDefinition">
+    <a href="#graphqlOperationDefinition">#</a>
+    GraphQL operation
+  </dt>
+  <dd>
+    The thing that the client sends to the GraphQL server.
+  </dd>
   <dt id="serverSideRuntimeDefinition">
     <a href="#serverSideRuntimeDefinition">#</a>
     Server-side runtime

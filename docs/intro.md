@@ -8,7 +8,7 @@
 
 ## My definition of GraphQL
 
-GraphQL is a structured way of talking to the backend and asking for data or performing an operation in a specific way within the established framework of our backend. Meaning we ain't gonna let client to do whatever they want but will give them more room to play but will still have some form dos and don'ts.
+GraphQL is a structured way of talking to the backend and asking for data or performing an [operation](./glossary.md#graphqlOperationDefinition) in a specific way within the established framework of our backend. Meaning we ain't gonna let client to do whatever they want but will give them more room to play but will still have some form dos and don'ts.
 
 ## How you create your API in GraphQL
 
