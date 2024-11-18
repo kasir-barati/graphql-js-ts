@@ -73,21 +73,32 @@ Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/m
 - Use a `Mutation` endpoint instead of `Query`.
 - Define the API endpoint as part of the top-level `Mutation` type.
 - E.g. a profile endpoint where you can change your info or fetch it.
-- <a href="#inputObjectType" id="inputObjectType">#</a> In NestJS we usually have this concept of DTOs where we define incoming data's structure for create endpoint and reuse the same DTO for the update endpoint since they accept the same stuff.
 
-  In GraphQL we can do the same thing, but within the GraphQL syntax; i.e. we can use `input` keyword to define our incoming data type.
+## Input Object type
 
-  > [!CAUTION]
-  >
-  > `Input` types can **NOT** have fields that are other objects, only:
-  >
-  > - [Basic scalar types](#basicScalarTypes).
-  > - List types.
-  > - Or other input types (this is the same concept of nested objects that we have in NestJS).
+In NestJS we usually have this concept of DTOs where we define incoming data's structure for create endpoint and reuse the same DTO for the update endpoint since they accept the same stuff.
 
-  > [!TIP]
-  >
-  > Naming convention for `input` types: add `Input` postfix to the base name.
+In GraphQL we can do the same thing, but within the GraphQL syntax boundaries; i.e. we can use `input` keyword to define our incoming data type.
+
+> [!CAUTION]
+>
+> `Input` types can **NOT** have:
+>
+> - Fields that are other objects, only:
+>   - [Basic scalar types](#basicScalarTypes).
+>   - List types.
+>   - Or other input types (this is the same concept of nested objects that we have in NestJS).
+> - Arguments either.
+
+> [!TIP]
+>
+> Naming convention for `input` types: add `Input` postfix to the base name.
+
+Following example's schema definition:
+
+1. https://github.com/kasir-barati/graphql/blob/cc9666b59d67392a89075531dbbd960683482fb8/apps/profile/src/main.ts#L24-L29
+
+2. https://github.com/kasir-barati/graphql/blob/cc9666b59d67392a89075531dbbd960683482fb8/apps/profile/src/main.ts#L44-L52
 
 ![Some notes about how to send mutation queries](./assets/mutation-example-notes.png)
 
@@ -113,7 +124,7 @@ enum TodoStatus {
 
 These are what you might call _abstract types_.
 
-## Interface
+## `interface`
 
 - A group of fields that must be included and implemented in either:
   - **A concrete** Object type.
@@ -153,7 +164,7 @@ These are what you might call _abstract types_.
     serialNumber: String!
   }
   # ML Application type implements the EventSource interface
-  type MLApp implements EventSource {
+  type MachineLearningApp implements EventSource {
     id: ID!
     name: String!
     timestamp: Int!
@@ -164,6 +175,32 @@ These are what you might call _abstract types_.
     appName: String!
   }
   ```
+
+## `union`
+
+- Similar to a `interface`.
+- Cannot define any shared fields among the constituent types.
+  - I.e the types included in a union can have completely unrelated structures, and GraphQL does not enforce that they share any fields.
+- Cannot use `interface` or another `union` inside a `union`.
+- Examples:
+
+  - ![When you have an interface you can utilize it to prevent repetitive work](./assets/unions-example1.png)
+  - ```graphql
+    union SearchResult = Issue | Code
+    type Issue {
+      id: ID!
+      Repo: Repository
+      title: String
+      content: String
+    }
+    type Code {
+      line: Int
+      Repo: RepositoryWithCommitSha
+      fileLanguage: ProgrammingLanguage
+    }
+    ```
+
+- Need [inline fragments](./queries-and-mutations.md#work-with-generic-types-and-concrete-ones----inline-fragments) to be able to query `interface` specific parts.
 
 ## Ref
 

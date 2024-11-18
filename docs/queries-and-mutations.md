@@ -35,7 +35,7 @@ By using variables:
 - Their type must be either:
   - [Enums](./data-types.md#enums).
   - [Scalars](./data-types.md#basicScalarTypes).
-  - [Input object](./data-types.md#inputObjectType).
+  - [Input object](./data-types.md#input-object-type).
 - You client code do not need to serialize them into a GraphQL-specific format.
 - GraphQL's [first-class way](./glossary.md#firstClassWayDefinition) to factor dynamic values out of the query.
   - By **factor out** in a dictionary, we **usually** mean to pass it as a separate key-value pair in your HTTP req (look at [this example](../apps/scalar-types-e2e/src/scalar-types/scalar-types.spec.ts#L89)).
@@ -69,9 +69,29 @@ You **cannot query for the same field with different arguments**. [Solution? **A
 
 Now imagine you need to fetch data based on some conditions that will be provided by user:
 
-![Dynamic table](./assets/dynamic-table.png)
+<figure>
+  <img src="./assets/dynamic-table.png" alt="Dynamic table" />
+  <figcaption>
+    <a href="https://css-tricks.com/responsive-data-table-roundup/">
+      Ref for the picture
+    </a>
+  </figcaption>
+</figure>
 
-[Ref for the picture](https://css-tricks.com/responsive-data-table-roundup/).
+- Annotate the types, fields, and arguments.
+  - Validated or executed differently.
+- They accept arguments too.
+- We have:
+
+  | Executable directives | Rest of built-in directives |
+  | --------------------- | --------------------------- |
+  | `@include`, `@skip`   | `@deprecated`               |
+
+- Here is how you could have implemented the `@deprecated` directive by yourself:
+
+  ![deprecated directive implementation](./assets/directives.png)
+
+- You can define custom ones too, e.g. [here you can see how it is done in NestJS](https://docs.nestjs.com/graphql/directives#custom-directives).
 
 ```graphql
 query GetProducts(
