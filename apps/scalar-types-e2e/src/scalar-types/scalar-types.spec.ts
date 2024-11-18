@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SomethingPartialResponse } from '../support/types/something.type';
 
 describe('POST /graphql', () => {
   it('should return a random ID', async () => {
@@ -112,21 +113,34 @@ describe('POST /graphql', () => {
       }
     `;
 
-    const res = await axios.post(
-      '/graphql',
-      {
-        query,
-        variables: { sides: 12 },
-      },
-      {
-        headers: {
-          'content-type': 'application/json',
-        },
-      },
-    );
+    const res = await axios.post('/graphql', {
+      query,
+      variables: { sides: 12 },
+    });
 
     expect(res.status).toBe(200);
-    expect(typeof res.data.data.getRoll.roll.length).toBe(1);
-    expect(typeof res.data.data.getRoll.rollOnce).toBe('number');
+    expect(res.data.data.getDie.roll.length).toBe(2);
+    expect(typeof res.data.data.getDie.rollOnce).toBe('number');
+  });
+
+  it('should return partial data', async () => {
+    const query = /* GraphQL */ `
+      query {
+        something {
+          message
+          getDie {
+            message
+            rollOnce
+          }
+        }
+      }
+    `;
+
+    const { data } = await axios.post<SomethingPartialResponse>(
+      '/graphql',
+      { query },
+    );
+
+    expect(data).toMatchSnapshot();
   });
 });

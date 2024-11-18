@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /graphql should return partial data 1`] = `
+{
+  "data": {
+    "something": {
+      "getDie": null,
+      "message": "whatever",
+    },
+  },
+  "errors": [
+    {
+      "locations": [
+        {
+          "column": 13,
+          "line": 7,
+        },
+      ],
+      "message": "Unexpected error value: "FakeError"",
+      "path": [
+        "something",
+        "getDie",
+        "rollOnce",
+      ],
+    },
+  ],
+}
+`;

@@ -6,9 +6,18 @@ export class RandomDie {
   rollOnce() {
     return rollTheDie(this.sides);
   }
-  roll(count: number) {
+  // this method's first parameter is args since it is our resolver.
+  roll({ count }: { count: number }) {
     return new Array(count)
       .fill([])
       .map((die: number[]) => die.push(this.rollOnce()));
+  }
+}
+
+export class RandomDieWithError {
+  message = 'hi';
+
+  rollOnce() {
+    throw 'FakeError';
   }
 }

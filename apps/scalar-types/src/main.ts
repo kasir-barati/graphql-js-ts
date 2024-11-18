@@ -4,7 +4,10 @@ import express from 'express';
 import { buildSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { ruruHTML } from 'ruru/server';
-import { RandomDie } from './resolvers/random-die.resolver';
+import {
+  RandomDie,
+  RandomDieWithError,
+} from './resolvers/random-die.resolver';
 import { rollTheDie } from './utils/roll-the-dice.util';
 
 const port = 4001;
@@ -21,7 +24,16 @@ const schema = buildSchema(/* GraphQL */ `
     # ABC: String
     rollOnce: Int!
   }
+  type RandomDieWithError {
+    message: String!
+    rollOnce: Int!
+  }
+  type Something {
+    message: String!
+    getDie: RandomDieWithError
+  }
   type Query {
+    something: Something
     genRandomId: ID!
     rollThreeDice: [Int]
     genRandomMnemonic: String!
@@ -32,6 +44,12 @@ const schema = buildSchema(/* GraphQL */ `
 `);
 
 const rootApi = {
+  something() {
+    return {
+      message: 'whatever',
+      getDie: new RandomDieWithError(),
+    };
+  },
   genRandomId() {
     return randomUUID();
   },
