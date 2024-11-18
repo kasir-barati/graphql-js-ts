@@ -60,4 +60,28 @@ Describes what kind of data can be requested,
   <dd>
     GraphQL provides a built-in, standardized, and recommended approach.
   </dd>
-<dl>
+  <dt id="telemetryDataDefinition">
+    <a href="#telemetryDataDefinition">#</a>
+    Telemetry data
+  </dt>
+  <dd>
+    In general: the automated collection, transmission, and analysis of data related to the performance, status, or behavior of a system, device, or application.
+  </dd>
+  <dd>
+    In GraphQL: info about the operation or performance of the GraphQL server during the execution of a query.
+  </dd>
+  <dd>
+    <img src="./assets/example-extensions-response-json.png" alt="Example of extensions response body" />
+  </dd>
+  <dt id="rateLimitConsumptionDefinition">
+    <a href="#rateLimitConsumptionDefinition">#</a>
+    Rate limit consumption
+  </dt>
+  <dd>
+    How much of the allocated request allowance (rate limit) a client has used when interacting with an API.
+  </dd>
+  <dd>Enforce rate limits to control traffic, and prevent abuse.</dd>
+  <dd>
+    Usually maximum number of requests or operations a client can perform within a specific time frame.
+  </dd>
+</dl>

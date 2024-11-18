@@ -65,3 +65,21 @@ E.g. if you're searching in [audit-log](./data-types.md#auditLogUnionExample) an
 ```
 
 ## Cannot use a named fragment inside itself
+
+# Request errors
+
+- Client has made a syntax error.
+- `location` key tells you where is the syntax issue located in your query.
+- No `data` key inside the response since GraphQL service returned the response before our request reaches its destined resolver.
+
+# Field errors
+
+- Raised if something unexpected happens during execution.
+- E.g. [here](https://github.com/kasir-barati/graphql/blob/bf70d551f86c33e6c6b50a69c30576cd6c738729/apps/scalar-types-e2e/src/scalar-types/__snapshots__/scalar-types.spec.ts.snap#L3-L28) we are mocking what will our server returns when something goes wrong in the middle of execution.
+- GraphQL will attempt to continue executing the other fields and return a partial response.
+- `data` key + `errors` key in the returned response.
+
+# Network errors
+
+- They ain't specific to GraphQL.
+- Your lib of choice for GraphQL might have retries mechanisms implemented, so you just need to configure it.
