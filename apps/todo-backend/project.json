@@ -71,7 +71,8 @@
       "dependsOn": ["compose:up", "build"],
       "options": {
         "buildTarget": "todo-backend:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": false,
+        "port": 0
       },
       "configurations": {
         "development": {

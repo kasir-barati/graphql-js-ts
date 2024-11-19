@@ -43,7 +43,8 @@
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "hello-world:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": false,
+        "port": 0
       },
       "configurations": {
         "development": {

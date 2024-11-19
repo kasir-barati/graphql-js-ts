@@ -44,7 +44,8 @@
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "scalar-types:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": false,
+        "port": 0
       },
       "configurations": {
         "development": {

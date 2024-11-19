@@ -44,7 +44,8 @@
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "profile:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": false,
+        "port": 0
       },
       "configurations": {
         "development": {
