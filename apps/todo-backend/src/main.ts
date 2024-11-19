@@ -6,7 +6,7 @@ import { rootResolvers } from './resolvers';
 import { schema } from './schema';
 
 const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+const port = process.env.PORT ? Number(process.env.PORT) : 4003;
 const builtSchema = buildSchema(schema);
 const app = express();
 
