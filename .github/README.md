@@ -4,6 +4,13 @@
 
 # GraphQL
 
+> [!TIP]
+>
+> Just for those curious minds who always jump from one branch to another like mine:
+>
+> - [Hasura](./docs/hasura.md)
+> - [GraphQL VS REST](https://www.apollographql.com/blog/graphql-vs-rest).
+
 You can find a good definition usually in [glossary](../docs/glossary.md).
 
 1. [Intro](../docs/intro.md).
@@ -18,9 +25,4 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
 8. [GraphQL request lifecycle](./docs/graphql-req-lifecycle.md).
 9. [How to query information about a GraphQL schema](../docs/introspection.md).
 10. [Security in GraphQL](./docs/security.md).
-
-> [!TIP]
->
-> Just for those curious minds who always jump from one branch to another like mine:
->
-> - [Hasura](./docs/hasura.md)
+11. [NestJS](../docs/nestjs.md).

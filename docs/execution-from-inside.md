@@ -66,7 +66,7 @@ class GraphqlTodo {
 }
 ```
 
-Note that we do not need to define trivial resolvers like `getTodoName` which does something like this:
+<a href="trivialResolvers">#</a> Note that we do not need to define trivial resolvers like `getTodoName` which does something like this:
 
 ```ts
 function getTodoName(obj: GraphqlTodo, args, context, info) {
