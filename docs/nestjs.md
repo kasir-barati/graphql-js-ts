@@ -36,6 +36,8 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
   - **Better dev exp**.
   - **Can do better on localization**, [related issue in GraphQL spec GH repo](https://github.com/graphql/graphql-spec/issues/193).
 
+![Schema first VS Code first in picture](./assets/code-first-VS-schema-first.png)
+
 ## Bootstrap your NestJS backend in Nx
 
 <!-- `pnpm add @nestjs/graphql @nestjs/mercurius graphql mercurius`. -->

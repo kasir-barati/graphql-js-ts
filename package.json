@@ -9,7 +9,10 @@
     "javascript",
     "typescript",
     "nx",
-    "expressjs"
+    "expressjs",
+    "nestjs",
+    "nest",
+    "apollo-server"
   ],
   "author": "kasir-barati",
   "license": "MIT",
