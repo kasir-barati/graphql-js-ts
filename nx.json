@@ -5,8 +5,13 @@
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ]
     }
   },
   "plugins": [
@@ -24,8 +29,17 @@
       "exclude": [
         "apps/hello-world-e2e/**/*",
         "apps/expressjs-hello-world-e2e/**/*",
-        "apps/todo-backend-e2e/**/*"
+        "apps/todo-backend-e2e/**/*",
+        "apps/todo-nest-e2e/**/*"
       ]
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
+      }
     }
   ]
 }

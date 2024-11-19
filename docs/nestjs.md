@@ -36,10 +36,23 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
   - **Better dev exp**.
   - **Can do better on localization**, [related issue in GraphQL spec GH repo](https://github.com/graphql/graphql-spec/issues/193).
 
-## Install 3rd-party deps
+## Bootstrap your NestJS backend in Nx
 
 <!-- `pnpm add @nestjs/graphql @nestjs/mercurius graphql mercurius`. -->
 
-```shell
-pnpm i @nestjs/graphql @nestjs/apollo @apollo/server graphql
-```
+1. ```shell
+   pnpm i @nestjs/graphql @nestjs/apollo @apollo/server graphql
+   ```
+2. ```shell
+   nx g @nx/node:app --framework nest --directory apps/todo-nest
+   ```
+3. Update your `tsconfig*.json` files to use `NodeNext` instead of `CommonJS`.
+4. ```shell
+   nx serve todo-nest --configuration=production
+   ```
+
+> [!NOTE]
+>
+> It seems that NestJS does not like the idea of using esbuild, or at least we cannot use it without a lot of troubles.
+>
+> &mdash; [Ref](https://github.com/nrwl/nx/issues/20546).
