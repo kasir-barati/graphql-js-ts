@@ -113,7 +113,7 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
 
 > [!TIP]
 >
-> After a lot of back and forth regarding how to query nested fields in GraphQL I reached a conclusion. Let's start by explaining how we resolve nested fields in GraphQL:
+> <a href="#shouldWeUseResolveField" id="shouldWeUseResolveField">#</a> After a lot of back and forth regarding how to query nested fields in GraphQL I reached a conclusion. Let's start by explaining how we resolve nested fields in GraphQL:
 >
 > - We have `@ResolveField` in NestJS to declare a resolver for a nested field.
 > - Then we also have `@Query` to annotate our main resolver (or what we call our query).
