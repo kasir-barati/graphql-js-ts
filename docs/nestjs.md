@@ -110,3 +110,24 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
    ```
 
    In that shared lib you can add your prisma client service.
+
+> [!TIP]
+>
+> After a lot of back and forth regarding how to query nested fields in GraphQL I reached a conclusion. Let's start by explaining how we resolve nested fields in GraphQL:
+>
+> - We have `@ResolveField` in NestJS to declare a resolver for a nested field.
+> - Then we also have `@Query` to annotate our main resolver (or what we call our query).
+>
+> So I was thinking that ah, this sucks because I'm making one or more than one extra unnecessary data fetching from database. I mean I could easily do something like this:
+>
+> ```ts
+> prisma.todo.findFirst({
+>   where: { id },
+>   include: { AssignedTo: true, CreatedBy: true },
+> });
+> ```
+>
+> This might sounds OK on the surface, but there are a couple of caveats:
+>
+> 1. ORMs make separate queries to fetch data and then in JS they put them together and shave it to your taste.
+> 2. The raw SQL query even for the most basic thing would be really hard to maintain. Just look at [this](https://github.com/kasir-barati/graphql/blob/3bf93922c493350bb600141d40ad97d038aee09a/apps/todo-nest/src/todo/todo.repository.ts#L9-L41) query for fetching one todo + who has created it and if it is being assigned to someone, I want their user info too.
