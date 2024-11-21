@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@testing": ["libs/testing/src/index.ts"]
+      "@testing": ["libs/testing/src/index.ts"],
+      "@shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,8 @@
+{
+  "name": "@shared",
+  "version": "0.0.1",
+  "dependencies": {},
+  "main": "./index.cjs",
+  "typings": "./index.d.ts",
+  "private": true
+}

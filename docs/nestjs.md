@@ -28,6 +28,7 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
   - It relies on [default resolvers](./execution-from-inside.md#trivialResolvers).
 - <img src="./assets/checkmark.png" width="20" height="20" /> Code first:
   - Generates the SDL from your code.
+    - Use decorators and classes to generate the corresponding GraphQL schema.
   - **Single source of truth**.
   - **Generating the schema** can be done automatically as part of our **CI**.
     - [Legibility](https://dictionary.cambridge.org/dictionary/english/legibility): Types can be ordered alphabetically.
@@ -52,9 +53,60 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
 4. ```shell
    nx serve todo-nest --configuration=production
    ```
+5. Now you should be able to start developing your dream GraphQL in NestJS.
+   - You're GraphQL IDE is available at `http://localhost:${PORT}/graphql`. Note that this is not GraphiQL. But it is their Apollo's own IDE.
+   - By default, `GraphQLModule` searches for resolvers throughout the whole app. To limit this scan to only a subset of modules, use the `include` property.
 
 > [!NOTE]
 >
 > It seems that NestJS does not like the idea of using esbuild, or at least we cannot use it without a lot of troubles.
 >
 > &mdash; [Ref](https://github.com/nrwl/nx/issues/20546).
+
+## How to create objects
+
+- Objects are what we return as a response.
+- An object maps to a domain object.
+  - Domain has no relation to [DDD](./domain-driven-design.md).
+  - Domain refers to the specific area or subject matter that your application deals with. In other words, it's the real-world concepts and entities that your application models and interacts with.
+- We need objects since our client needs to interact with those domains.
+
+### Steps to create a new object in code first approach
+
+1. ```shell
+   cd apps/todo-nest
+   ```
+2. ```shell
+   nest g module user
+   nest g module todo
+   ```
+
+   I know it sucks but I did not find a better solution to use Nx's integrated CLI for NestJS.
+
+3. ```shell
+   nest g class user/models/user --no-spec
+   nest g class todo/models/todo --no-spec
+   ```
+
+   Then rename it to `user.model.ts` and move it + its test file one level up. Change the `todo` too.
+
+4. Change the newly created models the way you wanted them to be.
+5. ```shell
+   nest g class user/user
+   nest g class todo/todo
+   ```
+
+   Move them again one level up, and rename them to `todo.resolver.ts` and `TodoResolver`. Repeat the same thing for user.
+
+6. ```shell
+   nest g service user/user
+   ```
+
+   And one more for repository, but you need to rename it so that is correct.
+
+7. ```shell
+   nx g @nx-tools/nx-prisma:configuration --project todo-nest --database postgresql
+   nx g @nx/js:lib libs/shared
+   ```
+
+   In that shared lib you can add your prisma client service.
