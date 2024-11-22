@@ -3,6 +3,15 @@ import { PrismaClient } from '@prisma/client';
 (async () => {
   const prismaClient = new PrismaClient();
 
+  if (
+    await prismaClient.user.findFirst({
+      where: { username: 'kasir-barati' },
+    })
+  ) {
+    console.log('Already have been seeded!');
+    return;
+  }
+
   const user = await prismaClient.user.create({
     data: {
       username: 'kasir-barati',
