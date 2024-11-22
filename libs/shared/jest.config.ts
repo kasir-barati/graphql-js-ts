@@ -1,3 +1,5 @@
+import type { Config } from 'jest';
+
 export default {
   displayName: 'shared',
   preset: '../../jest.preset.js',
@@ -8,6 +10,7 @@ export default {
       { tsconfig: '<rootDir>/tsconfig.spec.json' },
     ],
   },
+  // testMatch: ['**/delete-todo.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/libs/shared',
-};
+} satisfies Config;

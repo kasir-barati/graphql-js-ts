@@ -10,6 +10,7 @@ export default {
       { tsconfig: '<rootDir>/tsconfig.spec.json' },
     ],
   },
+  // testMatch: ['**/delete-todo.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/libs/testing',
 } satisfies Config;

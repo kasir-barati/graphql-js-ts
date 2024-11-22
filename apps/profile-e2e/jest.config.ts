@@ -1,3 +1,5 @@
+import type { Config } from 'jest';
+
 export default {
   displayName: 'profile-e2e',
   preset: '../../jest.preset.js',
@@ -13,6 +15,7 @@ export default {
       },
     ],
   },
+  // testMatch: ['**/delete-todo.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/profile-e2e',
-};
+} satisfies Config;
