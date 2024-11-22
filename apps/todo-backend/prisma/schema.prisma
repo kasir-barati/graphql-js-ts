@@ -14,7 +14,7 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz()
 
   CreatedTodos  Todo[] @relation("created_by")
-  AssingedTodos Todo[] @relation("assigned_to")
+  AssignedTodos Todo[] @relation("assigned_to")
 
   @@map("users")
 }
