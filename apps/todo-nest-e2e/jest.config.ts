@@ -1,3 +1,5 @@
+import type { Config } from 'jest';
+
 export default {
   displayName: 'todo-nest-e2e',
   preset: '../../jest.preset.js',
@@ -13,6 +15,7 @@ export default {
       },
     ],
   },
+  // testMatch: ['**/get-todo.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/todo-nest-e2e',
-};
+} satisfies Config;

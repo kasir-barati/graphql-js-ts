@@ -20,27 +20,28 @@ export class TodoRepository {
       ), "CreatedBy" AS (
         SELECT (JSON_AGG(created_by.*) ->> 0)::JSON AS "CreatedBy"
         FROM created_by
-      ), assigned_by AS (
+      ), assigned_to AS (
         SELECT 
           CASE 
             WHEN todo."assignedToId" IS NOT NULL THEN (
-              SELECT (JSON_AGG(assigned_user.*) ->> 0)::JSON
+              SELECT (JSON_AGG(assigned_to_user.*) ->> 0)::JSON
               FROM (
                 SELECT public.users.*
                 FROM public.users, todo
                 WHERE public.users.id = todo."assignedToId"
-              ) AS assigned_user
+              ) AS assigned_to_user
             )
-          END AS "AssignedBy"
+          END AS "AssignedTo"
         FROM todo
       )
       SELECT *
-      FROM todo, "CreatedBy", assigned_by`;
+      FROM todo, "CreatedBy", assigned_to
+    `;
 
     return result[0];
   }
 
-  create({
+  async create({
     title,
     content,
     createdById,
@@ -51,24 +52,38 @@ export class TodoRepository {
     createdById: string;
     assignedToId?: string;
   }) {
-    return this.prismaService.todo.create({
-      data: {
-        title,
-        content,
-        createdById,
-        assignedToId,
-      },
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        createdAt: true,
-        updatedAt: true,
-        CreatedBy: true,
-        createdById: true,
-        ...(assignedToId && { AssignedTo: true, assignedToId: true }),
-      },
-    });
+    const result = await this.prismaService.$queryRaw<
+      [Todo]
+    >`WITH created_todo AS (
+        INSERT INTO public.todos (id, title, content, created_at, updated_at, created_by_id, assigned_to_id) 
+        VALUES (GEN_RANDOM_UUID(), ${title}, ${content}, NOW(), NOW(), ${createdById}, ${assignedToId ?? null}) 
+        RETURNING public.todos.id, public.todos.title, public.todos.content, public.todos.created_at AS "createdAt", public.todos.updated_at AS "updatedAt", public.todos.created_by_id AS "createdById", public.todos.assigned_to_id AS "assignedToId"
+      ), created_by AS (
+        SELECT public.users.id, public.users.username, public.users.created_at as "createdAt", public.users.updated_at as "updatedAt"
+        FROM public.users, created_todo
+        WHERE public.users.id = created_todo."createdById"
+      ), "CreatedBy" AS (
+        SELECT (JSON_AGG(created_by.*) ->> 0)::JSON AS "CreatedBy"
+        FROM created_by
+      ), assigned_to AS (
+        SELECT
+          CASE
+            WHEN created_todo."assignedToId" IS NOT NULL THEN (
+              SELECT (JSON_AGG(assigned_to_user.*) ->> 0)::JSON
+              FROM (
+                SELECT public.users.id, public.users.username, public.users.created_at as "createdAt", public.users.updated_at as "updatedAt"
+                FROM public.users, created_todo
+                WHERE public.users.id = created_todo."assignedToId"
+              ) AS assigned_to_user
+            )
+          END AS "AssignedTo"
+        FROM created_todo
+      )
+      SELECT *
+      FROM created_todo, "CreatedBy", assigned_to
+    `;
+
+    return result[0];
   }
 
   update(

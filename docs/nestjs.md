@@ -63,7 +63,7 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
 >
 > &mdash; [Ref](https://github.com/nrwl/nx/issues/20546).
 
-## How to create objects
+## Create objects/mutations/queries
 
 - Objects are what we return as a response.
 - An object maps to a domain object.
@@ -71,7 +71,9 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
   - Domain refers to the specific area or subject matter that your application deals with. In other words, it's the real-world concepts and entities that your application models and interacts with.
 - We need objects since our client needs to interact with those domains.
 
-### Steps to create a new object in code first approach
+### Query
+
+To write our queries we usually need a new object in our GraphQL API. Here is what you need to do in a code first approach:
 
 1. ```shell
    cd apps/todo-nest
@@ -131,3 +133,33 @@ Nest offers both ways of building GraphQL applications, you can learn which one 
 >
 > 1. ORMs make separate queries to fetch data and then in JS they put them together and shave it to your taste.
 > 2. The raw SQL query even for the most basic thing would be really hard to maintain. Just look at [this](https://github.com/kasir-barati/graphql/blob/3bf93922c493350bb600141d40ad97d038aee09a/apps/todo-nest/src/todo/todo.repository.ts#L9-L41) query for fetching one todo + who has created it and if it is being assigned to someone, I want their user info too.
+> 3. Another important thing here is to know that we are not modular at all. I mean this `@ResolveField` can resolve any field with that name and the same return type.
+> 4. If the query is really crazy heavy then we have to write raw queries then. So we also will take care of all maintenance it brings along.
+
+> [!TIP]
+>
+> **Create separate NestJS modules for each domain model**.
+>
+> - "Domain model":
+>   - Conceptual model of specific domain of our app or its problem space.
+>   - A representation of the concepts, rules, and logic of a specific [business domain](./glossary.md#businessDomainInDomainDrivenDesign).
+>   - E.g., in an ECommerce app, entities such as `Product`, `Order`, `Customer`, and `Inventory` are domain models.
+> - Structuring your codebase around:
+>   - The core business logic.
+>   - Or areas of functionality in your application.
+
+### Mutation
+
+To change data on the server you need to create an `Input` object type most of the times (when the data you receive is complex) and an `Object` to show response schema:
+
+1. Write one E2E test for it.
+2. Then start with implementation:
+
+   1. Use `@Mutation` decorator to annotate the method which will serve as your resolver.
+   2. ```shell
+      cd apps/todo-nest && my-touch src/todo/dto/create-todo-input.dto.ts
+      ```
+
+      To create a DTO. BTW if you do not know what does `my-touch` you can read [this](https://kasir-barati.github.io/the-pragmatic-programmer/customize-your-dev-env/my-touch.html).
+
+   3. Write your service layer and repository layer logic for the mutation and then wire everything up.

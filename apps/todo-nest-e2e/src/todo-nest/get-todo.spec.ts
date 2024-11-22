@@ -1,8 +1,11 @@
 import axios from 'axios';
+import { TodoBuilder } from '../support/builders/todo.builder';
+import { UserBuilder } from '../support/builders/user.builder';
 import {
   GetDefaultTodoResponse,
+  GetTodoAndAssignedToResponse,
   GetTodoAndCreatedByResponse,
-} from '../types/todo-response.type';
+} from '../support/types/todo-response.type';
 
 describe('POST /graphql', () => {
   it('should return default pre-seeded todo', async () => {
@@ -73,5 +76,42 @@ describe('POST /graphql', () => {
         },
       },
     } satisfies GetTodoAndCreatedByResponse);
+  });
+
+  it('should return a single todo + to whom it is assigned', async () => {
+    const createdById = await new UserBuilder().build();
+    const assignedById = await new UserBuilder().build();
+    const todoId = await new TodoBuilder()
+      .setCreatedById(createdById)
+      .setAssignedById(assignedById)
+      .build();
+    const query = /* GraphQL */ `
+      query GetTodo($id: ID!) {
+        getTodo(id: $id) {
+          id
+          AssignedTo {
+            id
+          }
+        }
+      }
+    `;
+
+    const { data, status } =
+      await axios.post<GetTodoAndAssignedToResponse>(`/graphql`, {
+        query,
+        variables: { id: todoId },
+      });
+
+    expect(status).toBe(200);
+    expect(data).toStrictEqual({
+      data: {
+        getTodo: {
+          id: todoId,
+          AssignedTo: {
+            id: assignedById,
+          },
+        },
+      },
+    } satisfies GetTodoAndAssignedToResponse);
   });
 });

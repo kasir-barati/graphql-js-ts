@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateUserInputDto } from './dto/create-user-input.dto';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -7,5 +8,9 @@ export class UserService {
 
   getUser(id: string) {
     return this.userRepository.read(id);
+  }
+
+  createUser(inputDto: CreateUserInputDto) {
+    return this.userRepository.create(inputDto.username);
   }
 }
