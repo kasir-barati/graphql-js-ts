@@ -75,7 +75,7 @@ Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/m
 # Mutate data
 
 - Use a `Mutation` endpoint instead of `Query`.
-- Define the API endpoint as part of the top-level `Mutation` type.
+- Define the API endpoint as part of the top-level `Mutation` operation type.
 - E.g. a profile endpoint where you can change your info or fetch it.
 
 ## Input Object type

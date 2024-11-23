@@ -7,7 +7,9 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   },
   "files": [],
   "include": [],

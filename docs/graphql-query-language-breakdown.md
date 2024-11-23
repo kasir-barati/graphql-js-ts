@@ -74,3 +74,5 @@
       subscription: MySubscriptionType
     }
     ```
+
+    Learn more about Subscription [here](./subscription.md)

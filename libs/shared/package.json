@@ -1,7 +1,9 @@
 {
   "name": "@shared",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "cron": "^3.2.1"
+  },
   "main": "./index.cjs",
   "typings": "./index.d.ts",
   "private": true

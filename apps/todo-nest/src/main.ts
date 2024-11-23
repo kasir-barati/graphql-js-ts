@@ -8,11 +8,15 @@ async function bootstrap() {
   const port = process.env.PORT || 4004;
 
   app.setGlobalPrefix(globalPrefix);
+  app.enableCors();
 
   await app.listen(port);
 
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+  );
+  Logger.log(
+    `🚀 GraphQL IDE is running on: http://localhost:${port}/graphql`,
   );
 }
 
