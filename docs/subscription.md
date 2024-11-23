@@ -1,21 +1,44 @@
 # Subscription
 
 - In GraphQL you can:
-  - Fetch data using `query` operation type.
-  - Modify/insert data using `mutation` operation type.
-- But if you need to push data from the server to the clients, that choose to listen to real time messages from the server you need to use `subscription` operation type.
+  - Fetch data using `Query` operation type.
+  - Modify/insert data using `Mutation` operation type.
+- But if you need to push data from the server to the clients, that choose to listen to real time messages from the server, you need to use `Subscription` operation type.
 - More complex to implement, so first [make sure that you need it](#making-sure-that-i-need-subscription).
 - Subscription: long-lasting GraphQL read operations that can update their result whenever a particular server-side event occurs.
   - Done through [The WebSocket protocol](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-## How `subscription` operation type works
+## How `Subscription` operation type works
 
 - They're similar to `query` operation types.
-- Specify a set of fields to be delivered to the client.
+- It defines top-level **fields that clients can subscribe to**:
+  ```graphql
+  type Subscription {
+    # messageCreated field will update its value whenever a new Message is
+    # created on the backend, thus pushing the Message to subscribing clients.
+    messageCreated: Message
+  }
+  ```
 - Open a channel in the backend on the server.
 - A result is sent to the client every time a particular event happens on the server.
 
 ![Client specifies a set of fields to be delivered to the client, but instead of immediately returning a single answer, a channel is opened and a result is sent to the client every time a particular event happens on the server](./assets/server-clien-graphql-subscription.png)
+
+> [!IMPORTANT]
+>
+> Each `subscription` operation can subscribe to only one top-level field of the `Subscription` type. Meaning the following subscription operation is not valid:
+>
+> ```graphql
+> subscription IndexPageEvents {
+>   notificationCreated {
+>     id
+>   }
+>   postCreated {
+>     author
+>     comment
+>   }
+> }
+> ```
 
 ## Making sure that I need subscription
 

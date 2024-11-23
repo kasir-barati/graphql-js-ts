@@ -24,7 +24,7 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
 7. [Document your GraphQL service API](../docs/documentation.md).
 8. [GraphQL request lifecycle](./docs/graphql-req-lifecycle.md).
 9. [How to query information about a GraphQL schema](../docs/introspection.md).
-10. [Improve developer experience](../docs/improve-dev-exp.md)
+10. [Improve developer experience](../docs/improve-dev-exp.md).
 11. [Security in GraphQL](./docs/security.md).
 12. [NestJS](../docs/nestjs.md).
 13. [Subscription](../docs/subscription.md)
