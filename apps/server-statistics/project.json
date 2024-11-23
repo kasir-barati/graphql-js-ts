@@ -1,0 +1,66 @@
+{
+  "name": "server-statistics",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/server-statistics/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/server-statistics",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/server-statistics/src/main.ts",
+        "tsConfig": "apps/server-statistics/tsconfig.app.json",
+        "assets": [
+          "apps/server-statistics/src/assets",
+          {
+            "input": "{projectRoot}/src/",
+            "glob": "schema.graphql",
+            "output": "apps/server-statistics/src"
+          }
+        ],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "server-statistics:build",
+        "runBuildTargetDependencies": false,
+        "port": 0
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "server-statistics:build:development"
+        },
+        "production": {
+          "buildTarget": "server-statistics:build:production"
+        }
+      }
+    }
+  }
+}

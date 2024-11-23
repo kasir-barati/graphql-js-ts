@@ -1,0 +1,17 @@
+type Top {
+  cpu: Float
+}
+
+"""
+Do not use this query, I had to add it since GraphQL were upset with my schema
+"""
+type Query {
+  """
+  Do not use this query, I had to add it since GraphQL were upset with my schema
+  """
+  _dummy: String
+}
+
+type Subscription {
+  top: Top!
+}

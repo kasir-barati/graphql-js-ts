@@ -37,6 +37,7 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "~22.9.0",
+    "@types/ws": "^8.5.13",
     "esbuild": "^0.24.0",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
@@ -53,6 +54,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
+    "@graphql-tools/schema": "^10.0.9",
     "@nestjs/apollo": "^12.2.1",
     "@nestjs/common": "^10.4.8",
     "@nestjs/config": "^3.3.0",
@@ -69,9 +71,11 @@
     "graphql-http": "^1.22.2",
     "graphql-redis-subscriptions": "^2.6.1",
     "graphql-subscriptions": "^3.0.0",
+    "graphql-ws": "^5.16.0",
     "ioredis": "^5.4.1",
     "reflect-metadata": "^0.2.2",
     "ruru": "2.0.0-beta.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "ws": "^8.18.0"
   }
 }
