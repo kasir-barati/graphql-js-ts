@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["codegen"],
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
@@ -60,6 +61,16 @@
         "production": {
           "buildTarget": "server-statistics:build:production"
         }
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf {projectRoot}/__generated__ {projectRoot}/graphql.schema.json",
+          "gql-gen --config {projectRoot}/codegen.yml"
+        ],
+        "parallel": false
       }
     }
   }

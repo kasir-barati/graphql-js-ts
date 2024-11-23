@@ -1,4 +1,5 @@
 export * from './constants/trigger-name.constant';
+export * from './middlewares/ip-logger.middleware';
 export * from './models/top.model';
 export * from './modules/cron-top/cron-top.module';
 export * from './modules/cron-top/cron-top.service';

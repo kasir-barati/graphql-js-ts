@@ -9,6 +9,8 @@ dist
 dist-ssr
 tmp
 /out-tsc
+__generated__
+graphql.schema.json
 
 # dependencies
 node_modules
