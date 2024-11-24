@@ -13,6 +13,10 @@ import { resolvers } from './resolvers';
 
 const PORT = 4005;
 
+export interface Context {
+  ip: string;
+}
+
 (async () => {
   const app = express();
   const typeDefs = readFileSync(join(__dirname, 'schema.graphql'), {
@@ -20,7 +24,7 @@ const PORT = 4005;
   });
   const schema = makeExecutableSchema({ typeDefs, resolvers });
   const httpServer = createServer(app);
-  const apolloServer = new ApolloServer({
+  const apolloServer = new ApolloServer<Context>({
     schema,
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
@@ -49,7 +53,11 @@ const PORT = 4005;
       origin: ['http://localhost', 'http://localhost:*'],
     }),
     express.json(),
-    expressMiddleware(apolloServer),
+    expressMiddleware(apolloServer, {
+      async context({ req }) {
+        return { ip: req.ip ?? req.header('x-forwarded-for') };
+      },
+    }),
   );
 
   httpServer.listen(

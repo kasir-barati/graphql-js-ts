@@ -10,4 +10,6 @@ generates:
   ./apps/server-statistics/graphql.schema.json:
     plugins:
       - "introspection"
-
+config:
+  contextType: 'apps/server-statistics/src/main#Context'
+  useIndexSignature: true
