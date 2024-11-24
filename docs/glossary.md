@@ -187,7 +187,18 @@ Describes what kind of data can be requested,
   <dd>A set of all solutions that solve any given problem..</dd>
   <dd>Anything that depends on or is built upon the problem space.</dd>
   <dd>Things like mockups, prototypes, and wireframes.</dd>
-  <dd>Also look at <a href="#problem-space-vs-solution-space">problem space VS solution space</a>.<dd>
+  <dd>
+    Also look at <a href="#problem-space-vs-solution-space">problem space VS solution space</a>.
+  <dd>
+  <dt id="originInCorsAttackDefinition">
+    <a href="#originInCorsAttackDefinition">#</a>
+    Origin
+  </dt>
+  <dd>
+    A combination of a URL's domain (host), protocol (schema), and port.
+  </dd>
+  <dd>Identifies where a request is being made from.</dd>
+  <dd>Determines whether a request is cross-origin or same-origin.</dd>
 </dl>
 
 ## Problem space VS solution space
