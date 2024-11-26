@@ -5,3 +5,8 @@ export type TopResponse = Response<{
     cpu: number;
   };
 }>;
+export type HtopResponse = Response<{
+  htop: {
+    memory: number;
+  };
+}>;

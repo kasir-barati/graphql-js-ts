@@ -10,7 +10,7 @@ import { createServer } from 'http';
 import { join } from 'path';
 import { WebSocketServer } from 'ws';
 import { resolvers } from './resolvers';
-import { cronJob } from './services/top.service';
+import { cpuCronJob, memoryCronJob } from './services/top.service';
 import { getEnv } from './utils/env.util';
 import { isNotWhiteListed } from './utils/in-not-whitelisted.util';
 
@@ -79,7 +79,8 @@ export interface Context {
     );
   });
 
-  cronJob.start();
+  cpuCronJob.start();
+  memoryCronJob.start();
 })()
   .then()
   .catch(console.error);

@@ -1,7 +1,24 @@
-import type { Resolvers } from '../../__generated__/resolvers-types';
+import {
+  GigabyteConvertor,
+  KilobyteConvertor,
+  MegabyteConvertor,
+  MemoryUnitConvertor,
+} from '@shared';
+import { withFilter } from 'graphql-subscriptions';
+import {
+  HTop,
+  HTopMemoryArgs,
+  Resolvers,
+  Unit,
+} from '../../__generated__/resolvers-types';
 import { getRedisPubSub } from '../services/pubsub.service';
 
 const redisPubSub = getRedisPubSub();
+const unitToConvertorMap: Record<Unit, MemoryUnitConvertor> = {
+  [Unit.Gb]: new GigabyteConvertor(),
+  [Unit.Mb]: new MegabyteConvertor(),
+  [Unit.Kb]: new KilobyteConvertor(),
+};
 
 export const resolvers: Resolvers = {
   // Each field inside this MUST return an subscribe function!
@@ -17,6 +34,28 @@ export const resolvers: Resolvers = {
           'server-statistics-changed',
         ]) as any;
       },
+    },
+    htop: {
+      subscribe: withFilter(
+        (...args) => {
+          console.dir(args, { depth: null }); // Logs a crazy long string but at the very bottom I can see my whole query in string format and I can see clearly that GB is inside it but why GraphQL is not parsing it as an arg?
+          return redisPubSub.asyncIterator('htop');
+        },
+        (payload: { htop: HTop }, args: HTopMemoryArgs) => {
+          const convertor: MemoryUnitConvertor | undefined =
+            unitToConvertorMap[args.unit];
+
+          console.log(args); // logs {}
+
+          if (convertor) {
+            payload.htop.memory = convertor.convert(
+              payload.htop.memory,
+            );
+          }
+
+          return true;
+        },
+      ),
     },
     greet: {
       subscribe: async function* () {

@@ -8,14 +8,14 @@
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
-      "dependsOn": ["codegen"],
+      "dependsOn": ["codegen", "compile:codegen"],
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
         "target": "node20.10.0",
         "outputPath": "dist/apps/server-statistics",
         "format": ["cjs"],
-        "bundle": false,
+        "bundle": true,
         "main": "apps/server-statistics/src/main.ts",
         "tsConfig": "apps/server-statistics/tsconfig.app.json",
         "assets": [
@@ -23,7 +23,7 @@
           {
             "input": "{projectRoot}/src/",
             "glob": "schema.graphql",
-            "output": "apps/server-statistics/src"
+            "output": "."
           }
         ],
         "generatePackageJson": true,
@@ -69,7 +69,7 @@
       "options": {
         "commands": [
           "rm -rf {projectRoot}/__generated__ {projectRoot}/graphql.schema.json",
-          "gql-gen --config {projectRoot}/codegen.yml"
+          "gql-gen --config {projectRoot}/codegen.ts"
         ],
         "parallel": false
       }

@@ -1,8 +1,8 @@
-import { Field, Float, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Top {
-  @Field(() => Float, {
+  @Field(() => Int, {
     description: "Server's CPU usage.",
     nullable: false,
   })

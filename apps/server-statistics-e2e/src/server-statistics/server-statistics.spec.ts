@@ -1,5 +1,8 @@
 import { GreetResponse } from '../support/types/greet-response.type';
-import { TopResponse } from '../support/types/top-response.type';
+import {
+  HtopResponse,
+  TopResponse,
+} from '../support/types/top-response.type';
 import { WebsocketClient } from '../support/websocket-client';
 
 describe('POST /graphql', () => {
@@ -42,4 +45,35 @@ describe('POST /graphql', () => {
       break;
     }
   });
+
+  it.each(['GB', 'MB', 'KB'])(
+    'should subscribe to memory usage in %s of our server',
+    async (unit) => {
+      /*
+      const query = `#graphql
+        subscription { 
+          htop { 
+            memory(unit: GB)
+          }
+        }
+      `;
+      */
+      const query = `#graphql
+        subscription SubscribeToMemoryUsage($unit: Unit) { 
+          htop { 
+            memory(unit: $unit)
+          }
+        }
+      `;
+
+      for await (const statistics of graphqlWebsocketClient.subscribe<HtopResponse>(
+        query,
+        { unit },
+      )) {
+        console.log(statistics.data);
+        expect(typeof statistics.data.htop.memory).toBe('number');
+        break;
+      }
+    },
+  );
 });

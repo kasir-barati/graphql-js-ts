@@ -1,5 +1,16 @@
+enum Unit {
+  KB
+  MB
+  GB
+}
+
 type Top {
-  cpu: Float
+  # Just returns a scalar value
+  cpu: Int
+}
+type HTop {
+  # Client can filter events or in our case change the format of data
+  memory(unit: Unit): Float
 }
 
 """
@@ -15,4 +26,5 @@ type Query {
 type Subscription {
   greet: String!
   top: Top!
+  htop: HTop!
 }

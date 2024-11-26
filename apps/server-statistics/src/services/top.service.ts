@@ -1,12 +1,11 @@
-import { getCpuPercentage } from '@shared';
+import { getCpuPercentage, getMemoryUsage } from '@shared';
 import { CronJob } from 'cron';
-import { Top } from '../../__generated__/resolvers-types';
-import { getRedisPubSub } from './pubsub.service';
+import { HTop, Top } from '../../__generated__/resolvers-types.js';
+import { getRedisPubSub } from './pubsub.service.js';
 
 const redisPubSub = getRedisPubSub();
 
-export const cronJob = CronJob.from({
-  start: true,
+export const cpuCronJob = CronJob.from({
   cronTime: '*/5 * * * * *',
   onTick: async () => {
     const res = await getCpuPercentage('free');
@@ -17,4 +16,17 @@ export const cronJob = CronJob.from({
     });
   },
   timeZone: 'utc',
+});
+export const memoryCronJob = CronJob.from({
+  cronTime: '*/5 * * * * *',
+  timeZone: 'utc',
+  async onTick() {
+    const memoryUsage = getMemoryUsage();
+
+    redisPubSub.publish('htop', {
+      htop: {
+        memory: memoryUsage.usedMemory,
+      } satisfies HTop,
+    });
+  },
 });

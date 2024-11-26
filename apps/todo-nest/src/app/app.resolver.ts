@@ -16,6 +16,7 @@ export class AppResolver {
 
   @Subscription(() => Top)
   top() {
+    // Payload should be { top: { cpu: 12 } }
     // FIXME: https://github.com/davidyaha/graphql-redis-subscriptions/pull/636
     return this.redisPubSub.asyncIterator(SERVER_STATISTICS_CHANGED);
   }
