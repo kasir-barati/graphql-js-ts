@@ -6,7 +6,7 @@
 - But if you need to push data from the server to the clients, that choose to listen to real time messages from the server, you need to use `Subscription` operation type.
 - More complex to implement, so first [make sure that you need it](#making-sure-that-i-need-subscription).
 - Subscription: long-lasting GraphQL read operations that can update their result whenever a particular server-side event occurs.
-  - Done through [The WebSocket protocol](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+  - Done through [the WebSocket protocol](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
 ## How `Subscription` operation type works
 
@@ -62,41 +62,54 @@ Scenarios where we need it:
 
 - **No** built-in support for subscriptions.
 
-  1. We need to enable it in our Apollo server.
-     - We need a 3rd-party lib for it called [`graphql-ws`](https://www.npmjs.com/package/graphql-ws).
-  2. You need to [enable CORS in your NestJS app](https://docs.nestjs.com/security/cors).
-     - [Learn more about how to configure you're CORS](https://www.apollographql.com/docs/apollo-server/security/cors#specifying-origins).
-  3. [Set up HTTP body parsing](https://docs.nestjs.com/faq/raw-body). In NestJS it is by default activated.
-  4. ```diff
-      GraphQLModule.forRoot<ApolloDriverConfig>({
-       driver: ApolloDriver,
-       autoSchemaFile: join(__dirname, 'src', 'schema.gql'),
-       sortSchema: true,
-     +  subscriptions: {
-     +    'graphql-ws': true,
-     +  },
-     })
-     ```
-  5. Use `@Subscription` to annotate your handler.
-  6. ```shell
-     pnpm add graphql-subscriptions
-     ```
+### Subscription resolvers
 
-     - Provides a simple publish/subscribe API.
-     - We usually need to back it with an external store such as Redis, or RabbitMQ, or anything other database ([See a more complete list here](https://github.com/apollographql/graphql-subscriptions?tab=readme-ov-file#pubsub-implementations)).
-       - ```shell
-         pnpm add graphql-redis-subscriptions @nestjs/config ioredis class-transformer class-validator
-         ```
-       - For docker I am using [this `compose` file](https://github.com/kasir-barati/docker/blob/main/docker-compose-files/redis).
-       - ```shell
-         cd libs/shared && nest g module pubsub
-         ```
+- Return an object.
+- Define a subscribe function.
+- Publish an event whenever the return value of a subscription should be updated.
+  - It can be triggered by:
+    - A mutation.
+    - A cron job.
+    - etc.
+- You can [see how it is done in NodeJS + ExpressJS + Apollo server here](https://github.com/kasir-barati/graphql/tree/main/apps/server-statistics).
 
-  7. To publish an event, we use the `pubsub.publish` method.
-     - Often used within a mutation to trigger a client-side update when a part of the object graph has changed.
+### NestJS + Apollo server
 
-- Subscriptions, by definition, return an object with a single top level property.
+- Has a single top-level property.
   - Key: the name of the subscription.
     - This name is either:
-      - Inherited from the name of the subscription handler method (i.e., commentAdded above).
+      - Inherited from the name of the subscription handler method (e.g., `commentAdded`).
       - Is provided explicitly by passing an option with the key name as the second argument to the `@Subscription()` decorator.
+
+1. We need to enable it in our Apollo server.
+   - We need a 3rd-party lib for it called [`graphql-ws`](https://www.npmjs.com/package/graphql-ws).
+2. You need to [enable CORS in your NestJS app](https://docs.nestjs.com/security/cors).
+   - [Learn more about how to configure you're CORS](https://www.apollographql.com/docs/apollo-server/security/cors#specifying-origins).
+3. [Set up HTTP body parsing](https://docs.nestjs.com/faq/raw-body). In NestJS it is by default activated.
+4. ```diff
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+     driver: ApolloDriver,
+     autoSchemaFile: join(__dirname, 'src', 'schema.gql'),
+     sortSchema: true,
+   +  subscriptions: {
+   +    'graphql-ws': true,
+   +  },
+   })
+   ```
+5. Use `@Subscription` to annotate your handler.
+6. ```shell
+   pnpm add graphql-subscriptions
+   ```
+
+   - Provides a simple publish/subscribe API.
+   - We usually need to back it with an external store such as Redis, or RabbitMQ, or anything other database ([See a more complete list here](https://github.com/apollographql/graphql-subscriptions?tab=readme-ov-file#pubsub-implementations)).
+     - ```shell
+       pnpm add graphql-redis-subscriptions @nestjs/config ioredis class-transformer class-validator
+       ```
+     - For docker I am using [this `compose` file](https://github.com/kasir-barati/docker/blob/main/docker-compose-files/redis).
+     - ```shell
+       cd libs/shared && nest g module pubsub
+       ```
+
+7. To publish an event, we use the `pubsub.publish` method.
+   - Often used within a mutation to trigger a client-side update when a part of the object graph has changed.

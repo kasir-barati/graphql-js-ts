@@ -5,19 +5,19 @@ import {
   SERVER_STATISTICS_CHANGED,
   Top,
 } from '@shared';
-import { PubSub } from 'graphql-subscriptions';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
 
 @Resolver()
 export class AppResolver {
   constructor(
-    @Inject(PUB_SUB_INSTANCE) private readonly pubsub: PubSub,
+    @Inject(PUB_SUB_INSTANCE)
+    private readonly redisPubSub: RedisPubSub,
   ) {}
 
   @Subscription(() => Top)
   top() {
-    return this.pubsub.asyncIterableIterator(
-      SERVER_STATISTICS_CHANGED,
-    );
+    // FIXME: https://github.com/davidyaha/graphql-redis-subscriptions/pull/636
+    return this.redisPubSub.asyncIterator(SERVER_STATISTICS_CHANGED);
   }
 
   // @ResolveField(() => Float)

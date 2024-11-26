@@ -5,5 +5,10 @@ export function getEnv() {
   return {
     port,
     frontendUrl,
+    redis: {
+      port: 7000,
+      host: 'localhost',
+      password: 'password',
+    },
   };
 }

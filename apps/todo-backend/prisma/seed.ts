@@ -20,5 +20,5 @@ import { getDbClient } from '../src/repositories/db-client';
     },
   });
 })()
-  .then(console.log)
+  .then()
   .catch(console.error);

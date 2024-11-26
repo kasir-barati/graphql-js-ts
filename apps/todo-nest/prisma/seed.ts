@@ -29,5 +29,5 @@ import { PrismaClient } from '@prisma/client';
     },
   });
 })()
-  .then(console.log)
+  .then()
   .catch(console.error);

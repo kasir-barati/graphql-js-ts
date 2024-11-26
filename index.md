@@ -6,6 +6,7 @@
 >
 > - [Hasura](./docs/hasura.md)
 > - [GraphQL VS REST](https://www.apollographql.com/blog/graphql-vs-rest).
+> - [Testing GraphQL API](./docs/testing-graphql.md)
 
 You can find a good definition usually in [glossary](./docs/glossary.md).
 

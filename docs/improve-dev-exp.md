@@ -1,5 +1,9 @@
 # Improve developer experience
 
+## IoC -- Inversion of Control principle
+
+- By utilizing `context` we can have a more testable and extensible codebase in GraphQL.
+
 ## Separate `schema.graphql`
 
 The very first thing that I wanted so badly from the very beginning was the ability to separate my schema from TS code. So here is how you can do it:

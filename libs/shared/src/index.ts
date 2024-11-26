@@ -8,4 +8,6 @@ export * from './modules/prisma/prisma.service';
 export * from './modules/pubsub/pubsub.constant';
 export * from './modules/pubsub/pubsub.module';
 export * from './types/utility.type';
+export * from './utils/get-cpu-info.util';
+export * from './utils/get-cpu-percentage.util';
 export * from './utils/validate-envs.utils';

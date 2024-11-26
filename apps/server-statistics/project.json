@@ -12,6 +12,7 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
+        "target": "node20.10.0",
         "outputPath": "dist/apps/server-statistics",
         "format": ["cjs"],
         "bundle": false,
@@ -48,7 +49,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "dependsOn": ["build", "compose:up"],
       "options": {
         "buildTarget": "server-statistics:build",
         "runBuildTargetDependencies": false,
@@ -71,6 +72,34 @@
           "gql-gen --config {projectRoot}/codegen.yml"
         ],
         "parallel": false
+      }
+    },
+    "compose:up": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose up -d",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compose:down": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
       }
     }
   }

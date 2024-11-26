@@ -1,10 +1,45 @@
-import axios from 'axios';
+import { GreetResponse } from '../support/types/greet-response.type';
+import { TopResponse } from '../support/types/top-response.type';
+import { WebsocketClient } from '../support/websocket-client';
 
-describe('GET /', () => {
-  it('should return a message', async () => {
-    const res = await axios.get(`/`);
+describe('POST /graphql', () => {
+  let graphqlWebsocketClient: WebsocketClient;
 
-    expect(res.status).toBe(200);
-    expect(res.data).toEqual({ message: 'Hello API' });
+  beforeAll(() => {
+    graphqlWebsocketClient = new WebsocketClient();
+  });
+
+  it('should subscribe to greetings of our server!', async () => {
+    const query = `#graphql
+      subscription { greet }
+    `;
+    const expectedGreetings = [
+      'سلام',
+      'Hi',
+      'Hallo',
+      'Grüß Gott',
+      'Moin',
+      'Ciao',
+      'こにちは',
+    ];
+
+    for await (const greeting of graphqlWebsocketClient.subscribe<GreetResponse>(
+      query,
+    )) {
+      expect(greeting.data.greet).toBe(expectedGreetings.shift());
+    }
+  });
+
+  it('should subscribe to statistics of our server', async () => {
+    const query = `#graphql
+      subscription { top { cpu } }
+    `;
+
+    for await (const statistics of graphqlWebsocketClient.subscribe<TopResponse>(
+      query,
+    )) {
+      expect(typeof statistics.data.top.cpu).toBe('number');
+      break;
+    }
   });
 });

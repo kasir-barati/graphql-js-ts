@@ -3,8 +3,8 @@ import { CronJob } from 'cron';
 import { PubSub } from 'graphql-subscriptions';
 import { SERVER_STATISTICS_CHANGED } from '../../constants/trigger-name.constant';
 import { Top } from '../../models/top.model';
+import { getCpuInfo } from '../../utils/get-cpu-info.util';
 import { PUB_SUB_INSTANCE } from '../pubsub/pubsub.constant';
-import { getCpuInfo } from './get-cpu-info.util';
 
 @Injectable()
 export class CronTopService {
@@ -22,6 +22,7 @@ export class CronTopService {
       start: true,
       cronTime: '*/5 * * * * *',
       onTick: () => {
+        // Use getCpuPercentage instead!
         this.cpuPercentage();
       },
       timeZone: 'utc',
