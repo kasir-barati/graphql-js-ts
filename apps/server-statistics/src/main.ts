@@ -10,8 +10,10 @@ import { createServer } from 'http';
 import { join } from 'path';
 import { WebSocketServer } from 'ws';
 import { resolvers } from './resolvers';
+import { getEnv } from './utils/env.util';
+import { isNotWhiteListed } from './utils/in-not-whitelisted.util';
 
-const PORT = 4005;
+const { port } = getEnv();
 
 export interface Context {
   ip: string;
@@ -50,7 +52,13 @@ export interface Context {
   app.use(
     '/graphql',
     cors<CorsRequest>({
-      origin: ['http://localhost', 'http://localhost:*'],
+      origin(origin, callback) {
+        if (origin && isNotWhiteListed(origin)) {
+          callback(new Error('CORS_NotWhitelisted'));
+          return;
+        }
+        callback(null, true);
+      },
     }),
     express.json(),
     expressMiddleware(apolloServer, {
@@ -61,11 +69,11 @@ export interface Context {
   );
 
   httpServer.listen(
-    PORT,
+    port,
     'localhost',
     console.log.bind(
       this,
-      `🚀 Apollo serve is up and running on http://localhost:${PORT}/graphql`,
+      `🚀 Apollo serve is up and running on http://localhost:${port}/graphql`,
     ),
   );
 })()
