@@ -11,7 +11,7 @@
         "jestConfig": "apps/server-statistics-e2e/jest.config.ts",
         "passWithNoTests": true
       },
-      "dependsOn": ["server-statistics:build"]
+      "dependsOn": []
     }
   }
 }

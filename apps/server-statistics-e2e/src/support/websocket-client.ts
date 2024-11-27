@@ -6,7 +6,7 @@ export class WebsocketClient {
 
   constructor() {
     this.client = createClient({
-      url: 'ws://localhost:4005/subscriptions',
+      url: 'ws://localhost:4005/graphql',
       webSocketImpl: WebSocket,
       lazy: false,
     });

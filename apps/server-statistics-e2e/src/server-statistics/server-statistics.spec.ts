@@ -46,18 +46,9 @@ describe('POST /graphql', () => {
     }
   });
 
-  it.each(['GB', 'MB', 'KB'])(
+  it.only.each(['GB', 'MB', 'KB'])(
     'should subscribe to memory usage in %s of our server',
     async (unit) => {
-      /*
-      const query = `#graphql
-        subscription { 
-          htop { 
-            memory(unit: GB)
-          }
-        }
-      `;
-      */
       const query = `#graphql
         subscription SubscribeToMemoryUsage($unit: Unit) { 
           htop { 
