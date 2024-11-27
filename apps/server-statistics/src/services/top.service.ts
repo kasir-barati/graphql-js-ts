@@ -1,6 +1,6 @@
 import { getCpuPercentage, getMemoryUsage } from '@shared';
 import { CronJob } from 'cron';
-import { HTop, Top } from '../../__generated__/resolvers-types.js';
+import { HTop, Top } from '../__generated__/resolvers-types.js';
 import { getRedisPubSub } from './pubsub.service.js';
 
 const redisPubSub = getRedisPubSub();

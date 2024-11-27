@@ -15,7 +15,7 @@
         "target": "node20.10.0",
         "outputPath": "dist/apps/server-statistics",
         "format": ["cjs"],
-        "bundle": true,
+        "bundle": false,
         "main": "apps/server-statistics/src/main.ts",
         "tsConfig": "apps/server-statistics/tsconfig.app.json",
         "assets": [
@@ -23,7 +23,7 @@
           {
             "input": "{projectRoot}/src/",
             "glob": "schema.graphql",
-            "output": "."
+            "output": "apps/server-statistics/src"
           }
         ],
         "generatePackageJson": true,
@@ -68,7 +68,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "rm -rf {projectRoot}/__generated__ {projectRoot}/graphql.schema.json",
+          "rm -rf {projectRoot}/src/__generated__ {projectRoot}/graphql.schema.json",
           "gql-gen --config {projectRoot}/codegen.ts"
         ],
         "parallel": false

@@ -5,7 +5,7 @@ export default {
   // schema: "http://localhost:4005",
   schema: 'apps/server-statistics/src/schema.graphql',
   generates: {
-    'apps/server-statistics/__generated__/resolvers-types.ts': {
+    'apps/server-statistics/src/__generated__/resolvers-types.ts': {
       plugins: ['typescript', 'typescript-resolvers'],
     },
     './apps/server-statistics/graphql.schema.json': {
