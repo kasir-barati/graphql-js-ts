@@ -1,4 +1,4 @@
-import { getEnv } from './env.util';
+import { getEnv } from './env.util.js';
 
 const { frontendUrl, port } = getEnv();
 const whitelist = [

@@ -10,9 +10,9 @@ import { createServer } from 'http';
 import { join } from 'path';
 import { WebSocketServer } from 'ws';
 import { resolvers } from './resolvers';
-import { cpuCronJob, memoryCronJob } from './services/top.service';
-import { getEnv } from './utils/env.util';
-import { isNotWhiteListed } from './utils/in-not-whitelisted.util';
+import { cpuCronJob, memoryCronJob } from './services/top.service.js';
+import { getEnv } from './utils/env.util.js';
+import { isNotWhiteListed } from './utils/in-not-whitelisted.util.js';
 
 const { port } = getEnv();
 

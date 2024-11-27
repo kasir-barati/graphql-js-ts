@@ -10,8 +10,8 @@ import {
   HTopMemoryArgs,
   Resolvers,
   Unit,
-} from '../../__generated__/resolvers-types';
-import { getRedisPubSub } from '../services/pubsub.service';
+} from '../__generated__/resolvers-types.js';
+import { getRedisPubSub } from '../services/pubsub.service.js';
 
 const redisPubSub = getRedisPubSub();
 const unitToConvertorMap: Record<Unit, MemoryUnitConvertor> = {
