@@ -14,7 +14,7 @@
 
 ## Resolvers
 
-A resolver function receives four arguments:
+<a href="#fourArgumentsOfAnyResolverFunction" id="fourArgumentsOfAnyResolverFunction">#</a> A resolver function receives four arguments:
 
 ```ts
 async function getTodo(
@@ -65,6 +65,14 @@ class GraphqlTodo {
   }
 }
 ```
+
+> [!TIP]
+>
+> A very important note about `args` and `info` in a resolver:
+>
+> ![The args parameter is populated by the arguments passed to the field being resolved -- any arguments passed to other fields will not be included in the args parameter.](./assets/args-info-and-variables.png)
+>
+> &mdash; [Ref](https://stackoverflow.com/a/55716584/8784518).
 
 <a href="trivialResolvers">#</a> Note that we do not need to define trivial resolvers like `getTodoName` which does something like this:
 

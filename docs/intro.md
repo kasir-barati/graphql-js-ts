@@ -29,6 +29,10 @@ A GraphQL service (AKA GraphQL backend) is created by:
 
 ![a GraphQL service that tells you the name of a logged-in user might look like the code inside the image. In this example the function that provides data for the me field on the Query type uses information about the authenticated user who made the request, while the the name field on the User type is populated by using that user’s ID to fetch their full name from a database.](./assets/first-example.png)
 
+> [!TIP]
+>
+> [Learn about the four available arguments in a resolver here](./execution-from-inside.md#fourArgumentsOfAnyResolverFunction).
+
 ## Sales pitches of GraphQL
 
 ### Query what you need

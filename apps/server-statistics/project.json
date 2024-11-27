@@ -8,7 +8,7 @@
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
-      "dependsOn": ["codegen", "compile:codegen"],
+      "dependsOn": ["codegen"],
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",

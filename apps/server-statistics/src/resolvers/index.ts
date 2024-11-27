@@ -4,10 +4,10 @@ import {
   MegabyteConvertor,
   MemoryUnitConvertor,
 } from '@shared';
+import { GraphQLResolveInfo } from 'graphql';
 import { withFilter } from 'graphql-subscriptions';
 import {
   HTop,
-  HTopMemoryArgs,
   Resolvers,
   Unit,
 } from '../__generated__/resolvers-types.js';
@@ -37,21 +37,16 @@ export const resolvers: Resolvers = {
     },
     htop: {
       subscribe: withFilter(
-        () => {
-          return redisPubSub.asyncIterator('htop');
-        },
+        () => redisPubSub.asyncIterator('htop'),
         (
           payload: { htop: HTop },
-          args: HTopMemoryArgs,
-          context,
-          info,
+          _args,
+          _context,
+          info: GraphQLResolveInfo,
         ) => {
-          const unit = args.unit ?? info.variableValues.unit;
+          const unit = info.variableValues.unit as Unit;
           const convertor: MemoryUnitConvertor | undefined =
             unitToConvertorMap[unit];
-
-          console.log(info.variableValues.unit); // logs GB
-          console.log(args); // logs {}
 
           if (convertor) {
             payload.htop.memory = convertor.convert(
