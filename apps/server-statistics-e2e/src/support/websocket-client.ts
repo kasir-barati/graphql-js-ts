@@ -18,7 +18,7 @@ export class WebsocketClient {
   ): AsyncGenerator<ResponseType, void, unknown> {
     const subscription = this.client.iterate({
       query,
-      variables, // Is this correct?
+      variables,
     });
 
     for await (const event of subscription) {
