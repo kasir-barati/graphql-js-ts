@@ -72,6 +72,18 @@ Scenarios where we need it:
     - A cron job.
     - etc.
 - You can [see how it is done in NodeJS + ExpressJS + Apollo server here](https://github.com/kasir-barati/graphql/tree/main/apps/server-statistics).
+- To filter data you can use `withFilter` function.
+  - Runs before the `resolve` function.
+  - Returns early if the filter does **NOT** pass.
+  - Accepts two functions:
+    - The first is your usual subscribe which has to return an `AsyncIterator` object.
+    - The second function though is where you write extra logic to narrow what should be sent to the client based on their query.
+
+> [!TIP]
+>
+> Here you can see how `withFilter` should **NOT** be used in [AS](./glossary.md#asAcronymStandsFor):
+>
+> ![Inside the withFilter you should not change the resolved value, just filter it. For changing it use resolve function](./assets/wrong-usage-of-with-filter.png)
 
 ### NestJS + Apollo server
 

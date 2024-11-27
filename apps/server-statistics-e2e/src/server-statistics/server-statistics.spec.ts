@@ -46,7 +46,7 @@ describe('POST /graphql', () => {
     }
   });
 
-  it.only.each(['GB', 'MB', 'KB'])(
+  it.each(['GB', 'MB', 'KB'])(
     'should subscribe to memory usage in %s of our server',
     async (unit) => {
       const query = `#graphql

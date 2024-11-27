@@ -5,7 +5,6 @@ import {
   MemoryUnitConvertor,
 } from '@shared';
 import { GraphQLResolveInfo } from 'graphql';
-import { withFilter } from 'graphql-subscriptions';
 import {
   HTop,
   Resolvers,
@@ -36,27 +35,23 @@ export const resolvers: Resolvers = {
       },
     },
     htop: {
-      subscribe: withFilter(
-        () => redisPubSub.asyncIterator('htop'),
-        (
-          payload: { htop: HTop },
-          _args,
-          _context,
-          info: GraphQLResolveInfo,
-        ) => {
-          const unit = info.variableValues.unit as Unit;
-          const convertor: MemoryUnitConvertor | undefined =
-            unitToConvertorMap[unit];
-
-          if (convertor) {
-            payload.htop.memory = convertor.convert(
-              payload.htop.memory,
-            );
-          }
-
-          return true;
-        },
-      ),
+      resolve(
+        { htop }: { htop: HTop },
+        _args,
+        _context,
+        info: GraphQLResolveInfo,
+      ) {
+        const unit = info.variableValues.unit as Unit;
+        const convertor: MemoryUnitConvertor | undefined =
+          unitToConvertorMap[unit];
+        if (convertor) {
+          htop.memory = convertor.convert(htop.memory);
+        }
+        return htop;
+      },
+      subscribe() {
+        return redisPubSub.asyncIterator('htop') as any;
+      },
     },
     greet: {
       subscribe: async function* () {

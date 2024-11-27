@@ -199,6 +199,11 @@ Describes what kind of data can be requested,
   </dd>
   <dd>Identifies where a request is being made from.</dd>
   <dd>Determines whether a request is cross-origin or same-origin.</dd>
+  <dt id="asAcronymStandsFor">
+    <a href="#asAcronymStandsFor">#</a>
+    AS
+  </dt>
+  <dd>Stands for <b>A</b>pollo <b>S</b>erver</dd>
 </dl>
 
 ## Problem space VS solution space
