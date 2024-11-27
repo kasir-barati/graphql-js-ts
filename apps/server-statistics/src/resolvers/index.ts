@@ -37,14 +37,20 @@ export const resolvers: Resolvers = {
     },
     htop: {
       subscribe: withFilter(
-        (...args) => {
-          console.dir(args, { depth: null }); // Logs a crazy long string but at the very bottom I can see my whole query in string format and I can see clearly that GB is inside it but why GraphQL is not parsing it as an arg?
+        () => {
           return redisPubSub.asyncIterator('htop');
         },
-        (payload: { htop: HTop }, args: HTopMemoryArgs) => {
+        (
+          payload: { htop: HTop },
+          args: HTopMemoryArgs,
+          context,
+          info,
+        ) => {
+          const unit = args.unit ?? info.variableValues.unit;
           const convertor: MemoryUnitConvertor | undefined =
-            unitToConvertorMap[args.unit];
+            unitToConvertorMap[unit];
 
+          console.log(info.variableValues.unit); // logs GB
           console.log(args); // logs {}
 
           if (convertor) {

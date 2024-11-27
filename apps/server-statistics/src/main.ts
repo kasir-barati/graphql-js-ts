@@ -29,7 +29,7 @@ export interface Context {
   const schema = makeExecutableSchema({ typeDefs, resolvers });
   const wsServer = new WebSocketServer({
     server: httpServer,
-    path: '/subscriptions',
+    path: '/graphql',
   });
   const serverCleanup = useServer({ schema }, wsServer);
   const apolloServer = new ApolloServer<Context>({
