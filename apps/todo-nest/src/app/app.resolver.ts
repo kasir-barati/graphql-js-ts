@@ -30,6 +30,21 @@ export class AppResolver {
     private readonly redisPubSub: RedisPubSub,
   ) {}
 
+  @Subscription(() => String)
+  async *greet() {
+    for await (const word of [
+      'سلام',
+      'Hi',
+      'Hallo',
+      'Grüß Gott',
+      'Moin',
+      'Ciao',
+      'こにちは',
+    ]) {
+      yield { greet: word };
+    }
+  }
+
   @Subscription(() => Top)
   top() {
     this.redisPubSub.publish<boolean>(
