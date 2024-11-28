@@ -58,7 +58,7 @@ export class AppResolver {
 
   @ResolveField(() => Float)
   memory(
-    @Parent() payload: CronTopPayload,
+    @Parent() payload: CronTopPayload['top'],
     @Args('unit', { type: () => Unit }) unit: Unit,
   ) {
     const unitToConvertorMap: Record<Unit, MemoryUnitConvertor> = {
@@ -71,9 +71,10 @@ export class AppResolver {
       unitToConvertorMap[unit];
 
     if (convertor) {
-      return convertor.convert(payload.top.memory);
+      return convertor.convert(payload.memory);
     }
-    return payload.top.memory;
+
+    return payload.memory;
   }
 
   @ResolveField(() => Int)
