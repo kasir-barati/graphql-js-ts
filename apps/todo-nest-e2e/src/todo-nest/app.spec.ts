@@ -18,7 +18,7 @@ describe('APP', () => {
     expect(res.data).toEqual({ message: 'Hello API' });
   });
 
-  it.only('should return memory usage in gigabyte on POST /graphql', async () => {
+  it('should return memory usage in gigabyte on POST /graphql', async () => {
     const query = `#graphql
       subscription {
         top {
