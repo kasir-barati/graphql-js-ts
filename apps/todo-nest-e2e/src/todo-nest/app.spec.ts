@@ -1,6 +1,9 @@
 import { WebsocketClient } from '@testing';
 import axios from 'axios';
-import { TopResponse } from '../support/types/top-response.type';
+import {
+  GreetResponse,
+  TopResponse,
+} from '../support/types/app-response.type';
 
 describe('APP', () => {
   let websocketClient: WebsocketClient;
@@ -37,6 +40,29 @@ describe('APP', () => {
       expect(typeof statistics.data.top.memory).toBe('number');
 
       break;
+    }
+  });
+
+  it('should greet me in different ways, in different languages', async () => {
+    const query = `#graphql
+      subscription {
+        greet
+      }
+    `;
+    const expectedGreetings = [
+      'سلام',
+      'Hi',
+      'Hallo',
+      'Grüß Gott',
+      'Moin',
+      'Ciao',
+      'こにちは',
+    ];
+
+    for await (const greeting of websocketClient.subscribe<GreetResponse>(
+      query,
+    )) {
+      expect(greeting.data.greet).toBe(expectedGreetings.shift());
     }
   });
 });

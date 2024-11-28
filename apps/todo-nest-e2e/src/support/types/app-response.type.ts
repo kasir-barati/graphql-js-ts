@@ -6,3 +6,6 @@ export type TopResponse = Response<{
     memory: number;
   };
 }>;
+export type GreetResponse = Response<{
+  greet: string;
+}>;

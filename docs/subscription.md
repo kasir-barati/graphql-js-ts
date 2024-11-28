@@ -109,6 +109,17 @@ Scenarios where we need it:
    +  },
    })
    ```
+
+   > [!CAUTION]
+   >
+   > You cannot use `GqlOptionsFactory` as your return type. It is a generic type and in our case we wanna use `ApolloServer` as our driver, but if you use it then you won't be able to access properties such as `subscriptions`:
+   >
+   > ![You should not use GqlModuleOptions since it is a generic type](./assets/wrongly-typed-graphql-config.png)
+   >
+   > And here is how you do should do it instead:
+   >
+   > ![Use ApolloDriverConfig exported from @nestjs/apollo](./assets/correct-way-of-configuring-graphql.png)
+
 3. Use `@Subscription` to annotate your handler.
 4. ```shell
    pnpm add graphql-subscriptions
@@ -126,3 +137,6 @@ Scenarios where we need it:
 
 5. To publish an event, we use the `pubsub.publish` method.
    - Often used within a mutation to trigger a client-side update when a part of the object graph has changed.
+   - BTW it is also possible to use [_Javascript function generators_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) instead. Like what we did for `greet` subscription.
+6. If you need to pass arguments to your field you need to utilize `@ResolveField`.
+   - And if you need to access to the response you can use `@Parent`.
