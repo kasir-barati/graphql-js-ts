@@ -1,15 +1,17 @@
+import { WebsocketClient } from '@testing';
 import { GreetResponse } from '../support/types/greet-response.type';
 import {
   HtopResponse,
   TopResponse,
 } from '../support/types/top-response.type';
-import { WebsocketClient } from '../support/websocket-client';
 
 describe('POST /graphql', () => {
   let graphqlWebsocketClient: WebsocketClient;
 
   beforeAll(() => {
-    graphqlWebsocketClient = new WebsocketClient();
+    graphqlWebsocketClient = new WebsocketClient(
+      'ws://localhost:4005/graphql',
+    );
   });
 
   it('should subscribe to greetings of our server!', async () => {

@@ -72,7 +72,7 @@ export interface Context {
 
   httpServer.listen(port, 'localhost', () => {
     console.log(
-      `🚀 WebSocket server URL: ws://localhost:${port}/subscriptions`,
+      `🚀 WebSocket server URL: ws://localhost:${port}/graphql`,
     );
     console.log(
       `🚀 Apollo serve URL: http://localhost:${port}/graphql`,

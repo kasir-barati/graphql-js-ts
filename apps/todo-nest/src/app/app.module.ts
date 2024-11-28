@@ -1,6 +1,6 @@
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CronTopModule, PubSubModule } from '@shared';
 import { join } from 'path';
@@ -9,22 +9,22 @@ import { UserModule } from '../user/user.module';
 import { AppController } from './app.controller';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
+import appConfig from './configs/app.config';
+import { GraphQLConfig } from './configs/graphql.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
-      envFilePath: [join(__dirname, '..', '..', '.env')],
+      envFilePath: [join(__dirname, '.env')],
+      load: [appConfig],
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      // Options will be passed down to apollo server
+    GraphQLModule.forRootAsync({
       driver: ApolloDriver,
-      autoSchemaFile: join(__dirname, 'src', 'schema.gql'),
-      sortSchema: true,
-      subscriptions: {
-        'graphql-ws': true,
-      },
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useClass: GraphQLConfig,
     }),
     UserModule,
     TodoModule,

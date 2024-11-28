@@ -72,6 +72,11 @@ Scenarios where we need it:
     - A cron job.
     - etc.
 - You can [see how it is done in NodeJS + ExpressJS + Apollo server here](https://github.com/kasir-barati/graphql/tree/main/apps/server-statistics).
+- You need to enable CORS in your backend.
+  - [Learn more about CORS here](./security.md#cross-origin-resource-sharing----cors).
+- Do not forget to set up HTTP body parsing
+  - [In NestJS it is by default activated](https://docs.nestjs.com/faq/raw-body).
+  - In ExpressJS just `app.use(express.json())`.
 - To filter data you can use `withFilter` function.
   - Runs before the `resolve` function.
   - Returns early if the filter does **NOT** pass.
@@ -87,18 +92,14 @@ Scenarios where we need it:
 
 ### NestJS + Apollo server
 
-- Has a single top-level property.
-  - Key: the name of the subscription.
-    - This name is either:
-      - Inherited from the name of the subscription handler method (e.g., `commentAdded`).
-      - Is provided explicitly by passing an option with the key name as the second argument to the `@Subscription()` decorator.
+- Define a new `Subscription`
+  - This name is either:
+    - Inherited from the name of the subscription handler method (e.g., `commentAdded`).
+    - Is provided explicitly by passing an option with the key name as the second argument to the `@Subscription()` decorator.
 
-1. We need to enable it in our Apollo server.
+1. Enable subscription in [AS](./glossary.md#asAcronymStandsFor).
    - We need a 3rd-party lib for it called [`graphql-ws`](https://www.npmjs.com/package/graphql-ws).
-2. You need to [enable CORS in your NestJS app](https://docs.nestjs.com/security/cors).
-   - [Learn more about how to configure you're CORS](https://www.apollographql.com/docs/apollo-server/security/cors#specifying-origins).
-3. [Set up HTTP body parsing](https://docs.nestjs.com/faq/raw-body). In NestJS it is by default activated.
-4. ```diff
+2. ```diff
     GraphQLModule.forRoot<ApolloDriverConfig>({
      driver: ApolloDriver,
      autoSchemaFile: join(__dirname, 'src', 'schema.gql'),
@@ -108,8 +109,8 @@ Scenarios where we need it:
    +  },
    })
    ```
-5. Use `@Subscription` to annotate your handler.
-6. ```shell
+3. Use `@Subscription` to annotate your handler.
+4. ```shell
    pnpm add graphql-subscriptions
    ```
 
@@ -123,5 +124,5 @@ Scenarios where we need it:
        cd libs/shared && nest g module pubsub
        ```
 
-7. To publish an event, we use the `pubsub.publish` method.
+5. To publish an event, we use the `pubsub.publish` method.
    - Often used within a mutation to trigger a client-side update when a part of the object graph has changed.

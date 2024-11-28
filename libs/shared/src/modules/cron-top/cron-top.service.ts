@@ -1,56 +1,58 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { CronJob } from 'cron';
-import { PubSub } from 'graphql-subscriptions';
-import { SERVER_STATISTICS_CHANGED } from '../../constants/trigger-name.constant';
-import { Top } from '../../models/top.model';
-import { getCpuInfo } from '../../utils/get-cpu-info.util';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import {
+  CRON_JOB_OF_SERVER_STATISTICS,
+  SERVER_STATISTICS_CHANGED,
+} from '../../constants/trigger-name.constant';
+import { CronTopPayload } from '../../types/cron-top-payload.type';
+import { getCpuPercentage } from '../../utils/get-cpu-percentage.util';
+import { getMemoryUsage } from '../../utils/get-memory-usage.utils';
 import { PUB_SUB_INSTANCE } from '../pubsub/pubsub.constant';
 
 @Injectable()
-export class CronTopService {
-  private _cpuState: 'free' | 'in-use';
-  private job: CronJob<null, null>;
+export class CronTopService implements OnModuleInit {
+  private _cpuJob: CronJob<null, null>;
 
-  set cpuState(value: 'free' | 'in-use') {
-    this._cpuState = value;
+  public get cpuJob() {
+    return this._cpuJob;
   }
 
   constructor(
-    @Inject(PUB_SUB_INSTANCE) private readonly pubsub: PubSub,
+    @Inject(PUB_SUB_INSTANCE)
+    private readonly redisPubSub: RedisPubSub,
   ) {
-    this.job = CronJob.from({
+    this._cpuJob = CronJob.from({
       start: true,
       cronTime: '*/5 * * * * *',
-      onTick: () => {
-        // Use getCpuPercentage instead!
-        this.cpuPercentage();
+      onTick: async () => {
+        const freeCpu = await getCpuPercentage('free');
+        const inUseCpu = await getCpuPercentage('in-use');
+        const memory = getMemoryUsage().usedMemory;
+
+        this.redisPubSub.publish(SERVER_STATISTICS_CHANGED, {
+          top: {
+            cpu: 0,
+            memory: memory,
+            freeCpu,
+            inUseCpu,
+          },
+        } satisfies CronTopPayload);
       },
       timeZone: 'utc',
     });
   }
 
-  private cpuPercentage() {
-    const cpuInfo1 = getCpuInfo();
-
-    setTimeout(() => {
-      const cpuInfo2 = getCpuInfo();
-      const idle = cpuInfo2.idle - cpuInfo1.idle;
-      const total = cpuInfo2.total - cpuInfo1.total;
-      const percentage = idle / total;
-
-      if (this._cpuState === 'free') {
-        this.pubsub.publish(SERVER_STATISTICS_CHANGED, {
-          top: {
-            cpu: percentage,
-          } satisfies Top,
-        });
-      } else {
-        this.pubsub.publish(SERVER_STATISTICS_CHANGED, {
-          top: {
-            cpu: percentage,
-          } satisfies Top,
-        });
-      }
-    }, 1000);
+  async onModuleInit() {
+    await this.redisPubSub.subscribe(
+      CRON_JOB_OF_SERVER_STATISTICS,
+      (start: boolean) => {
+        if (start) {
+          this._cpuJob.start();
+          return;
+        }
+        this._cpuJob.stop();
+      },
+    );
   }
 }

@@ -7,6 +7,7 @@ export * from './modules/prisma/prisma.module';
 export * from './modules/prisma/prisma.service';
 export * from './modules/pubsub/pubsub.constant';
 export * from './modules/pubsub/pubsub.module';
+export * from './types/cron-top-payload.type';
 export * from './types/utility.type';
 export * from './utils/assert-not-negative-number.util';
 export * from './utils/get-cpu-info.util';

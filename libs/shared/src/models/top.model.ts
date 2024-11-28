@@ -1,4 +1,10 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  Float,
+  Int,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql';
 
 @ObjectType()
 export class Top {
@@ -8,37 +14,31 @@ export class Top {
   })
   cpu: number;
 
-  // @Field(() => Float, {
-  //   description: "Server's memory usage.",
-  //   nullable: false,
-  // })
-  // memory: number;
-
-  // @Field(() => Float, {
-  //   description: "Server's swap usage.",
-  //   nullable: false,
-  // })
-  // swap: number;
+  @Field(() => Float, {
+    description: "Server's memory usage.",
+    nullable: false,
+  })
+  memory: number;
 }
 
-// export enum CpuState {
-//   FREE,
-//   IN_USE,
-// }
+export enum CpuState {
+  FREE,
+  IN_USE,
+}
 
-// registerEnumType(CpuState, {
-//   description: 'How CPU usage should be returned',
-//   name: 'CpuState',
-// });
+registerEnumType(CpuState, {
+  description: 'How CPU usage should be returned',
+  name: 'CpuState',
+});
 
-// export enum Unit {
-//   BYTE,
-//   KILOBYTE,
-//   MEGABYTE,
-//   GIGABYTE,
-// }
+export enum Unit {
+  BYTE,
+  KILOBYTE,
+  MEGABYTE,
+  GIGABYTE,
+}
 
-// registerEnumType(Unit, {
-//   description: 'Supported units for stats',
-//   name: 'Unit',
-// });
+registerEnumType(Unit, {
+  description: 'Supported units for stats',
+  name: 'Unit',
+});

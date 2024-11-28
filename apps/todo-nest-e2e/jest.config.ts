@@ -15,7 +15,7 @@ export default {
       },
     ],
   },
-  // testMatch: ['**/get-todo.spec.ts'],
+  testMatch: ['**/app.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/todo-nest-e2e',
 } satisfies Config;

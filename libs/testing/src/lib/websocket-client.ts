@@ -4,9 +4,9 @@ import WebSocket from 'ws';
 export class WebsocketClient {
   private client: Client;
 
-  constructor() {
+  constructor(url: string) {
     this.client = createClient({
-      url: 'ws://localhost:4005/graphql',
+      url,
       webSocketImpl: WebSocket,
       lazy: false,
     });

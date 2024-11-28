@@ -4,7 +4,9 @@ import { assertNotNegativeNumber } from './assert-not-negative-number.util';
 import { MemoryUnitConvertor } from './memory-unit-convertor.util';
 
 interface Get {
+  /**@description Memory usage in bytes */
   usedMemory: NotNegativeNumber;
+  /**@description Total memory in bytes */
   totalMemory: NotNegativeNumber;
 }
 
