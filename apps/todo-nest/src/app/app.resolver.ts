@@ -78,11 +78,13 @@ export class AppResolver {
 
   @ResolveField(() => Int)
   cpu(
-    @Parent() payload: CronTopPayload,
+    // Note that here the top-level key does not exist anymore
+    // It is I guess handled by NestJS.
+    @Parent() payload: CronTopPayload['top'],
     @Args('cpuState', { type: () => CpuState }) cpuState: CpuState,
   ) {
     return cpuState === CpuState.FREE
-      ? payload.top.freeCpu
-      : payload.top.inUseCpu;
+      ? payload.freeCpu
+      : payload.inUseCpu;
   }
 }
