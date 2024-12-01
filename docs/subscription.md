@@ -4,7 +4,7 @@
   - Fetch data using `Query` operation type.
   - Modify/insert data using `Mutation` operation type.
 - But if you need to push data from the server to the clients, that choose to listen to real time messages from the server, you need to use `Subscription` operation type.
-- More complex to implement, so first [make sure that you need it](#making-sure-that-i-need-subscription).
+- More complex to implement, so first [make sure that you need it](https://github.com/kasir-barati/awesome-js-ts/blob/main/docs/websockets.md#scenarios-where-we-need-websockets).
 - Subscription: long-lasting GraphQL read operations that can update their result whenever a particular server-side event occurs.
   - Done through [the WebSocket protocol](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
@@ -39,24 +39,6 @@
 >   }
 > }
 > ```
-
-## Making sure that I need subscription
-
-> [!NOTE]
-> In the majority of cases, your client should not use subscriptions to stay up to date with your backend, **instead**:
->
-> - **Short polling**: Poll [intermittently](https://dictionary.cambridge.org/dictionary/english/intermittently) with queries.
-> - Re-execute queries on demand, when a user performs a relevant action (e.g. clicking on a refresh button).
-
-Scenarios where we need it:
-
-- **Large objects, small, incremental changes**:
-  - Short polling a large object is expensive, especially here since most of the object's fields have not changed.
-  - Instead:
-    1. Fetch the object's initial state with a query.
-    2. Server proactively push updates to individual fields as they occur.
-- **Low-latency, real-time updates**:
-  - Clients in a chat app want to receive new messages ASAP.
 
 ## `@apollo/server`
 
