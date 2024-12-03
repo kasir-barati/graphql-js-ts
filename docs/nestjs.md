@@ -129,14 +129,16 @@ To write our queries we usually need a new object in our GraphQL API. Here is wh
 > });
 > ```
 >
-> This is commonly known as [`N+1` issue in GraphQL](https://stackoverflow.com/a/60832838/8784518). To solve this issue we have libraries such as [`@paljs`](https://github.com/paljs/prisma-tools). But I also wanna talk about a few things:
+> This is commonly known as [`N+1` issue in GraphQL](https://stackoverflow.com/a/60832838/8784518). I am not sure except writing raw queries or the [new feature of Prisma](https://www.prisma.io/blog/prisma-6-better-performance-more-flexibility-and-type-safe-sql#pick-the-best-join-strategy) what else we can do since:
 >
-> 1. ORMs make separate queries to fetch data and then in JS they put them together and shave it to your taste (this is how things are usually done when you use their APIs). Though [Prisma v6 has a new feature](https://www.prisma.io/blog/prisma-6-better-performance-more-flexibility-and-type-safe-sql#pick-the-best-join-strategy) which allows you to pick the best strategy.
+> 1. ORMs make separate queries to fetch data and then at the application level they put them together and shave it to your taste (this is how things are usually done when you use their APIs).
 > 2. The raw SQL query even for the most basic thing would be really hard to maintain. Just look at [this](https://github.com/kasir-barati/graphql/blob/3bf93922c493350bb600141d40ad97d038aee09a/apps/todo-nest/src/todo/todo.repository.ts#L9-L41) query for fetching one todo + who has created it and if it is being assigned to someone, I want their user info too.
 > 3. Another important thing here is to know that we are not modular at all. I mean this `@ResolveField` can resolve any field with that name and the same return type.
 > 4. If the query is really crazy heavy then we have to write raw queries then. So we also will take care of all maintenance it brings along.
+> 5. In general it is a good idea to use [`@paljs`](https://github.com/paljs/prisma-tools) since it can help us a lot with reducing the amount of data being transferred from database to our NodeJS app.
+> 6. This new feature of Prisma where they use `LATERAL JOIN` is not flawless either ([learn more](https://github.com/prisma/prisma/discussions/22288#discussioncomment-11446261)).
 >
-> So with these in mind I believe `@paljs` is the best thing we have.
+> **Conclusion**: I am gonna use `@paljs/plugin` for the foreseeable future :smile:.
 
 > [!TIP]
 >

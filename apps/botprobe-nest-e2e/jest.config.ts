@@ -15,7 +15,7 @@ export default {
       },
     ],
   },
-  // testMatch: ['**/delete-todo.spec.ts'],
+  // testMatch: ['**/alert.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/botprobe-nest-e2e',
 } satisfies Config;

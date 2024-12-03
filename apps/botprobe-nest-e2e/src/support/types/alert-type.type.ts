@@ -1,12 +1,16 @@
-import { Response } from './common.type';
+import { Response } from '@testing';
 
 export type AlertTypesResponse = Response<{
-  alertTypes: {
-    id: string;
-    name: string;
-    Alert: {
+  alertTypes: [
+    {
       id: string;
-      title: string;
-    };
-  };
+      name: string;
+      Alerts: [
+        {
+          id: string;
+          title: string;
+        },
+      ];
+    },
+  ];
 }>;

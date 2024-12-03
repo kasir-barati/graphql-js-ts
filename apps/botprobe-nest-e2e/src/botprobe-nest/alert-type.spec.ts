@@ -2,13 +2,13 @@ import axios from 'axios';
 import { AlertTypesResponse } from '../support/types/alert-type.type';
 
 describe('POST /graphql', () => {
-  it('should return all the alarms', async () => {
+  it('should return all the alarm types with the "leak" inside their name', async () => {
     const query = `#graphql
       query($where: AlertTypeWhereInput!) {
         alertTypes(where: $where) {
           id
           name
-          Alert {
+          Alerts {
             id
             title
           }
@@ -37,10 +37,10 @@ describe('POST /graphql', () => {
           {
             id: expect.any(String),
             name: 'leak-detection',
-            Alert: expect.anything(),
+            Alerts: expect.anything(),
           },
         ],
       },
-    });
+    } satisfies AlertTypesResponse);
   });
 });

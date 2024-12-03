@@ -6,7 +6,7 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { AlertCreateInput } from '../@generated/alert/alert-create.input';
+import { AlertCreateManyInput } from '../@generated/alert/alert-create-many.input';
 import { AlertWhereInput } from '../@generated/alert/alert-where.input';
 import { Alert } from '../@generated/alert/alert.model';
 import { AlertService } from './alert.service';
@@ -24,7 +24,10 @@ export class AlertResolver {
   }
 
   @Mutation(() => Alert)
-  async create(@Args('alert') alert: AlertCreateInput) {
-    return this.alertService.create(alert);
+  async create(
+    @Args('alert') alert: AlertCreateManyInput,
+    @Info() info: GraphQLResolveInfo,
+  ) {
+    return this.alertService.create(alert, info);
   }
 }

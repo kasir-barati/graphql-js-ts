@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaSelect } from '@paljs/plugins';
 import { PrismaService } from '@shared';
 import { GraphQLResolveInfo } from 'graphql';
-import { AlertCreateInput } from '../@generated/alert/alert-create.input';
+import { AlertCreateManyInput } from '../@generated/alert/alert-create-many.input';
 import { AlertWhereInput } from '../@generated/alert/alert-where.input';
 
 @Injectable()
@@ -23,7 +23,12 @@ export class AlertService {
     });
   }
 
-  create(alert: AlertCreateInput) {
-    return this.prismaService.alert.create({ data: alert });
+  create(alert: AlertCreateManyInput, info: GraphQLResolveInfo) {
+    const select = new PrismaSelect(info).value;
+
+    return this.prismaService.alert.create({
+      data: alert,
+      ...select,
+    });
   }
 }
