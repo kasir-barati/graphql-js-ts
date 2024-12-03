@@ -41,3 +41,45 @@
    ```
 4. Check `apps/botprobe-nest` to see what goes inside those files.
 5. And to see how you should write e2e tests read the `apps/botprobe-nest-e2e`.
+6. Use `///` to customize the generated code:
+
+   - [`/// @HideField()`](https://github.com/unlight/prisma-nestjs-graphql?tab=readme-ov-file#hidefield).
+   - For class-validator you need to:
+
+     1. ```shell
+        pnpm add class-validator class-transformer
+        ```
+     2. ```ts
+        // src/main.ts
+        import { ValidationPipe } from '@nestjs/common';
+        // ...
+        app.useGlobalPipes(new ValidationPipe());
+        // ...
+        ```
+     3. ```prisma
+        generator nestgraphql {
+          fields_Validator_from = "class-validator"
+          fields_Validator_input = true
+        }
+        // ...
+        model User {
+          // ...
+          /// @Validator.MinLength(3)
+          name String
+          // ...
+        }
+        // ...
+        ```
+
+        Find more examples in `apps/botprobe-nest`.
+
+> ![IMPORTANT]
+>
+> According to my experiences with this lib there are a couple of things which needs your consideration:
+>
+> 1. [The naming of input types does not make sense](https://github.com/unlight/prisma-nestjs-graphql/issues/226).
+> 2. [Optional fields are not optional in the generated TS class](https://github.com/unlight/prisma-nestjs-graphql/issues/225).
+> 3. In `apps/botprobe-nest` I used `@paljs/plugin` which simplifies selecting the fields that client asked for. But be aware of these issues:
+>    - [Prisma still sends separates queries to the underlying database](https://github.com/paljs/prisma-tools/issues/347).
+> 4. `prisma-nestjs-graphql` does not [delete the previous @generated before generating the new one (purgeOutput)](https://github.com/unlight/prisma-nestjs-graphql/issues/224).
+> 5. [Weird naming for `*CreateInput`](https://github.com/unlight/prisma-nestjs-graphql/issues/226).

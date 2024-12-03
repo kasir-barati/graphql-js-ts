@@ -3,10 +3,12 @@ generator client {
 }
 
 generator nestgraphql {
-  provider = "node node_modules/prisma-nestjs-graphql"
-  output   = "../src/@generated"
+  provider               = "node node_modules/prisma-nestjs-graphql"
+  output                 = "../src/@generated"
   // https://github.com/unlight/prisma-nestjs-graphql/issues/224
   // purgeOutput = true
+  fields_Validator_from  = "class-validator"
+  fields_Validator_input = true
 }
 
 datasource db {
@@ -16,9 +18,14 @@ datasource db {
 
 model AlertType {
   id          String    @id @default(uuid())
+  /// @Validator.MinLength(3)
   name        String    @unique @db.VarChar(200)
+  /// @Validator.MinLength(3)
+  /// @Validator.MaxLength(500)
   description String?   @db.VarChar(500)
+  /// @HideField({input: true, output: false})
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  /// @HideField({input: true, output: false})
   updatedAt   DateTime? @updatedAt @map("updated_at") @db.Timestamptz()
 
   Alerts Alert[]
@@ -28,13 +35,22 @@ model AlertType {
 
 model Alert {
   id          String    @id @default(uuid())
+  /// @Validator.MinLength(3)
+  /// @Validator.MaxLength(200)
   title       String    @db.VarChar(200)
+  /// @Validator.MinLength(3)
+  /// @Validator.MaxLength(500)
   description String?   @db.VarChar(500)
+  /// @Validator.IsUUID()
   userId      String    @map("user_id") @db.Uuid
+  /// @HideField({input: true, output: false})
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  /// @HideField({input: true, output: false})
   updatedAt   DateTime? @updatedAt @map("updated_at") @db.Timestamptz()
 
+  /// @HideField({input: true, output: false})
   AlertType   AlertType @relation(fields: [alertTypeId], references: [id])
+  /// @Validator.IsUUID()
   alertTypeId String    @map("alert_type_id")
 
   @@map("alerts")
