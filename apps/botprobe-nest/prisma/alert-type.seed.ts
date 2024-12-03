@@ -32,6 +32,19 @@ const alertTypes: Prisma.AlertTypeCreateArgs['data'][] = [
   },
 ];
 
+const dummyAlertTypes: Prisma.AlertTypeCreateArgs['data'][] =
+  new Array(1_000_000).fill({}).map((_, index) => {
+    return {
+      name: 'Dummy alert type name ' + index + 1,
+      description: 'Dummy alert type description' + index + 1,
+    } satisfies Prisma.AlertTypeCreateArgs['data'];
+  });
+
+export const alertTypesIds = [
+  ...alertTypes.map((alertType) => alertType.id!),
+  ...dummyAlertTypes.map((alertType) => alertType.id!),
+];
+
 export async function seedAlertTypes(prismaClient: PrismaClient) {
   if (
     await prismaClient.alertType.findFirst({
@@ -42,5 +55,6 @@ export async function seedAlertTypes(prismaClient: PrismaClient) {
   }
 
   await prismaClient.alertType.createMany({ data: alertTypes });
+  await prismaClient.alertType.createMany({ data: dummyAlertTypes });
   return 'Alert types seeded!';
 }
