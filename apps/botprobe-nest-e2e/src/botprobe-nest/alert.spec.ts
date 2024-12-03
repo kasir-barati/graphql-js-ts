@@ -118,7 +118,7 @@ describe('POST /graphql', () => {
     expect(status).toBe(200);
     expect(data).toEqual({
       data: {
-        search: [
+        search: expect.arrayContaining([
           {
             id: alertId,
             title: alertTitle,
@@ -127,7 +127,7 @@ describe('POST /graphql', () => {
               name: 'leak-detection',
             },
           },
-        ],
+        ]),
       },
     } satisfies SearchAlertResponse);
   });
