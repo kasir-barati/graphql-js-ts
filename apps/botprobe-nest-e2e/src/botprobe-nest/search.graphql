@@ -1,0 +1,91 @@
+# https://api.crystallize.com/furniture/search
+enum OrderField {
+  ITEM_NAME
+  PRICE
+  STOCK
+  CREATED_AT
+}
+enum OrderDirection {
+  ASC
+  DESC
+}
+input OrderBy {
+  field: OrderField!
+  direction: OrderDirection!
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+input TopicPathsFilterFields {
+  value: String!
+}
+input TopicPathsFilterSection {
+  logicalOperator: LogicalOperator = AND
+  fields: [TopicPathsFilterFields!]!
+}
+input TopicPathsFilter {
+  logicalOperator: LogicalOperator = AND
+  sections: [TopicPathsFilterSection!]!
+}
+input ItemFilterFields {
+  itemIds: [String!]
+  skus: [String!]
+  shapeIdentifiers: [String!]
+  paths: [String!]
+  slugs: [String!]
+  topicPaths: TopicPathsFilter
+}
+input PriceRangeFilter {
+  min: Float
+  max: Float
+}
+input StockFilter {
+  location: String
+  min: Int!
+}
+enum StockLocationsLogicalOperator {
+  OR
+}
+input StockLocationsFilter {
+  logicalOperator: StockLocationsLogicalOperator = OR
+  locations: [String!]
+  min: Int!
+}
+input VariantAttributeFilter {
+  attribute: String!
+  values: [String!]!
+}
+input ProductVariantsFilter {
+  isDefault: Boolean
+  priceRange: PriceRangeFilter
+  stock: StockFilter
+  stockLocations: StockLocationsFilter
+  attributes: [VariantAttributeFilter!]
+}
+enum ItemType {
+  PRODUCT
+  DOCUMENT
+  FOLDER
+}
+input CatalogueSearchFilter {
+  searchTerm: String
+  type: ItemType
+  include: ItemFilterFields
+  exclude: ItemFilterFields
+  productVariants: ProductVariantsFilter
+  priceVariant: String = "default"
+  stockLocation: String = "default"
+}
+
+type Query {
+  search(
+    language: String
+    after: String
+    before: String
+    first: Int
+    orderBy: OrderBy
+    filter: CatalogueSearchFilter
+  ): CatalogueSearchConnection!
+}

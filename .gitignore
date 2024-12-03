@@ -11,6 +11,7 @@ tmp
 /out-tsc
 __generated__
 graphql.schema.json
+@generated
 
 # dependencies
 node_modules

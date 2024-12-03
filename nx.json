@@ -26,7 +26,8 @@
         "apps/expressjs-hello-world-e2e/**/*",
         "apps/todo-backend-e2e/**/*",
         "apps/todo-nest-e2e/**/*",
-        "apps/server-statistics-e2e/**/*"
+        "apps/server-statistics-e2e/**/*",
+        "apps/botprobe-nest-e2e/**/*"
       ]
     },
     {
