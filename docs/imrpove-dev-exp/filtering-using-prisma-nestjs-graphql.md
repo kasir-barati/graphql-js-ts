@@ -83,3 +83,6 @@
 >    - [Prisma still sends separates queries to the underlying database](https://github.com/paljs/prisma-tools/issues/347).
 > 4. `prisma-nestjs-graphql` does not [delete the previous @generated before generating the new one (purgeOutput)](https://github.com/unlight/prisma-nestjs-graphql/issues/224).
 > 5. [Weird naming for `*CreateInput`](https://github.com/unlight/prisma-nestjs-graphql/issues/226).
+> 6. I did a quick npmtrends and it seems that this lib reign supreme:
+>
+>    ![npmtrends](../assets/npmtrends-prisma-nestjs-graphql.png)
