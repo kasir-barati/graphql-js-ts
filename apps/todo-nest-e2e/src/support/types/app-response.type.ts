@@ -1,4 +1,4 @@
-import { Response } from './common.type';
+import { Response } from '@testing';
 
 export type TopResponse = Response<{
   top: {

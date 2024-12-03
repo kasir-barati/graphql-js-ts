@@ -1,4 +1,4 @@
-import { Response } from './common.type';
+import { Response } from '@testing';
 
 export type CreateUserBuilderResponse = Response<{
   createUser: { id: string };
