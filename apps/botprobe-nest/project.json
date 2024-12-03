@@ -5,10 +5,43 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "compose:up": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose up -d",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compose:down": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "compose:up",
+        "prisma-push",
+        "prisma-seed",
+        "build"
+      ],
       "options": {
         "buildTarget": "botprobe-nest:build",
         "runBuildTargetDependencies": false
@@ -53,7 +86,8 @@
       "executor": "@nx-tools/nx-prisma:pull"
     },
     "prisma-push": {
-      "executor": "@nx-tools/nx-prisma:push"
+      "executor": "@nx-tools/nx-prisma:push",
+      "parallelism": false
     },
     "prisma-reset": {
       "executor": "@nx-tools/nx-prisma:reset"
@@ -62,7 +96,13 @@
       "executor": "@nx-tools/nx-prisma:resolve"
     },
     "prisma-seed": {
-      "executor": "@nx-tools/nx-prisma:seed"
+      "executor": "@nx-tools/nx-prisma:seed",
+      "options": {
+        "script": "{projectRoot}/prisma/seed.ts",
+        "tsConfig": "{projectRoot}/tsconfig.app.json",
+        "executeWith": "ts-node"
+      },
+      "parallelism": false
     },
     "prisma-status": {
       "executor": "@nx-tools/nx-prisma:status"

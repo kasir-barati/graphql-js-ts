@@ -50,7 +50,7 @@ services:
   
   postgres:
     image: postgres:17.0-alpine3.20
-    # To eanble logging queries:
+    # To enable logging queries:
     command: "-c log_statement=all"
     restart: always
     ports:

@@ -31,7 +31,9 @@
 3. ```shell
    cd apps/botprobe-nest
    nest g module alert
+   nest g service alert
    nest g resolver alert
    nest g module alert-type
+   nest g service alert-type
    nest g resolver alert-type
    ```
