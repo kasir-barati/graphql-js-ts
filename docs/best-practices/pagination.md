@@ -34,7 +34,7 @@ To traverse the relationship between sets of objects. we can have a field that r
   2. `comments(first:2 after:$commentId)` returns the next two after the last comment we fetched.
   3. `comments(first:2 after:$commentCursor)` returns the next two comments from where the cursor points to.
 
-  [Cursor-based pagination](https://github.com/kasir-barati/nestjs-materials/blob/main/.github/docs/designing-restful-api/pagination.md#cursorBasedPagination) is the one we'll use.
+  [Cursor-based pagination](https://github.com/kasir-barati/nestjs-materials/blob/main/docs/designing-restful-api/pagination.md#cursorBasedPagination) is the one we'll use.
 
 ## Cursor-based pagination in GraphQL
 
