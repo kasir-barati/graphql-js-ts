@@ -18,3 +18,11 @@ But **Un**like these type systems, GraphQL types are nullable by default unless 
 > [!IMPORTANT]
 >
 > When designing a GraphQL schema, keep in mind when `null` is an appropriate value for a failed field, and if it is **NOT**, use non-null types.
+
+> [!CAUTION]
+>
+> **A common misunderstanding about GraphQL**:
+>
+> The nullable/not-nullable feature has nothing to do with user input validation and definitely should not be expected to do any of that. The nullabilty feature of GraphQL fields has to do with API integrity/ quality, versioning, etc.
+>
+> &mdash; [Ref](https://discord.com/channels/520622812742811698/1313097554543771689/1314132497533108324).
