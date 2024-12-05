@@ -138,7 +138,25 @@ To write our queries we usually need a new object in our GraphQL API. Here is wh
 > 5. In general it is a good idea to use [`@paljs`](https://github.com/paljs/prisma-tools) since it can help us a lot with reducing the amount of data being transferred from database to our NodeJS app.
 > 6. This new feature of Prisma where they use `LATERAL JOIN` is not flawless either ([learn more](https://github.com/prisma/prisma/discussions/22288#discussioncomment-11446261)).
 >
-> **Conclusion**: I am gonna use `@paljs/plugin` for the foreseeable future :smile:.
+> **Conclusion**: I am gonna use `@paljs/plugin` for the foreseeable future :smile:. But keep in mind that there are scenarios that it might requires us to write extra code, e.g.:
+>
+> - An external Auth provider handles users data, therefore our app needs to fetch data from their API in a separate `@ResolveField` method:
+>
+>   ```graphql
+>   query {
+>     post {
+>       id
+>       title
+>       # Assume user info is stored in FusionAuth.
+>       user {
+>         id
+>         name
+>       }
+>     }
+>   }
+>   ```
+>
+> - Or when your pagination is following "Connections" spec. Then your query might not match exactly the underlying database. [Learn more here](./best-practices/pagination.md).
 
 > [!TIP]
 >

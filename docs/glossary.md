@@ -204,6 +204,37 @@ Describes what kind of data can be requested,
     AS
   </dt>
   <dd>Stands for <b>A</b>pollo <b>S</b>erver</dd>
+  <dt id="indirectionDefinition">
+    <a href="#indirectionDefinition">#</a>
+    Indirection
+  </dt>
+  <dd>Useful and simple technique.</dd>
+  <dd>
+    Decouple software units by introducing a layer between two existing units/layers.
+  </dd>
+  <dd>
+    Enable you to introduce a new behavior, without directly impairing the existing units.
+  </dd>
+  <dd>
+    E.g., your application needs to read some persisted data, instead of spreading the knowledge of how and from where your app can read all throughout the application.
+    <br />
+    Isolate it (put that reading of data into a new layer called repository) and then let all of the other parts of your application call that method to get the data instead of each part of the app having to deal with those details itself.
+  </dd>
+  <dd>
+    Learn more:
+    <ul>
+      <li>
+        <a href="https://stackoverflow.com/q/18003544/8784518">
+          What does "level of indirection" mean in David Wheeler's aphorism?
+        </a>
+      </li>
+      <li>
+        <a href="https://medium.com/@nmckinnonblog/indirection-fba1857630e2">
+          INDIRECTION
+        </a>
+      </li>
+    </ul>
+  </dd>
 </dl>
 
 ## Problem space VS solution space
