@@ -2,7 +2,8 @@
 
 > [!NOTE]
 >
-> Different pagination models enable different client capabilities.
+> - Different pagination models enable different client capabilities.
+> - For code and implementation you can check my `apps/botprobe-nest` project in [this repo](https://github.com/kasir-barati/graphql-js-ts).
 
 To traverse the relationship between sets of objects. we can have a field that returns a plural type:
 

@@ -53,7 +53,7 @@
     - A mutation.
     - A cron job.
     - etc.
-- You can [see how it is done in NodeJS + ExpressJS + Apollo server here](https://github.com/kasir-barati/graphql/tree/main/apps/server-statistics).
+- You can [see how it is done in NodeJS + ExpressJS + Apollo server here](https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/server-statistics).
 - You need to enable CORS in your backend.
   - [Learn more about CORS here](./security.md#cross-origin-resource-sharing----cors).
 - Do not forget to set up HTTP body parsing

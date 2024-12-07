@@ -18,7 +18,7 @@ export type AlertTypesResponse = Response<{
       id: string;
       name: string;
       // Read this for more info:
-      // https://github.com/kasir-barati/graphql/blob/9d6aa2c980bb0f9365c25bd2dd06ff1aaeb1a331/docs/improve-dev-exp/filtering-using-prisma-nestjs-graphql.md#prismaNestjsGraphqlEvaluation
+      // https://github.com/kasir-barati/graphql-js-ts/blob/9d6aa2c980bb0f9365c25bd2dd06ff1aaeb1a331/docs/improve-dev-exp/filtering-using-prisma-nestjs-graphql.md#prismaNestjsGraphqlEvaluation
       // And this part is commented since it does not have pagination
       // Alerts: [
       //   {

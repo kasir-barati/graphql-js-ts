@@ -4,11 +4,11 @@
 - Each field returns the next type.
 - Each field on each type is backed by a resolver function.
 
-  - E.g. when [here](https://github.com/kasir-barati/graphql/blob/63439cd4029023736636e039a1ddea2686b974b3/apps/scalar-types/src/main.ts#L30) we are returning a `RandomDie` and inside that type we have `roll` and `rollOnce` which are also considered resolvers.
+  - E.g. when [here](https://github.com/kasir-barati/graphql-js-ts/blob/63439cd4029023736636e039a1ddea2686b974b3/apps/scalar-types/src/main.ts#L30) we are returning a `RandomDie` and inside that type we have `roll` and `rollOnce` which are also considered resolvers.
 
     Though we never really passed them explicitly as resolver to our `rootApi` variable.
 
-- The execution stops when you return a scalar/enum type -- [like `Todo` object type](https://github.com/kasir-barati/graphql/blob/63439cd4029023736636e039a1ddea2686b974b3/apps/todo-backend/src/schema.ts#L10-L20).
+- The execution stops when you return a scalar/enum type -- [like `Todo` object type](https://github.com/kasir-barati/graphql-js-ts/blob/63439cd4029023736636e039a1ddea2686b974b3/apps/todo-backend/src/schema.ts#L10-L20).
 
 ![Execution flowchart](./assets/execution-cycle.png)
 

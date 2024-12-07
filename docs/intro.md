@@ -111,7 +111,7 @@ Here is another example of fetching user info when we are only interested in use
 4. Define the query.
 5. Make a call to your GraphQL.
 
-Code: [https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/main.ts](https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/main.ts).
+Code: [https://github.com/kasir-barati/graphql-js-ts/blob/main/apps/hello-world/src/main.ts](https://github.com/kasir-barati/graphql-js-ts/blob/main/apps/hello-world/src/main.ts).
 
 ## ExpressJS + GraphQL
 
@@ -134,7 +134,7 @@ Code: [https://github.com/kasir-barati/graphql/blob/main/apps/hello-world/src/ma
 
    BTW To learn more about my thought processes and why I did test it this way you can [read this](https://github.com/kasir-barati/you-say/tree/main/.github/docs/testing#how-to-write-good-integration-tests).
 
-Code: [https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world](https://github.com/kasir-barati/graphql/tree/main/apps/expressjs-hello-world).
+Code: [https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/expressjs-hello-world](https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/expressjs-hello-world).
 
 > [!TIP]
 >

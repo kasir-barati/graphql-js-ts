@@ -24,4 +24,4 @@ The very first thing that I wanted so badly from the very beginning was the abil
 
 You can see a working example here:
 
-https://github.com/kasir-barati/graphql/blob/8dc88c57d2ba98af3a8d6619bdf153e2f912c3a1/apps/server-statistics/src/main.ts#L1-L17
+[https://github.com/kasir-barati/graphql-js-ts/blob/8dc88c57d2ba98af3a8d6619bdf153e2f912c3a1/apps/server-statistics/src/main.ts#L1-L17](https://github.com/kasir-barati/graphql-js-ts/blob/8dc88c57d2ba98af3a8d6619bdf153e2f912c3a1/apps/server-statistics/src/main.ts#L1-L17).

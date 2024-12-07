@@ -23,7 +23,7 @@ export class TodoResolver {
     return this.todoService.createTodo(inputDto);
   }
 
-  // Learn more about ResolveField: https://github.com/kasir-barati/graphql/blob/main/docs/nestjs.md#shouldWeUseResolveField
+  // Learn more about ResolveField: https://github.com/kasir-barati/graphql-js-ts/blob/main/docs/nestjs.md#shouldWeUseResolveField
   // @ResolveField(() => User, { nullable: true, name: 'AssignedTo' })
   // async getAssignedTo(@Parent() todo: Todo) {
   //   // Since this field is nullable we need to check if that field exits

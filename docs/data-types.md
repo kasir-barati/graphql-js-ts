@@ -21,7 +21,7 @@
 - Scalar types cannot have sub-selections in the query.
 - The leaf values of the query.
 
-Code: [https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types](https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types).
+Code: [https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/scalar-types](https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/scalar-types).
 
 ## Define custom scalar types
 
@@ -42,7 +42,7 @@ Code: [https://github.com/kasir-barati/graphql/tree/main/apps/scalar-types](http
   - Enforce basic type enforcements.
 - Still need to do more validation, things like a string is a strong password, or email validation? Then you need to write your own custom validator.
 
-Code: [https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16](https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16).
+Code: [https://github.com/kasir-barati/graphql-js-ts/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16](https://github.com/kasir-barati/graphql-js-ts/blob/122a487b29ec9c4b8610fe87498dfc6bae7463e1/apps/scalar-types/src/main.ts#L16).
 
 ## Define custom types -- Objects
 
@@ -57,9 +57,9 @@ Code: [https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498d
 
   Now let's look at the wrong and correct way of querying this particular query:
 
-  | Wrong usage                                                                                                                         | Correct usage                                                                                                                 |
-  | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-  | https://github.com/kasir-barati/graphql/blob/abe288c3dc3db225fe639250f446fe2a45cfc273/docs/assets/wrong-get-die-query.graphql#L1-L5 | https://github.com/kasir-barati/graphql/blob/abe288c3dc3db225fe639250f446fe2a45cfc273/docs/assets/get-die-query.graphql#L1-L9 |
+  | Wrong usage                                                                                                                               | Correct usage                                                                                                                       |
+  | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+  | https://github.com/kasir-barati/graphql-js-ts/blob/abe288c3dc3db225fe639250f446fe2a45cfc273/docs/assets/wrong-get-die-query.graphql#L1-L5 | https://github.com/kasir-barati/graphql-js-ts/blob/abe288c3dc3db225fe639250f446fe2a45cfc273/docs/assets/get-die-query.graphql#L1-L9 |
 
   Why should we use this approach?
 
@@ -70,7 +70,7 @@ Code: [https://github.com/kasir-barati/graphql/blob/122a487b29ec9c4b8610fe87498d
      - In our frontend we get a much cleaner way to fetch data.
   4. Better UX since user do not have to wait a long time for the data.
 
-Code: [https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts](https://github.com/kasir-barati/graphql/blob/main/apps/scalar-types/src/main.ts).
+Code: [https://github.com/kasir-barati/graphql-js-ts/blob/main/apps/scalar-types/src/main.ts](https://github.com/kasir-barati/graphql-js-ts/blob/main/apps/scalar-types/src/main.ts).
 
 # Mutate data
 
@@ -100,13 +100,13 @@ In GraphQL we can do the same thing, but within the GraphQL syntax boundaries; i
 
 Following example's schema definition:
 
-1. https://github.com/kasir-barati/graphql/blob/cc9666b59d67392a89075531dbbd960683482fb8/apps/profile/src/main.ts#L24-L29
+1. https://github.com/kasir-barati/graphql-js-ts/blob/cc9666b59d67392a89075531dbbd960683482fb8/apps/profile/src/main.ts#L24-L29
 
-2. https://github.com/kasir-barati/graphql/blob/cc9666b59d67392a89075531dbbd960683482fb8/apps/profile/src/main.ts#L44-L52
+2. https://github.com/kasir-barati/graphql-js-ts/blob/cc9666b59d67392a89075531dbbd960683482fb8/apps/profile/src/main.ts#L44-L52
 
 ![Some notes about how to send mutation queries](./assets/mutation-example-notes.png)
 
-Code: [https://github.com/kasir-barati/graphql/tree/main/apps/profile](https://github.com/kasir-barati/graphql/tree/main/apps/profile).
+Code: [https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/profile](https://github.com/kasir-barati/graphql-js-ts/tree/main/apps/profile).
 
 # Enums
 

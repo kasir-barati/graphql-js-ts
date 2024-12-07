@@ -75,7 +75,7 @@ E.g. if you're searching in [audit-log](./data-types.md#auditLogUnionExample) an
 # Field errors
 
 - Raised if something unexpected happens during execution.
-- E.g. [here](https://github.com/kasir-barati/graphql/blob/bf70d551f86c33e6c6b50a69c30576cd6c738729/apps/scalar-types-e2e/src/scalar-types/__snapshots__/scalar-types.spec.ts.snap#L3-L28) we are mocking what will our server returns when something goes wrong in the middle of execution.
+- E.g. [here](https://github.com/kasir-barati/graphql-js-ts/blob/bf70d551f86c33e6c6b50a69c30576cd6c738729/apps/scalar-types-e2e/src/scalar-types/__snapshots__/scalar-types.spec.ts.snap#L3-L28) we are mocking what will our server returns when something goes wrong in the middle of execution.
 - GraphQL will attempt to continue executing the other fields and return a partial response.
 - `data` key + `errors` key in the returned response.
 
