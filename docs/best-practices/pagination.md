@@ -102,25 +102,91 @@ How can we send the cursor to the client?
 
 ![Cursor-based connections pagination](../assets/graphql-cursor-based-connections-pagination.png)
 
-- `PostCommentEdge` represents an actual entity in our graph.
-- `PostCommentsConnection` type represents an abstract concept.
-- In graph theory, an edge can have properties of its own which act effectively as metadata;
-  - ```graphql
-    enum CommentSentiment {
-      NEUTRAL
-      POSITIVE
-      NEGATIVE
-    }
-    type PostCommentEdge {
-      cursor: String!
-      node: Comment
-      sentiment: CommentSentiment
-    }
-    ```
-  - **Note**: most tools treat the edge type as boilerplate. But we are not gonna do that, we add data that belongs to the edge to the `edge` type.
+- `PostCommentsConnection`:
+
+  - An "object".
+  - Fields:
+
+    - `edges`.
+
+      <details>
+        <summary>Fields inside it</summary>
+        <ul>
+          <li>
+            <code>node</code> contains the actual comment's data.
+            <br />
+            <b>Cannot be a list!</b>
+          </li>
+          <li><code>cursor</code> is the cursor to that "node".</li>
+          <li>Can have additional fields related to the edge</li>
+        </ul>
+      </details>
+
+    - `pageInfo`:
+
+      <details>
+        <summary>Fields inside it</summary>
+        <ul>
+          <li><code>startCursor</code> is the first cursor of the "page".</li>
+          <li><code>endCursor</code> is the last cursor of the "page".</li>
+        </ul>
+      </details>
+
+    - Additional info related to the connection
+
+- `PostCommentEdge`:
+  - An actual entity in our graph.
+- `commentsConnection`: you can perform forward pagination, backward pagination, **or both**.
+
+  - **Forward pagination**:
+    - `first`:
+      - Mandatory.
+      - Slices the data, i.e., returns that many comments.
+    - `after`:
+      - Mandatory.
+      - Paginates through the data, i.e., returns comments after that cursor.
+  - **Backward pagination**:
+    - `last`:
+      - Required.
+      - A non-negative integer.
+    - `before`:
+      - Required.
+      - Returns the nodes before that cursor.
+
+> [!CAUTION]
+>
+> Sort edges the same way, in both, forward pagination and backward pagination. I.e.,
+>
+> - `after`: the edge closest to `cursor` must **come first**.
+> - `before`: the edge closest to `cursor` must **come last**.
+
+> [!TIP]
+>
+> In graph theory, an _edge_/_connection_ can have properties of its own which act effectively as metadata;
+>
+> ```graphql
+> enum CommentSentiment {
+>   NEUTRAL
+>   POSITIVE
+>   NEGATIVE
+> }
+> type PostCommentEdge {
+>   cursor: String!
+>   node: Comment
+>   sentiment: CommentSentiment
+> }
+> ```
+>
+> **Note**: most tools treat the edge type as boilerplate. But we are not gonna do that, we add data that belongs to the edge to the `edge` type.
+
+### 3rd-party libs
+
+- In Prisma we have libraries such as [prisma-relay-cursor-connection](https://github.com/devoxa/prisma-relay-cursor-connection).
+- Or ORM agnostic libraries such as [nestjs-graphql-connection](https://github.com/equalogic/nestjs-graphql-connection).
 
 ## Ref
 
 1. [Pagination](https://graphql.org/learn/pagination/).
 2. [Understanding pagination: REST, GraphQL, and Relay](https://www.apollographql.com/blog/understanding-pagination-rest-graphql-and-relay).
 3. [Explaining GraphQL Connections](https://www.apollographql.com/blog/explaining-graphql-connections).
+4. [Implementation of Relay-style pagination with Prisma Client JS](https://github.com/prisma/prisma/issues/5016).

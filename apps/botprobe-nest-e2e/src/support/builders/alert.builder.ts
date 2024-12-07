@@ -9,10 +9,10 @@ export class AlertBuilder {
   private _description?: string;
 
   constructor() {
-    this._title = 'Some title';
+    this._title = 'Some title ' + Date.now();
     this._userId = randomUUID();
     this._alertTypeId = '8f55cefb-402d-4615-9025-548f76362c27';
-    this._description = 'Some random desc';
+    this._description = 'Some random desc ' + Date.now();
   }
 
   setTitle(title: string) {
@@ -34,7 +34,7 @@ export class AlertBuilder {
   async build() {
     const query = `#graphql
       mutation CreateAlert($alert: AlertCreateManyInput!) {
-        create(alert: $alert) {
+        createAlert(alert: $alert) {
           id
         }
       }
@@ -42,7 +42,7 @@ export class AlertBuilder {
     const {
       data: {
         data: {
-          create: { id },
+          createAlert: { id },
         },
       },
     } = await axios.post<AlertBuilderResponse>('/graphql', {

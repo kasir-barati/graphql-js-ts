@@ -4,6 +4,7 @@ export default {
   displayName: 'shared',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
+  setupFilesAfterEnv: ['<rootDir>/test-setup-after-env.ts'],
   transform: {
     '^.+\\.[tj]s$': [
       'ts-jest',

@@ -7,6 +7,7 @@ generator nestgraphql {
   output                 = "../src/@generated"
   // https://github.com/unlight/prisma-nestjs-graphql/issues/224
   // purgeOutput = true
+  omitModelsCount        = true
   fields_Validator_from  = "class-validator"
   fields_Validator_input = true
 }
@@ -23,11 +24,14 @@ model AlertType {
   /// @Validator.MinLength(3)
   /// @Validator.MaxLength(500)
   description String?   @db.VarChar(500)
-  /// @HideField({input: true, output: false})
+  /// @HideField({ match: 'AlertTypeCreate*Input' })
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz()
-  /// @HideField({input: true, output: false})
+  /// @HideField({ match: 'AlertTypeCreate*Input' })
   updatedAt   DateTime? @updatedAt @map("updated_at") @db.Timestamptz()
 
+  // we cannot use @deprecated:
+  // https://github.com/unlight/prisma-nestjs-graphql/issues/227
+  // That's why I did not change its name to `alertsConnection`!
   Alerts Alert[]
 
   @@map("alert_types")
@@ -43,12 +47,15 @@ model Alert {
   description String?   @db.VarChar(500)
   /// @Validator.IsUUID()
   userId      String    @map("user_id") @db.Uuid
-  /// @HideField({input: true, output: false})
+  /// @HideField({ match: 'AlertCreate*Input' })
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz()
-  /// @HideField({input: true, output: false})
+  /// @HideField({ match: 'AlertCreate*Input' })
   updatedAt   DateTime? @updatedAt @map("updated_at") @db.Timestamptz()
 
-  /// @HideField({input: true, output: false})
+  // we cannot use @deprecated:
+  // https://github.com/unlight/prisma-nestjs-graphql/issues/227
+  // That is why I did not rename it to `alertTypeConnection` instead
+  /// @HideField({ match: 'AlertCreate*Input' })
   AlertType   AlertType @relation(fields: [alertTypeId], references: [id])
   /// @Validator.IsUUID()
   alertTypeId String    @map("alert_type_id")

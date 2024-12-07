@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+import { randomUUID } from 'crypto';
 
 const alertTypes: Prisma.AlertTypeCreateArgs['data'][] = [
   {
@@ -33,10 +34,11 @@ const alertTypes: Prisma.AlertTypeCreateArgs['data'][] = [
 ];
 
 const dummyAlertTypes: Prisma.AlertTypeCreateArgs['data'][] =
-  new Array(1_000_000).fill({}).map((_, index) => {
+  new Array(10).fill({}).map((_, index) => {
     return {
-      name: 'Dummy alert type name ' + index + 1,
-      description: 'Dummy alert type description' + index + 1,
+      id: randomUUID(),
+      name: 'Dummy alert type name ' + (index + 1),
+      description: 'Dummy alert type description' + (index + 1),
     } satisfies Prisma.AlertTypeCreateArgs['data'];
   });
 
@@ -51,7 +53,7 @@ export async function seedAlertTypes(prismaClient: PrismaClient) {
       where: { name: alertTypes[0].name },
     })
   ) {
-    return 'Already have been seeded!';
+    return 'Alert types already have been seeded!';
   }
 
   await prismaClient.alertType.createMany({ data: alertTypes });

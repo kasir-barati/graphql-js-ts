@@ -23,7 +23,7 @@ describe('POST /graphql', () => {
   it('should create a new alert', async () => {
     const query = `#graphql
       mutation Create($alert: AlertCreateManyInput!) {
-        create(alert: $alert) {
+        createAlert(alert: $alert) {
           id
           title
           AlertType {
@@ -57,7 +57,7 @@ describe('POST /graphql', () => {
 
     expect(data).toStrictEqual({
       data: {
-        create: {
+        createAlert: {
           id: expect.any(String),
           title,
           AlertType: {
@@ -126,7 +126,7 @@ describe('POST /graphql', () => {
               id: '8f55cefb-402d-4615-9025-548f76362c27',
               name: 'leak-detection',
             },
-          },
+          } satisfies SearchAlertResponse['data']['search'][0],
         ]),
       },
     } satisfies SearchAlertResponse);

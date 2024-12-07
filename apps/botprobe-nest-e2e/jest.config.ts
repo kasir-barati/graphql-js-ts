@@ -6,6 +6,9 @@ export default {
   globalSetup: '<rootDir>/src/support/global-setup.ts',
   globalTeardown: '<rootDir>/src/support/global-teardown.ts',
   setupFiles: ['<rootDir>/src/support/test-setup.ts'],
+  setupFilesAfterEnv: [
+    '<rootDir>/src/support/test-setup-after-env.ts',
+  ],
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': [
@@ -15,7 +18,7 @@ export default {
       },
     ],
   },
-  // testMatch: ['**/alert.spec.ts'],
+  // testMatch: ['**/alert-type.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/botprobe-nest-e2e',
 } satisfies Config;

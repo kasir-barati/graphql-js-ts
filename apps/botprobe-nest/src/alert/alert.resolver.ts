@@ -1,6 +1,7 @@
 import {
   Args,
   Info,
+  Int,
   Mutation,
   Query,
   Resolver,
@@ -18,13 +19,22 @@ export class AlertResolver {
   @Query(() => [Alert])
   search(
     @Args('where') where: AlertWhereInput,
+    @Args('first', {
+      type: () => Int,
+      nullable: true,
+      defaultValue: 10,
+    })
+    first: number = 10,
+    @Args('after', { nullable: true }) after: string,
+    @Args('last', { type: () => Int, nullable: true }) last: number,
+    @Args('before', { nullable: true }) before: string,
     @Info() info: GraphQLResolveInfo,
   ) {
     return this.alertService.search(where, info);
   }
 
   @Mutation(() => Alert)
-  async create(
+  async createAlert(
     @Args('alert') alert: AlertCreateManyInput,
     @Info() info: GraphQLResolveInfo,
   ) {

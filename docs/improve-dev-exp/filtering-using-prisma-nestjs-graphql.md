@@ -75,14 +75,42 @@
 
 > ![IMPORTANT]
 >
-> According to my experiences with this lib there are a couple of things which needs your consideration:
+> <a id="prismaNestjsGraphqlEvaluation" href="#prismaNestjsGraphqlEvaluation">#</a> According to my experiences with this lib there are a couple of things which needs your consideration:
 >
 > 1. [The naming of input types does not make sense](https://github.com/unlight/prisma-nestjs-graphql/issues/226).
 > 2. [Optional fields are not optional in the generated TS class](https://github.com/unlight/prisma-nestjs-graphql/issues/225).
 > 3. In `apps/botprobe-nest` I used `@paljs/plugin` which simplifies selecting the fields that client asked for. But be aware of these issues:
 >    - [Prisma still sends separates queries to the underlying database](https://github.com/paljs/prisma-tools/issues/347).
 > 4. `prisma-nestjs-graphql` does not [delete the previous @generated before generating the new one (purgeOutput)](https://github.com/unlight/prisma-nestjs-graphql/issues/224).
-> 5. [Weird naming for `*CreateInput`](https://github.com/unlight/prisma-nestjs-graphql/issues/226).
-> 6. I did a quick npmtrends and it seems that this lib reign supreme:
+> 5. [There is not any way to deprecate a relation field](https://github.com/unlight/prisma-nestjs-graphql/issues/227).
+> 6. Pagination and fetching data from external APIs and incorporating them in your API requires a lot of manual work:
+>    ```graphql
+>    query {
+>      post {
+>        # `user` data is stored in our FusionAuth e.g.
+>        user {
+>          id
+>          username
+>        }
+>        # `commentsConnection` is implemented according to the Cursor-based Connections Spec.
+>        commentsConnection(
+>          first: 5
+>          after: "encodedValueWithBase64Algorithm"
+>        ) {
+>          edges {
+>            cursor
+>            node {
+>              id
+>              content
+>            }
+>          }
+>          pageInfo {
+>            hasNextPage
+>          }
+>        }
+>      }
+>    }
+>    ```
+> 7. I did a quick npmtrends and it seems that this lib reign supreme in Prisma but the downsides are too many:
 >
 >    ![npmtrends](../assets/npmtrends-prisma-nestjs-graphql.png)
