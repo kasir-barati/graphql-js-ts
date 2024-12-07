@@ -4,6 +4,8 @@
 >
 > - Different pagination models enable different client capabilities.
 > - For code and implementation you can check my `apps/botprobe-nest` project in [this repo](https://github.com/kasir-barati/graphql-js-ts).
+> - To lean more about pagination in general [read this](https://github.com/kasir-barati/nestjs-materials/blob/main/docs/designing-restful-api/pagination.md).
+> - To learn more about efficiency in SQL you can read [this](https://github.com/kasir-barati/sql/blob/main/docs/select/pagination.md).
 
 To traverse the relationship between sets of objects. we can have a field that returns a plural type:
 
@@ -96,7 +98,7 @@ How can we send the cursor to the client?
 ### Why Were Connections Created?
 
 - A very crucial existential question.
-- To have a very efficient method of paging (learn more about efficiency [here](https://github.com/kasir-barati/sql/blob/main/docs/select/pagination.md)).
+- To have a very efficient method of paging.
 - To have a common nomenclature that is generic enough to encompass everything.
 
 ### Designing GraphQL Schema
