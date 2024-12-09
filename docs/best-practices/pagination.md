@@ -3,7 +3,7 @@
 > [!NOTE]
 >
 > - Different pagination models enable different client capabilities.
-> - For code and implementation you can check my `apps/botprobe-nest` project in [this repo](https://github.com/kasir-barati/graphql-js-ts).
+> - I tried `prisma-nestjs-graphql` lib and here is the result: `apps/botprobe-nest` project.
 > - To lean more about pagination in general [read this](https://github.com/kasir-barati/nestjs-materials/blob/main/docs/designing-restful-api/pagination.md).
 > - To learn more about efficiency in SQL you can read [this](https://github.com/kasir-barati/sql/blob/main/docs/select/pagination.md).
 

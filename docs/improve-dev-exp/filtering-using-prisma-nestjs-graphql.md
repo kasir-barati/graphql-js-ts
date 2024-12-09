@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+>
+> [Read my conclusion after using `prisma-nestjs-graphql`](#prismaNestjsGraphqlEvaluation).
+
 # Filtering using [`prisma-nestjs-graphql`](https://github.com/unlight/prisma-nestjs-graphql)
 
 1. ```shell
@@ -77,13 +81,15 @@
 >
 > <a id="prismaNestjsGraphqlEvaluation" href="#prismaNestjsGraphqlEvaluation">#</a> According to my experiences with this lib there are a couple of things which needs your consideration:
 >
+> **Downsides IMO**
+>
 > 1. [The naming of input types does not make sense](https://github.com/unlight/prisma-nestjs-graphql/issues/226).
 > 2. [Optional fields are not optional in the generated TS class](https://github.com/unlight/prisma-nestjs-graphql/issues/225).
 > 3. In `apps/botprobe-nest` I used `@paljs/plugin` which simplifies selecting the fields that client asked for. But be aware of these issues:
 >    - [Prisma still sends separates queries to the underlying database](https://github.com/paljs/prisma-tools/issues/347).
 > 4. `prisma-nestjs-graphql` does not [delete the previous @generated before generating the new one (purgeOutput)](https://github.com/unlight/prisma-nestjs-graphql/issues/224).
 > 5. [There is not any way to deprecate a relation field](https://github.com/unlight/prisma-nestjs-graphql/issues/227).
-> 6. Pagination and fetching data from external APIs and incorporating them in your API requires a lot of manual work:
+> 6. Pagination and fetching data from external APIs and incorporating them in your API requires a lot of manual work (learn more [here](../best-practices/pagination.md)):
 >    ```graphql
 >    query {
 >      post {
