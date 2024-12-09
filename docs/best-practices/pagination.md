@@ -4,6 +4,7 @@
 >
 > - Different pagination models enable different client capabilities.
 > - I tried `prisma-nestjs-graphql` lib and here is the result: `apps/botprobe-nest` project.
+>   - I decided to try out `nestjs-query` since it looks more promising both from filtering capabilities, pagination and auth (learn more [here](https://discord.com/channels/520622812742811698/1313097554543771689/1315660190330392658)).
 > - To lean more about pagination in general [read this](https://github.com/kasir-barati/nestjs-materials/blob/main/docs/designing-restful-api/pagination.md).
 > - To learn more about efficiency in SQL you can read [this](https://github.com/kasir-barati/sql/blob/main/docs/select/pagination.md).
 
