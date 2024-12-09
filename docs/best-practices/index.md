@@ -9,4 +9,4 @@ Some philosophies developed within Facebook around designing and deploying Graph
 - [Avoid versioning](./avoid-versioning.md).
 - [Most of the times fields are nullable](./most-of-the-times-fields-are-nullable.md).
 - [Pagination](./pagination.md).
-- [Communication with a GraphQL service](./communication-with-a-graphql-service.md)
+- [Communication with a GraphQL service](./communication-with-a-graphql-service.md).

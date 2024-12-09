@@ -22,7 +22,17 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
 8. [GraphQL request lifecycle](./docs/graphql-req-lifecycle.md).
 9. [How to query information about a GraphQL schema](./docs/introspection.md).
 10. [Improve developer experience](./docs/improve-dev-exp/index.md).
+    - [IoC -- Inversion of Control principle](./docs/improve-dev-exp/ioc.md).
+    - [Use a `schema.graphql` file](./docs/improve-dev-exp/use-schema-graphql-files.md)
+    - [Strongly typed resolvers, context, ...](./docs/improve-dev-exp/strongly-typed.md).
+    - [Filtering using `prisma-nestjs-graphql`](./docs/improve-dev-exp/filtering-using-prisma-nestjs-graphql.md).
 11. [Security in GraphQL](./docs/security.md).
 12. [NestJS](./docs/nestjs.md).
 13. [Subscription](./docs/subscription.md).
 14. [Best practices](./docs/best-practices/index.md).
+    - [Serve over HTTP](./docs/best-practices/serve-over-http.md).
+    - [Compress your request/response with GZIP](./docs/best-practices/compress-your-req-res-with-gzip.md).
+    - [Avoid versioning](./docs/best-practices/avoid-versioning.md).
+    - [Most of the times fields are nullable](./docs/best-practices/most-of-the-times-fields-are-nullable.md).
+    - [Pagination](./docs/best-practices/pagination.md).
+    - [Communication with a GraphQL service](./docs/best-practices/communication-with-a-graphql-service.md).
