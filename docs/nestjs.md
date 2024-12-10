@@ -170,6 +170,23 @@ To write our queries we usually need a new object in our GraphQL API. Here is wh
 >   - The core business logic.
 >   - Or areas of functionality in your application.
 
+> [!TIP]
+>
+> One thing that I really love about `@nestjs/graphql` is that it exports an `GraphQLISODateTime` which we can use to signify the type of date fields:
+>
+> ```ts
+> import {
+>   ObjectType,
+>   GraphQLISODateTime,
+>   Field,
+> } from '@nestjs/graphql';
+> @ObjectType('EntityName')
+> export class EntityName {
+>   @Field(() => GraphQLISODateTime)
+>   createdAt!: Date;
+> }
+> ```
+
 ### Mutation
 
 To change data on the server you need to create an `Input` object type most of the times (when the data you receive is complex) and an `Object` to show response schema:
