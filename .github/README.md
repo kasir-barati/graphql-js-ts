@@ -19,7 +19,7 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
 3. [Auth](../docs/auth.md).
 4. A simple todo app written with GraphQL + ReactJS + Relay:
    - [Backend](../apps/todo-backend/README.md).
-   - [Frontend]().
+   - [Frontend]() TK.
 5. [Queries and mutations in depth](../docs/queries-and-mutations.md).
 6. [Let's breakdown the query language a bit more](../docs/graphql-query-language-breakdown.md).
 7. [Document your GraphQL service API](../docs/documentation.md).
