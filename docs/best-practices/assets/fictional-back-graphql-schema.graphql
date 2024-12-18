@@ -55,3 +55,21 @@ type Transaction implements Node {
   amount: Float!
   date: String
 }
+
+query fetchPage {
+  account(id: "123") {
+    name
+    transactions(last: 5) {
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          date
+          amount
+        }
+      }
+    }
+  }
+}
