@@ -10,3 +10,5 @@ Some philosophies developed within Facebook around designing and deploying Graph
 - [Most of the times fields are nullable](./most-of-the-times-fields-are-nullable.md).
 - [Pagination](./pagination.md).
 - [Communication with a GraphQL service](./communication-with-a-graphql-service.md).
+- [Batching](./batching.md).
+- [Caching](./caching.md).

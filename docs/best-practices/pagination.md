@@ -175,7 +175,7 @@ How can we send the cursor to the client?
 >   NEGATIVE
 > }
 > type PostCommentEdge {
->   cursor: String!
+>   cursor: ID!
 >   node: Comment
 >   sentiment: CommentSentiment
 > }

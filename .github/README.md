@@ -40,3 +40,5 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
     - [Most of the times fields are nullable](../docs/best-practices/most-of-the-times-fields-are-nullable.md).
     - [Pagination](../docs/best-practices/pagination.md).
     - [Communication with a GraphQL service](../docs/best-practices/communication-with-a-graphql-service.md).
+    - [Batching](../docs/best-practices/batching.md).
+    - [Caching](../docs/best-practices/caching.md).

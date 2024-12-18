@@ -1,0 +1,103 @@
+{
+  "name": "dos-attack-example",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dos-attack-example/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "compose:up": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose up -d",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compose:down": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "seed": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "dependsOn": ["compose:up"],
+      "options": {
+        "command": "ts-node --project tsconfig.app.json src/seed.ts",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/dos-attack-example",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/dos-attack-example/src/main.ts",
+        "tsConfig": "apps/dos-attack-example/tsconfig.app.json",
+        "assets": [
+          "apps/dos-attack-example/src/assets",
+          {
+            "input": "{projectRoot}/src/",
+            "glob": "schema.graphql",
+            "output": "apps/dos-attack-example/src"
+          }
+        ],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "dos-attack-example:build",
+        "runBuildTargetDependencies": false,
+        "port": 0
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dos-attack-example:build:development"
+        },
+        "production": {
+          "buildTarget": "dos-attack-example:build:production"
+        }
+      }
+    }
+  }
+}

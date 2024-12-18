@@ -1,4 +1,4 @@
-# Graph QL
+# GraphQL
 
 - A [query language](./glossary.md#queryLanguageDefinition) for your API.
   - Note that GraphQL query language is basically about selecting fields on objects.
