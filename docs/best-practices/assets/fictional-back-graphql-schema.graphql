@@ -1,0 +1,57 @@
+type Query {
+  customer(id: ID!): Customer
+  customers(
+    first: Int
+    last: Int
+    after: ID
+    before: ID
+  ): CustomerConnection
+  account(id: ID!): Account
+  accounts(
+    first: Int
+    last: Int
+    after: ID
+    before: ID
+  ): AccountConnection
+}
+"""
+A single account for one or two customers
+"""
+type Account implements Node {
+  id: ID!
+  name: String
+  purpose: String
+  familyMembers(limit: Int!): [Account]
+  transactions(
+    first: Int
+    last: Int
+    after: ID
+    before: ID
+  ): TransactionConnection
+    @listSize(
+      slicingArguments: ["first", "last"]
+      sizedFields: ["edges"]
+    )
+}
+type TransactionConnection {
+  pageInfo: PageInfo!
+  edges: [TransactionEdge]
+}
+type PageInfo {
+  hasNextPage: Boolean!
+  totalCount: Int!
+}
+type TransactionEdge {
+  cursor: ID!
+  node: Transaction
+}
+"""
+A single transaction on an account
+"""
+type Transaction implements Node {
+  id: ID!
+  name: String
+  description: String
+  amount: Float!
+  date: String
+}
