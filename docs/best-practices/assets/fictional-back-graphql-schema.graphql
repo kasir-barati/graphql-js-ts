@@ -61,7 +61,7 @@ query fetchPage {
     name
     transactions(last: 5) {
       pageInfo {
-        hasNextPage
+        totalCount
       }
       edges {
         cursor
