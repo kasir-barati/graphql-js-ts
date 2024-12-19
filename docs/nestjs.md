@@ -202,3 +202,42 @@ To change data on the server you need to create an `Input` object type most of t
       To create a DTO. BTW if you do not know what does `my-touch` you can read [this](https://kasir-barati.github.io/the-pragmatic-programmer/customize-your-dev-env/my-touch.html).
 
    3. Write your service layer and repository layer logic for the mutation and then wire everything up.
+
+## Query Complexity
+
+> [!CAUTION]
+>
+> - First make sure to read [this doc about cost analysis](./best-practices/cost-analysis.md).
+> - Only works in code first approach.
+
+- Define how complex certain fields are.
+  - A common default is to give each field a complexity of 1.
+  - <a href="#complexityEstimatorFunction" id="complexityEstimatorFunction">#</a> Calculate the complexity of a query via a "complexity estimator";
+    - A simple function that calculates the complexity of a field.
+    - Add any number of complexity estimators to the rule, which are then executed one after another.
+      - The first estimator that returns a numeric complexity value determines the complexity for that field.
+- Restrict queries with a maximum complexity to prevent attack such as [DoS](./security.md#denial-of-service-attack).
+- Her we're gonna use a 3rd-party packages called [`graphql-query-complexity`](https://www.npmjs.com/package/graphql-query-complexity).
+
+### `graphql-query-complexity`
+
+1. ```shell
+   pnpm add graphql-query-complexity
+   ```
+2. [Follow step #1 through #5](#bootstrap-your-nestjs-backend-in-nx).
+3. ```shell
+   nest g cl complexity-plugin --flat
+   ```
+4. Then write a custom "plugin" for your apollo server to calculate the complexity of a query.
+5. Add the newly created class to `providers` array.
+6. **Now** we can utilize:
+   - The `complexity` field on a DTO.
+   - Or pass a complexity estimator function.
+
+> [!CAUTION]
+>
+> If you have nested fields and use `@ResolveField` decorator it is not gonna add up all the nested queries. So you'll end up with whatever your return from your cost estimator or the hard coded value (like what we're doing [here](https://github.com/kasir-barati/graphql-js-ts/blob/54cc54f495194f9292c4308b346e0b66d91b519e/apps/complexity/src/app/dto/user.dto.ts#L10)).
+
+> [!CAUTION]
+>
+> I also cannot see how you might be doing field cost analysis separately from type cost analysis and add them together to figure out the cost for a query.
