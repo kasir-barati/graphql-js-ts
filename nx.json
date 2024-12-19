@@ -1,5 +1,7 @@
 {
-  "installation": { "version": "20.2.2" },
+  "installation": {
+    "version": "20.2.2"
+  },
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
       "cache": true,
@@ -10,11 +12,15 @@
   "plugins": [
     {
       "plugin": "@nx/eslint/plugin",
-      "options": { "targetName": "lint" }
+      "options": {
+        "targetName": "lint"
+      }
     },
     {
       "plugin": "@nx/jest/plugin",
-      "options": { "targetName": "test" },
+      "options": {
+        "targetName": "test"
+      },
       "exclude": [
         "apps/hello-world-e2e/**/*",
         "apps/expressjs-hello-world-e2e/**/*",
@@ -22,7 +28,8 @@
         "apps/todo-nest-e2e/**/*",
         "apps/server-statistics-e2e/**/*",
         "apps/botprobe-nest-e2e/**/*",
-        "apps/dos-attack-example-e2e/**/*"
+        "apps/dos-attack-example-e2e/**/*",
+        "apps/complexity-e2e/**/*"
       ]
     },
     {
