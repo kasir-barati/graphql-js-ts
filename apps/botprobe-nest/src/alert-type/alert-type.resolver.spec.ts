@@ -1,15 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { SinonMock, SinonMockType } from '@testing';
 import { AlertTypeResolver } from './alert-type.resolver';
+import { AlertTypeService } from './alert-type.service';
 
 describe('AlertTypeResolver', () => {
   let resolver: AlertTypeResolver;
+  let alertTypeService: SinonMockType<AlertTypeService>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [AlertTypeResolver],
-    }).compile();
-
-    resolver = module.get<AlertTypeResolver>(AlertTypeResolver);
+    alertTypeService = SinonMock.of(AlertTypeService);
+    resolver = new AlertTypeResolver(alertTypeService);
   });
 
   it('should be defined', () => {

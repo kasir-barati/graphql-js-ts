@@ -1,15 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaService } from '@shared';
+import { SinonMock, SinonMockType } from '@testing';
 import { AlertService } from './alert.service';
 
 describe('AlertService', () => {
   let service: AlertService;
+  let prismaService: SinonMockType<PrismaService>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [AlertService],
-    }).compile();
-
-    service = module.get<AlertService>(AlertService);
+    prismaService = SinonMock.of(PrismaService);
+    service = new AlertService(prismaService);
   });
 
   it('should be defined', () => {

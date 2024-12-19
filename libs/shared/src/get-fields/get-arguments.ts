@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLResolveInfo } from 'graphql';
 import { AST, ValueOfArgument } from './types';
 

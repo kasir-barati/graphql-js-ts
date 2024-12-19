@@ -1,15 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { SinonMock, SinonMockType } from '@testing';
+import { TodoRepository } from './todo.repository';
 import { TodoService } from './todo.service';
 
 describe('TodoService', () => {
   let service: TodoService;
+  let repository: SinonMockType<TodoRepository>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [TodoService],
-    }).compile();
-
-    service = module.get<TodoService>(TodoService);
+    repository = SinonMock.of(TodoRepository);
+    service = new TodoService(repository);
   });
 
   it('should be defined', () => {

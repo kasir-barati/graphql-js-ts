@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "NodeNext",
+    "esModuleInterop": true,
     "types": ["jest", "node"]
   },
   "include": [

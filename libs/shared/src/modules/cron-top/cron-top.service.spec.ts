@@ -1,15 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { SinonMock, SinonMockType } from '@testing';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { CronTopService } from './cron-top.service';
 
 describe('CronTopService', () => {
   let service: CronTopService;
+  let redisPubSub: SinonMockType<RedisPubSub>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [CronTopService],
-    }).compile();
-
-    service = module.get<CronTopService>(CronTopService);
+    redisPubSub = SinonMock.of(RedisPubSub);
+    service = new CronTopService(redisPubSub);
   });
 
   it('should be defined', () => {

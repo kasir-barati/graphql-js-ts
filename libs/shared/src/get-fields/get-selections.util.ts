@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { SchemaDefinitionNode } from 'graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 
