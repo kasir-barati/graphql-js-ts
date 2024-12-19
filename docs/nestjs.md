@@ -237,6 +237,34 @@ To change data on the server you need to create an `Input` object type most of t
 > [!CAUTION]
 >
 > If you have nested fields and use `@ResolveField` decorator it is not gonna add up all the nested queries. So you'll end up with whatever your return from your cost estimator or the hard coded value (like what we're doing [here](https://github.com/kasir-barati/graphql-js-ts/blob/54cc54f495194f9292c4308b346e0b66d91b519e/apps/complexity/src/app/dto/user.dto.ts#L10), [here](https://github.com/kasir-barati/graphql-js-ts/blob/54cc54f495194f9292c4308b346e0b66d91b519e/apps/complexity/src/app/dto/user.dto.ts#L10), [here](https://github.com/kasir-barati/graphql-js-ts/blob/54cc54f495194f9292c4308b346e0b66d91b519e/apps/complexity/src/app/app.module.ts#L38), and [here](https://github.com/kasir-barati/graphql-js-ts/blob/54cc54f495194f9292c4308b346e0b66d91b519e/libs/shared/src/services/complexity-plugin/complexity-plugin.ts#L1-L61)).
+>
+> And our query is this:
+>
+> ```graphql
+> query {
+>   getPosts {
+>     id
+>     author {
+>       posts {
+>         id
+>         author {
+>           posts {
+>             id
+>             author {
+>               posts {
+>                 id
+>                 author {
+>                   id
+>                 }
+>               }
+>             }
+>           }
+>         }
+>       }
+>     }
+>   }
+> }
+> ```
 
 > [!CAUTION]
 >
