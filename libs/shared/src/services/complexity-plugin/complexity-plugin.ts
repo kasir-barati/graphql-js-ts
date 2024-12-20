@@ -11,6 +11,7 @@ import {
   getComplexity,
   simpleEstimator,
 } from 'graphql-query-complexity';
+import { isIntrospection } from '../../get-fields';
 
 @Plugin()
 export class ComplexityPlugin implements ApolloServerPlugin {
@@ -31,7 +32,11 @@ export class ComplexityPlugin implements ApolloServerPlugin {
     const { schema } = this.graphqlSchemaHost;
 
     return {
-      async didResolveOperation({ request, document }) {
+      async didResolveOperation({
+        request,
+        document,
+        operationName,
+      }) {
         /**
          * @description
          * `getComplexity` calculate the complexity outside of the validation phase and we're storing it in this variable.
@@ -44,7 +49,7 @@ export class ComplexityPlugin implements ApolloServerPlugin {
           estimators: [
             fieldExtensionsEstimator(),
             // the last estimator in your chain to define a default value.
-            simpleEstimator({ defaultComplexity: 0 }),
+            simpleEstimator({ defaultComplexity: 1 }),
           ],
         });
 
@@ -54,7 +59,9 @@ export class ComplexityPlugin implements ApolloServerPlugin {
           );
         }
 
-        console.log('Query Complexity:', complexity);
+        if (!isIntrospection(operationName)) {
+          console.log('Query Complexity:', complexity);
+        }
       },
     };
   }

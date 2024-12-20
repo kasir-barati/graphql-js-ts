@@ -1,1 +1,2 @@
-export * from './get-fields';
+export * from './does-path-exist';
+export * from './is-introspection';
