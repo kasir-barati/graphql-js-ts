@@ -16,7 +16,7 @@ export class AppService {
   ) {}
 
   getPosts() {
-    return this.postRepository.find({ take: 100 });
+    return this.postRepository.find({ take: 5 });
   }
 
   getUser(authorId: string, info: GraphQLResolveInfo) {
