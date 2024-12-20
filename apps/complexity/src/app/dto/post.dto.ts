@@ -1,4 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { fieldDepth } from '@shared';
+import { ComplexityEstimatorArgs } from 'graphql-query-complexity';
 import { Post } from '../entities/post.entity';
 import { UserDto } from './user.dto';
 
@@ -11,8 +13,11 @@ export class PostDto implements Post {
   authorId: string;
 
   @Field(() => UserDto, {
-    complexity(options) {
-      return 1;
+    complexity({ childComplexity, node }: ComplexityEstimatorArgs) {
+      const depth = fieldDepth(node);
+      const complexity = 1 * depth + childComplexity;
+
+      return complexity;
     },
   })
   author: UserDto;

@@ -14,7 +14,7 @@ import { UserDto } from './dto/user.dto';
 export class AppResolver {
   constructor(private readonly appService: AppService) {}
 
-  @Query(() => [PostDto])
+  @Query(() => [PostDto], { complexity: 1 })
   getPosts() {
     return this.appService.getPosts();
   }
