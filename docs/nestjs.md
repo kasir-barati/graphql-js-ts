@@ -221,6 +221,10 @@ To change data on the server you need to create an `Input` object type most of t
 
 ### `graphql-query-complexity`
 
+> [!NOTE]
+>
+> You can see the final NestJS app with query complexity configured here: `apps/complexity`
+
 1. ```shell
    pnpm add graphql-query-complexity
    ```
