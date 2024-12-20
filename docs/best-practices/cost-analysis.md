@@ -64,6 +64,7 @@ By calculating each query's cost we can:
 >   - Rely on dynamic query analysis and deduct after execution.
 >   - Deduct first based on the upper bound and then refund if we've deducted too much.
 > - For monetization we can rely on dynamic query analysis.
+> - **When I wrote this doc first I only watched one YouTube video and there he said that since scalar types are already presumably fetched from DB we're gonna skip them from static query cost analysis. But there are other approaches to this too. [Find out more here](#should-i-calculate-scalar-type-in-my-cost-analysis)**
 
 #### Static Query Analysis
 
@@ -105,6 +106,8 @@ By calculating each query's cost we can:
             </li>
             <li>
               We skip <code>scalar types</code> while calculating the cost of a query, but you can include it in case a specific scalar type is costly. <a href="./assets/static-query-analysis-skip-name.jpg">E.g. here we do not calculate <code>name</code> as a <i>field</i> in the <i>field counts</i></a>.
+              <br />
+              But keep in mind that this is not the only approach. <a href="#should-i-calculate-scalar-type-in-my-cost-analysis">Find out more here</a>.
             </li>
             <li>
               Learn about <code>@listSize</code> directive <a href="https://ibm.github.io/graphql-specs/cost-spec.html#sec-The-List-Size-Directive">here</a>.
@@ -205,6 +208,13 @@ By calculating each query's cost we can:
 </details>
 
 TK: https://youtu.be/_WpM7qylvYg?si=rQFxNNj3CjWGc8Bf
+
+##### Should I calculate scalar type in my cost analysis?
+
+According to what I read [here](https://hygraph.com/docs/api-reference/basics/query-complexity) it seems it is a good idea to do so. It says:
+
+> - Each scalar field in a query contributes one point to the query complexity.
+> - Relations/Unions multiply their complexity times the level of nesting in the query.
 
 # Ref
 
