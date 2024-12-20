@@ -23,7 +23,6 @@
     "@graphql-codegen/typescript": "^4.1.2",
     "@graphql-codegen/typescript-resolvers": "^4.4.1",
     "@nestjs/schematics": "^10.2.3",
-    "@nestjs/testing": "^10.4.15",
     "@nx-tools/nx-prisma": "^6.4.1",
     "@nx/esbuild": "20.2.2",
     "@nx/eslint": "20.2.2",
