@@ -53,14 +53,14 @@ export class ComplexityPlugin implements ApolloServerPlugin {
           ],
         });
 
+        if (!isIntrospection(operationName)) {
+          console.log('Query Complexity:', complexity);
+        }
+
         if (complexity > maxComplexity) {
           throw new GraphQLError(
             `Query is too complex: ${complexity}. Maximum allowed complexity: ${maxComplexity}`,
           );
-        }
-
-        if (!isIntrospection(operationName)) {
-          console.log('Query Complexity:', complexity);
         }
       },
     };
