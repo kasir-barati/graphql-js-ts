@@ -18,20 +18,38 @@
 
 ```ts
 async function getTodo(
-  // The previous object.
-  // For a field inside the root Query type, this argument mostly won't be used.
+  /**
+   * @description
+   * The previous object.
+   *
+   * - AKA root, or parent.
+   * - A GraphQL server needs to call the resolvers of a query’s fields. GraphQL does a breadth-first (level-by-level) resolver call. The root argument in each resolver call is simply the result of the previous call.
+   * - Mostly won't be used.
+   */
   obj,
-  // Arguments provided to the field in the GraphQL operation
-  // getTodo(id: ID!)
+  /**
+   * @description
+   * Arguments/parameters passed to a field in a GraphQL operation.
+   * @example `getTodo(id: ID!)`
+   */
   args: { id: string },
-  // Provided to every resolver.
-  // Holds important contextual information, things like:
-  // - Access to a database.
-  // - The currently logged in user.
+  /**
+   * @description
+   * An object that every resolver can write to and read from it so that resolvers can communicate.
+   *
+   * Holds important contextual information, things like:
+   * - Access to a database.
+   * - The currently logged in user.
+   */
   context: { db: PrismaClient },
-  // Used in advanced use-cases.
-  // Holds field-specific* info and the schema details.
-  // *Things relevant to the current operation.
+  /**
+   * @description
+   * The Abstract Syntax Tree representation of a query or mutation.
+   *
+   * Holds field-specific* info and the schema details.
+   *
+   * *Things relevant to the current operation.
+   */
   info,
 ) {
   const todo = await context.db.todo.find({
@@ -83,3 +101,22 @@ function getTodoName(obj: GraphqlTodo, args, context, info) {
 ```
 
 Most of the times when we have not defined a resolver the lib we're using to build our GraphQL service assume that there is a property/method named exactly the same as the field. Thus it automatically calls that one.
+
+### What is AST
+
+- Stands for Abstract Syntax Tree.
+- A data structure.
+- A very broad term used in computer science ([wiki](https://en.wikipedia.org/wiki/Abstract_syntax_tree)).
+- Represents the structure of a program, code snippet, or a GraphQL query.
+- A tree representation of the abstract syntactic structure of text (often source code, but here a GraphQL query) written in a [formal language](https://en.wikipedia.org/wiki/Formal_language).
+  - In GraphQL a query comes in as a string, this string must be split into meaningful sub-strings\* and parsed into a representation that the machine understands.
+  - <details>
+      <summary>
+        An example of an AST for a code
+      </summary>
+      <img src="./assets/ast-plus-code.png" />
+      <br />
+      <a href="./assets/Abstract_syntax_tree_for_Euclidean_algorithm.svg">Same image better quality</a>
+    </details>
+
+\*[Tokenization](https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization): A lexical token is a string with an assigned and thus identified meaning, in contrast to the probabilistic token used in large language models.
