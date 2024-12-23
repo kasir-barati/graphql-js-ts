@@ -14,7 +14,7 @@ GraphQL is a structured way of talking to the backend and asking for data or per
 >
 > Answers to some of questions that I yearned to know:
 >
-> - This is copied and pasted from GraphQL here, in fact this was a burning question for me that if I should stick to HTTP/S or should I use a different protocol. But in short we do not need to change our protocol.
+> - **GraphQL is transport-layer agnostic**: This is copied and pasted from GraphQL here, in fact this was a burning question for me that if I should stick to HTTP/S or should I use a different protocol. But in short we do not need to change our protocol.
 >
 > > ... the GraphQL specification doesn’t require the use of a particular transport protocol for requests ... it is common for HTTP to be used for stateless query and mutations operations. Long-lived, stateful subscription operations are often supported by WebSockets or server-sent events instead.
 > >
@@ -22,6 +22,12 @@ GraphQL is a structured way of talking to the backend and asking for data or per
 >
 > - And related to the previous note, in general in GraphQL we serve our GraphQL service via a single endpoint as [described here](./best-practices/serve-over-http.md#serveOverHttpFromSingleEndpoint).
 > - This was my second question that I was trying to find an answer to it and it was actually just a few links away from me. [In graphql.org they have a section for tools and libs](https://graphql.org/community/tools-and-libraries/). There I was able to compare and find the right tool for my next move, deciding on a lib for my backend app.
+>   - [`graphql-tools`](https://github.com/ardatan/graphql-tools) really handy when you're approach is **schema-first and not [code-first](./code-first.md)**.
+>   - [`@apollo/server`](https://github.com/apollographql/apollo-server) is there to help you build a spec-compliant GraphQL server in no time.
+>   - [`graphiql`](https://github.com/graphql/graphiql) gives you a nice GraphQL IDE, though personally I am using most of the times [the IDE that comes with `@apollo/server`](https://www.apollographql.com/docs/graphos/platform/explorer).
+>   - [`graphql-mesh`](https://github.com/ardatan/graphql-mesh) helps us to do multiple things:
+>     - Integrate all of our 3rd-party APIs, databases, and other GraphQL APIs into a single API (more on that in the [federation](./federation.md)).
+>     - Generate SDKs for your GraphQL API.
 
 ## How you create your API in GraphQL
 

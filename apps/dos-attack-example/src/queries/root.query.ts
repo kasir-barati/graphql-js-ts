@@ -1,4 +1,8 @@
-import { GraphQLList, GraphQLObjectType } from 'graphql';
+import {
+  GraphQLList,
+  GraphQLObjectType,
+  GraphQLResolveInfo,
+} from 'graphql';
 import joinMonster from 'join-monster';
 import { PostObject } from '../objects/post.object';
 import { Context } from '../type';
@@ -30,7 +34,12 @@ export const RootQuery = new GraphQLObjectType({
           },
         },
       },
-      resolve: (parent, args, context: Context, resolveInfo) => {
+      resolve: (
+        parent,
+        args,
+        context: Context,
+        resolveInfo: GraphQLResolveInfo,
+      ) => {
         return joinMonster(resolveInfo, {}, (sql: string) => {
           console.log(sql);
 

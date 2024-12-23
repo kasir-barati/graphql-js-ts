@@ -12,24 +12,28 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
 
 1. [Intro](./docs/intro.md).
 2. [Data types](./docs/data-types.md).
-3. [Auth](./docs/auth.md).
-4. A simple todo app written with GraphQL + ReactJS + Relay:
+3. A simple todo app written with GraphQL + ReactJS + Relay:
    - [Backend](./apps/todo-backend/README.md).
    - [Frontend]() TK.
-5. [Queries and mutations in depth](./docs/queries-and-mutations.md).
-6. [Let's breakdown the query language a bit more](./docs/graphql-query-language-breakdown.md).
+4. [Queries and mutations in depth](./docs/queries-and-mutations.md).
+5. [Let's breakdown the query language a bit more](./docs/graphql-query-language-breakdown.md).
+6. [Functions provided by `graphql`](./docs/function-provided-by-graphql.md).
 7. [Document your GraphQL service API](./docs/documentation.md).
 8. [GraphQL request lifecycle](./docs/graphql-req-lifecycle.md).
-9. [How to query information about a GraphQL schema](./docs/introspection.md).
-10. [Improve developer experience](./docs/improve-dev-exp/index.md).
+   - [Common validation errors](./docs/common-errors.md).
+   - [Execution from inside, resolver's args, AST, ...](./docs/execution-from-inside.md)
+9. [Code-first approach](./docs/code-first.md).
+10. [Auth](./docs/auth.md).
+11. [How to query information about a GraphQL schema](./docs/introspection.md).
+12. [Improve developer experience](./docs/improve-dev-exp/index.md).
     - [IoC -- Inversion of Control principle](./docs/improve-dev-exp/ioc.md).
     - [Use a `schema.graphql` file](./docs/improve-dev-exp/use-schema-graphql-files.md)
     - [Strongly typed resolvers, context, ...](./docs/improve-dev-exp/strongly-typed.md).
     - [Filtering using `prisma-nestjs-graphql`](./docs/improve-dev-exp/filtering-using-prisma-nestjs-graphql.md).
-11. [Security in GraphQL](./docs/security.md).
-12. [NestJS](./docs/nestjs.md).
-13. [Subscription](./docs/subscription.md).
-14. [Best practices](./docs/best-practices/index.md).
+13. [Security in GraphQL](./docs/security.md).
+14. [NestJS](./docs/nestjs.md).
+15. [Subscription](./docs/subscription.md).
+16. [Best practices](./docs/best-practices/index.md).
     - [Serve over HTTP](./docs/best-practices/serve-over-http.md).
     - [Compress your request/response with GZIP](./docs/best-practices/compress-your-req-res-with-gzip.md).
     - [Avoid versioning](./docs/best-practices/avoid-versioning.md).

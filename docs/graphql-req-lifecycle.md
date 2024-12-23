@@ -1,6 +1,14 @@
 # Lifecycle of a request
 
-1. Document parsing.
+> [!NOTE]
+>
+> You can see this YouTube video after you read this doc or before it to get the most out of them:
+>
+> [Eric Baer - GraphQL Under the Hood](https://youtu.be/fo6X91t3O2I?si=y1EUOJlRT_Nr_Fwt).
+
+1. Document parsing:
+   - AKA [Lexing](./execution-from-inside.md#lexicalAnalysis) and Parsing.
+   - Transform the query (which is string) into something it understands.
 2. Validation using the type system: is it valid when checked against the API's schema?
    - [Validation errors you might encounter](./common-errors.md#common-validation-errors).
 3. [Execution](./execution-from-inside.md).

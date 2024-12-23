@@ -14,7 +14,7 @@
 
 ## Resolvers
 
-<a href="#fourArgumentsOfAnyResolverFunction" id="fourArgumentsOfAnyResolverFunction">#</a> A resolver function receives four arguments:
+<a href="#fourArgumentsOfAnyResolverFunction" id="fourArgumentsOfAnyResolverFunction">#</a> A resolver function receives 4 arguments in this specific order:
 
 ```ts
 async function getTodo(
@@ -84,18 +84,27 @@ class GraphqlTodo {
 }
 ```
 
-> [!TIP]
->
-> A very important note about `args` and `info` in a resolver:
->
-> ![The args parameter is populated by the arguments passed to the field being resolved -- any arguments passed to other fields will not be included in the args parameter.](./assets/args-info-and-variables.png)
->
-> &mdash; [Ref](https://stackoverflow.com/a/55716584/8784518).
+### An Important Note About `args` in a Resolver
 
-<a href="trivialResolvers">#</a> Note that we do not need to define trivial resolvers like `getTodoName` which does something like this:
+![The args parameter is populated by the arguments passed to the field being resolved -- any arguments passed to other fields will not be included in the args parameter.](./assets/args-info-and-variables.png)
+
+&mdash; [Ref](https://stackoverflow.com/a/55716584/8784518).
+
+> [!NOTE]
+>
+> I've demystified the `info` object in GraphQL [here](./resolve-info-object.md).
+
+### <a id="trivialResolvers" href="#trivialResolvers">#</a> No Need to Define Trivial Resolvers Like `getTodoName`
 
 ```ts
-function getTodoName(obj: GraphqlTodo, args, context, info) {
+import { GraphQLResolveInfo } from 'graphql';
+
+function getTodoName(
+  obj: GraphqlTodo,
+  args,
+  context,
+  info: GraphQLResolveInfo,
+) {
   return obj.name;
 }
 ```
@@ -109,7 +118,8 @@ Most of the times when we have not defined a resolver the lib we're using to bui
 - A very broad term used in computer science ([wiki](https://en.wikipedia.org/wiki/Abstract_syntax_tree)).
 - Represents the structure of a program, code snippet, or a GraphQL query.
 - A tree representation of the abstract syntactic structure of text (often source code, but here a GraphQL query) written in a [formal language](https://en.wikipedia.org/wiki/Formal_language).
-  - In GraphQL a query comes in as a string, this string must be split into meaningful sub-strings\* and parsed into a representation that the machine understands.
+  - Formal language essentially is a language that consciously and deliberately is designed to express a set of particular concepts without ambiguity.
+  - <a id="lexicalAnalysis" href="#lexicalAnalysis">#</a> In GraphQL a query comes in as a string, this string must be [split into meaningful sub-strings](#tokenization) and parsed into a representation that the machine understands.
   - <details>
       <summary>
         An example of an AST for a code
@@ -119,4 +129,36 @@ Most of the times when we have not defined a resolver the lib we're using to bui
       <a href="./assets/Abstract_syntax_tree_for_Euclidean_algorithm.svg">Same image better quality</a>
     </details>
 
-\*[Tokenization](https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization): A lexical token is a string with an assigned and thus identified meaning, in contrast to the probabilistic token used in large language models.
+#### [Tokenization](https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization)
+
+- A lexical token is a string with an assigned and thus identified meaning, in contrast to the probabilistic token used in large language models. AKA lexing (or lexical analysis).
+- [Here](https://spec.graphql.org/October2021/#sec-Language.Lexical-Analysis-Syntactic-Parse) you can find out about the rules the GraphQL lexer uses to tokenize your query.
+- [Here is our lexer in `graphql`](https://github.com/graphql/graphql-js/blob/48afd37a48d37f6d3342b959e8cb34e1ecbfeffb/src/language/lexer.ts).
+
+##### A GraphQL Query Parts After Tokenization
+
+![tokenized GraphQL query](./assets/tokenized-graphql-query.png)
+
+- Its root is called [`Document`](https://spec.graphql.org/October2021/#sec-Document).
+- A `Document` can have one or many `Definition`.
+  - A Definition is either:
+    - A [`OperationDefinition`](https://spec.graphql.org/October2021/#OperationDefinition).
+    - Or `FragmentDefinition`.
+  - It contains at least one `OperationDefinition`.
+- An `OperationDefinition` is:
+
+  - The [`OperationType`](https://spec.graphql.org/October2021/#OperationType) followed by an optional given `Name`.
+
+    - E.g. `query GetUsers...`
+
+  - Then usually we define our [`SelectionSet`](https://spec.graphql.org/October2021/#sec-Selection-Sets).
+
+    ![SectionSet example](./assets/selectionset.png)
+
+  It accepts more than this and you can see a complete list [here](https://spec.graphql.org/October2021/#OperationDefinition).
+
+- You can see here how [`graphql`'s parser uses `Lexer` to parse a GraphQL query](https://github.com/graphql/graphql-js/blob/48afd37a48d37f6d3342b959e8cb34e1ecbfeffb/src/language/parser.ts#L193).
+
+## Ref
+
+- [Life of a GraphQL Query — Lexing/Parsing](https://medium.com/@cjoudrey/life-of-a-graphql-query-lexing-parsing-ca7c5045fad8).
