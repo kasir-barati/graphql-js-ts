@@ -62,6 +62,9 @@ importers:
       cron:
         specifier: ^3.3.1
         version: 3.3.1
+      dataloader:
+        specifier: ^2.2.3
+        version: 2.2.3
       express:
         specifier: ^4.21.2
         version: 4.21.2

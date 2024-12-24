@@ -53,9 +53,12 @@ export class ComplexityPlugin implements ApolloServerPlugin {
           ],
         });
 
-        if (!isIntrospection(operationName)) {
-          console.log('Query Complexity:', complexity);
+        // Otherwise your GraphQL IDE will be busted too.
+        if (isIntrospection(operationName)) {
+          return;
         }
+
+        console.log('Query Complexity:', complexity);
 
         if (complexity > maxComplexity) {
           throw new GraphQLError(

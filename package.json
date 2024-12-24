@@ -82,6 +82,7 @@
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "cron": "^3.3.1",
+    "dataloader": "^2.2.3",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
     "graphql-http": "^1.22.3",
