@@ -1,0 +1,86 @@
+{
+  "name": "depth",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/depth/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "compose:up": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose up -d",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compose:down": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "cache": false,
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down",
+            "forwardAllArgs": true
+          }
+        ],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/depth",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/depth/src/main.ts",
+        "tsConfig": "apps/depth/tsconfig.app.json",
+        "assets": ["apps/depth/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build", "compose:up"],
+      "options": {
+        "buildTarget": "depth:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "depth:build:development"
+        },
+        "production": {
+          "buildTarget": "depth:build:production"
+        }
+      }
+    }
+  }
+}
