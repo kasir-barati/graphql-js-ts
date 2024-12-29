@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import DataLoader from 'dataloader';
 import { PostDto } from '../post/dto/post.dto';
 import { PostService } from '../post/post.service';
@@ -6,12 +6,16 @@ import { UserDto } from '../user/dto/user.dto';
 import { UserService } from '../user/user.service';
 import { Dataloaders } from './dataloader.type';
 
-@Injectable({ scope: Scope.REQUEST })
+let counter = 1;
+
+@Injectable()
 export class DataloaderService {
   constructor(
     private readonly userService: UserService,
     private readonly postService: PostService,
-  ) {}
+  ) {
+    console.log('DataloaderService constructor: ' + counter++);
+  }
 
   getLoaders(): Dataloaders {
     const postsLoader = this.createPostsLoader();
