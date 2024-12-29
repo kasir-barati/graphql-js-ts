@@ -33,6 +33,15 @@
         "cwd": "{projectRoot}"
       }
     },
+    "seed": {
+      "executor": "nx:run-commands",
+      "parallelism": false,
+      "dependsOn": ["compose:up"],
+      "options": {
+        "command": "ts-node --project tsconfig.app.json src/shared/seed.ts",
+        "cwd": "{projectRoot}"
+      }
+    },
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
