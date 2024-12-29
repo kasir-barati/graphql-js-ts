@@ -1,9 +1,10 @@
 import { ObjectType } from '@nestjs/graphql';
+import { Class } from '../types/utility.type';
 
 export function Exclude<T, K extends keyof T>(
-  Parent: new () => T,
+  Parent: Class<T>,
   keys: K[],
-): new () => Omit<T, (typeof keys)[number]> {
+): Class<Omit<T, (typeof keys)[number]>> {
   @ObjectType()
   class Child extends (Parent as any) {}
 

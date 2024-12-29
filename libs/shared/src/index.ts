@@ -21,6 +21,7 @@ export * from './utils/cursor-encoder.util';
 export * from './utils/get-cpu-info.util';
 export * from './utils/get-cpu-percentage.util';
 export * from './utils/get-memory-usage.utils';
+export * from './utils/is-nil.utils';
 export * from './utils/memory-unit-convertor.util';
 export * from './utils/object.util';
 export * from './utils/validate.utils';

@@ -2,7 +2,7 @@ import { FieldNode } from 'graphql';
 import { fieldDepthQueryNormalizer } from './field-depth-query-normalizer.util';
 
 /**
- * @todo Take into account fragments
+ * @description Calculates the depth of a field
  */
 export function fieldDepth(node: Readonly<FieldNode>) {
   if (!node.loc) {

@@ -12,3 +12,6 @@ export type NestedKeysOf<T, K extends PropertyKey> = T extends object
   : never;
 
 export type NotNegativeNumber = Brand<number, 'NotNegativeNumber'>;
+export interface Class<T> {
+  new (...args: any[]): T;
+}
