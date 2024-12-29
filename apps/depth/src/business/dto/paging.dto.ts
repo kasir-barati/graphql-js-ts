@@ -18,8 +18,11 @@ export class PagingDto {
   @Min(0)
   last?: number;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, {
+    nullable: true,
+    description: 'Default value is 10',
+  })
   @IsOptional()
   @Min(0)
-  first?: number;
+  first?: number = 10;
 }

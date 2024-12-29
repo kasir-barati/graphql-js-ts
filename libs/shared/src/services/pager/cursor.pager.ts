@@ -207,7 +207,7 @@ export class CursorPager<DTO> {
       return {
         options: {
           defaultSort: this.defaultSort,
-          limit: 0,
+          limit: 10,
           isBackward: false,
           isForward: true,
           hasBefore: false,
