@@ -12,6 +12,7 @@ export * from './modules/prisma/prisma.service';
 export * from './modules/pubsub/pubsub.constant';
 export * from './modules/pubsub/pubsub.module';
 export * from './services/complexity-plugin';
+export * from './services/pager';
 export * from './types/cron-top-payload.type';
 export * from './types/cursor-based-connections-pagination.type';
 export * from './types/utility.type';
