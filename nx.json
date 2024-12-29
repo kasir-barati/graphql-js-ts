@@ -29,7 +29,8 @@
         "apps/server-statistics-e2e/**/*",
         "apps/botprobe-nest-e2e/**/*",
         "apps/dos-attack-example-e2e/**/*",
-        "apps/complexity-e2e/**/*"
+        "apps/complexity-e2e/**/*",
+        "apps/depth-e2e/**/*"
       ]
     },
     {
