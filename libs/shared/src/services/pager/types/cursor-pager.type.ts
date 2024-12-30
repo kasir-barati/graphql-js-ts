@@ -1,4 +1,5 @@
 import { EdgeType, PageInfoType } from './dto.type';
+import { Paging } from './filter-query-builder.type';
 
 export interface CursorPaging {
   before?: string;
@@ -24,7 +25,7 @@ export interface SelectRelation<DTO> {
   query: Query<DTO>;
 }
 export interface Query<DTO> {
-  paging?: CursorPaging;
+  paging?: CursorPaging & Paging;
   sorting?: SortField<DTO>[];
   relations?: SelectRelation<DTO>[];
 }

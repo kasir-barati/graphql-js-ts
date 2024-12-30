@@ -10,8 +10,8 @@ export class QueryService<Entity extends ObjectLiteral> {
   async query(query: Query<Entity>): Promise<Entity[]> {
     return this.filterQueryBuilder
       .setRelation(query.relations)
-      .setSorting()
-      .setPaging()
+      .setSorting(query.sorting)
+      .setPaging(query.paging)
       .build()
       .getMany();
   }
