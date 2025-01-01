@@ -19,7 +19,6 @@ export class PostService {
     const posts = await this.postRepository.findAllByUserIds(userIds);
     const mappedResults = this.mapPostsToUserIds(posts, userIds);
 
-    // @ts-ignore
     return mappedResults;
   }
 
