@@ -1,50 +1,43 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import {
-  CursorPager,
-  FilterQueryBuilder,
-  QueryService,
-} from '@shared';
+import { ApolloArmor } from '@escape.tech/graphql-armor';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { BusinessResolver } from './business/business.resolver';
-import { CustomerEntity } from './customer/customer.entity';
-import { CustomerRepository } from './customer/customer.repository';
 import { CustomerResolver } from './customer/customer.resolver';
-import { CustomerService } from './customer/customer.service';
-import { CustomerDto } from './customer/dto/customer.dto';
 import { AppDataSource } from './shared/data-source';
-import { DataloaderService } from './shared/dataloader';
+import { getLoaders } from './shared/temp';
 
 (async () => {
   await AppDataSource.initialize();
 
   console.log('Connected to database.');
 
+  const armor = new ApolloArmor({
+    maxDepth: {
+      enabled: true,
+      ignoreIntrospection: true,
+      n: 7,
+      flattenFragments: true,
+    },
+    costLimit: {
+      enabled: true,
+      depthCostFactor: 1.5,
+      objectCost: 2,
+      scalarCost: 1,
+      ignoreIntrospection: true,
+      flattenFragments: true,
+      maxCost: 100,
+    },
+  });
   const schema = await buildSchema({
     resolvers: [BusinessResolver, CustomerResolver],
   });
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({ schema, ...armor.protect() });
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4009 },
     context: async () => {
-      // I know this is ugly and not practical. But I just wanted to get over it.
-      // Maybe later I'll think about refactoring it, MAYBE!
-      const customerRepository =
-        AppDataSource.getRepository(CustomerEntity);
-      const filterQueryBuilder = new FilterQueryBuilder(
-        customerRepository,
-      );
-      const queryService = new QueryService(filterQueryBuilder);
-      const cursorPager = new CursorPager(CustomerDto, ['id']);
-      const customerService = new CustomerService(
-        cursorPager,
-        queryService,
-        new CustomerRepository(customerRepository),
-      );
-      const loaders = new DataloaderService(
-        customerService,
-      ).getLoaders();
+      const loaders = getLoaders();
 
       return { loaders };
     },

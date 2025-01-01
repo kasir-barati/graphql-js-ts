@@ -4,8 +4,17 @@ import {
   PagingDto,
   QueryService,
 } from '@shared';
-import { Args, Query, Resolver } from 'type-graphql';
+import {
+  Args,
+  Ctx,
+  FieldResolver,
+  Query,
+  Resolver,
+  Root,
+} from 'type-graphql';
+import { BusinessDto } from '../business/dto/business.dto';
 import { AppDataSource } from '../shared/data-source';
+import { GraphQLResolveContext } from '../shared/dataloader';
 import { CustomerEntity } from './customer.entity';
 import { CustomerRepository } from './customer.repository';
 import { CustomerService } from './customer.service';
@@ -35,6 +44,14 @@ export class CustomerResolver {
 
   @Query(() => CustomerDtoConnection)
   customers(@Args(() => PagingDto) paging: PagingDto) {
-    CustomerResolver.customerService.findAll(paging);
+    return CustomerResolver.customerService.findAll(paging);
+  }
+
+  @FieldResolver(() => BusinessDto)
+  shopAt(
+    @Root() customer: CustomerDto,
+    @Ctx() context: GraphQLResolveContext,
+  ) {
+    return context.loaders.businessLoader.load(customer.shopAtId);
   }
 }

@@ -16,6 +16,7 @@ import { CustomerDto } from '../customer/dto/customer.dto';
 import { AppDataSource } from '../shared/data-source';
 import { GraphQLResolveContext } from '../shared/dataloader';
 import { BusinessEntity } from './business.entity';
+import { BusinessRepository } from './business.repository';
 import { BusinessService } from './business.service';
 import {
   BusinessDto,
@@ -41,6 +42,7 @@ export class BusinessResolver {
     this.businessService = new BusinessService(
       cursorPager,
       queryService,
+      new BusinessRepository(businessRepository),
     );
   }
 
