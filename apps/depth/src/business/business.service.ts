@@ -2,12 +2,12 @@ import {
   createEdgeType,
   CursorPager,
   PageInfoTypeImplementation,
+  PagingDto,
   QueryService,
 } from '@shared';
 import { validatePagination } from '../shared/validate-pagination.util';
 import { BusinessEntity } from './business.entity';
 import { BusinessDto } from './dto/business.dto';
-import { PagingDto } from './dto/paging.dto';
 
 export class BusinessService {
   constructor(

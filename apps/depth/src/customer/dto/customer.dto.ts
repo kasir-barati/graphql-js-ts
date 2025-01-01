@@ -1,5 +1,6 @@
+import { createConnectionType } from '@shared';
 import { Field, ID, ObjectType } from 'type-graphql';
-import { BusinessDto } from '../business/dto/business.dto';
+import { BusinessDto } from '../../business/dto/business.dto';
 
 @ObjectType()
 export class CustomerDto {
@@ -15,3 +16,5 @@ export class CustomerDto {
   @Field(() => BusinessDto)
   shopAt: BusinessDto;
 }
+export const CustomerDtoConnection =
+  createConnectionType(CustomerDto);

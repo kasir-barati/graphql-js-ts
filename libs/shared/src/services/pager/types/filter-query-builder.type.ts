@@ -1,14 +1,8 @@
-import { Query } from './cursor-pager.type';
-
 export interface NestedRelationsAliased {
   [keys: string]: {
     alias: string;
     relations: NestedRelationsAliased;
   };
-}
-export interface SelectRelation<DTO> {
-  name: string;
-  query: Query<DTO>;
 }
 export interface Paging {
   limit?: number;

@@ -1,17 +1,26 @@
 import {
   CursorPager,
   FilterQueryBuilder,
+  PagingDto,
   QueryService,
 } from '@shared';
-import { Args, Query, Resolver } from 'type-graphql';
+import {
+  Args,
+  Ctx,
+  FieldResolver,
+  Query,
+  Resolver,
+  Root,
+} from 'type-graphql';
+import { CustomerDto } from '../customer/dto/customer.dto';
 import { AppDataSource } from '../shared/data-source';
+import { GraphQLResolveContext } from '../shared/dataloader';
 import { BusinessEntity } from './business.entity';
 import { BusinessService } from './business.service';
 import {
   BusinessDto,
   BusinessDtoConnection,
 } from './dto/business.dto';
-import { PagingDto } from './dto/paging.dto';
 
 @Resolver(() => BusinessDto)
 export class BusinessResolver {
@@ -38,5 +47,17 @@ export class BusinessResolver {
   @Query(() => BusinessDtoConnection)
   businesses(@Args(() => PagingDto) paging: PagingDto) {
     return BusinessResolver.businessService.findAll(paging);
+  }
+
+  @FieldResolver(() => [CustomerDto])
+  async customers(
+    @Root() business: BusinessDto,
+    @Ctx() context: GraphQLResolveContext,
+  ) {
+    const customer = await context.loaders.customerLoader.load(
+      business.id,
+    );
+
+    return customer;
   }
 }

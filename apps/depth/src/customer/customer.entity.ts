@@ -1,13 +1,15 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  RelationId,
 } from 'typeorm';
 import { BusinessEntity } from '../business/business.entity';
 
-@Entity()
+export const CUSTOMER_TABLE_NAME = 'customers';
+
+@Entity(CUSTOMER_TABLE_NAME)
 export class CustomerEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -15,9 +17,12 @@ export class CustomerEntity {
   @Column('varchar', { length: 200 })
   name: string;
 
-  @RelationId((customer: CustomerEntity) => customer.shopAt)
+  // https://stackoverflow.com/a/61433772/8784518
+  // @RelationId is buggy!
+  @Column('uuid')
   shopAtId: string;
 
   @ManyToOne(() => BusinessEntity, (business) => business.customers)
+  @JoinColumn({ name: 'shopAtId' })
   shopAt: BusinessEntity;
 }

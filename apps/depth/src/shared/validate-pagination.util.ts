@@ -1,5 +1,4 @@
-import { isNil } from '@shared';
-import { PagingDto } from '../business/dto/paging.dto';
+import { isNil, PagingDto } from '@shared';
 
 export function validatePagination(paging: PagingDto) {
   if (!isNil(paging.last) && isNil(paging.before)) {

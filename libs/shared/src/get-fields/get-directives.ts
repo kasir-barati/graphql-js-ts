@@ -2,6 +2,12 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { AST, Directive } from './types';
 
+/**
+ * @description
+ * Finds out if `@skip` directive or the `@include` directive were used.
+ *
+ * @link https://facebook.github.io/graphql/draft/#sec--include
+ */
 export function getDirectiveResults(
   selection: AST,
   info: GraphQLResolveInfo,

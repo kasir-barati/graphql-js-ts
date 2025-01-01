@@ -35,9 +35,13 @@ import { AppDataSource } from './data-source';
           } satisfies Partial<CustomerEntity>;
         }),
     );
+
+    if (customers.length === 1000) {
+      await customerRepository.save(customers);
+      customers.length = 0;
+    }
   }
 
-  await customerRepository.save(customers);
   await AppDataSource.destroy();
 
   return 'Seeded!';

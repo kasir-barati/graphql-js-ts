@@ -8,7 +8,9 @@ import {
 } from 'typeorm';
 import { CustomerEntity } from '../customer/customer.entity';
 
-@Entity()
+export const BUSINESS_TABLE_NAME = 'businesses';
+
+@Entity(BUSINESS_TABLE_NAME)
 export class BusinessEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

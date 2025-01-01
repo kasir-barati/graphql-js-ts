@@ -4,12 +4,11 @@ import {
   Repository,
   SelectQueryBuilder,
 } from 'typeorm';
-import { SortField } from './types/cursor-pager.type';
+import { SelectRelation, SortField } from './types/cursor-pager.type';
 import {
   NestedRecord,
   NestedRelationsAliased,
   Paging,
-  SelectRelation,
 } from './types/filter-query-builder.type';
 
 export class FilterQueryBuilder<Entity extends ObjectLiteral> {
@@ -69,12 +68,19 @@ export class FilterQueryBuilder<Entity extends ObjectLiteral> {
     if (!selectRelations) {
       return this;
     }
-    return this.applyRelationJoinsRecursive({
-      relationsMap: this.getReferencedRelationsWithAliasRecursive(
+
+    const relationsMap =
+      this.getReferencedRelationsWithAliasRecursive(
         this.repository.metadata,
-      ),
+        selectRelations,
+      );
+
+    this.applyRelationJoinsRecursive({
+      relationsMap,
       selectRelations,
     });
+
+    return this;
   }
   build() {
     return this.queryBuilder;
@@ -137,6 +143,7 @@ export class FilterQueryBuilder<Entity extends ObjectLiteral> {
       metadata,
       selectRelations,
     );
+
     return this.injectRelationsAliasRecursive(referencedRelations);
   }
   private applyRelationJoinsRecursive({
@@ -147,9 +154,9 @@ export class FilterQueryBuilder<Entity extends ObjectLiteral> {
     alias?: string;
     relationsMap?: NestedRelationsAliased;
     selectRelations?: SelectRelation<Entity>[];
-  }): FilterQueryBuilder<Entity> {
+  }) {
     if (!relationsMap) {
-      return this;
+      return;
     }
 
     for (const [relationKey, relation] of Object.entries(
@@ -183,7 +190,5 @@ export class FilterQueryBuilder<Entity extends ObjectLiteral> {
         });
       }
     }
-
-    return this;
   }
 }
