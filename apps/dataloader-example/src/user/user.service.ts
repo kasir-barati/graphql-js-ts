@@ -21,10 +21,10 @@ export class UserService {
   /**
    * @description
    * When using Dataloader we have to fulfill 2 requirements:
-   * 1. `?? null` part: The length of the returned array must be the same with the length of the supplied keys.
+   * 1. `?? null` part: The length of the returned array must be equal to the length of the supplied keys.
    *    We need to return `null` if a user is not found for a given user ID.
    * 2. `users.filter` part: The returned values must be ordered in the same order as the supplied keys.
-   *    E.g. if the keys are `[1, 3, 4]`, the value must be something like `[userOfUser1, userOfUser3, userOfUser4]`.
+   *    E.g. if the keys are `[User1, User3, User4]`, the value must be something like `[userOfUser1, userOfUser3, userOfUser4]`.
    *    The data source might not return them in the same order, so we have to reorder them.
    */
   private mapUsersToUserIds(
@@ -33,7 +33,11 @@ export class UserService {
   ): User[] {
     return userIds
       .map((userId) => {
-        return users.filter((user) => user.id === userId) ?? null;
+        const filteredUsers = users.filter(
+          (user) => user.id === userId,
+        );
+
+        return filteredUsers ?? null;
       })
       .flat();
   }
