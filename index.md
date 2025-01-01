@@ -33,7 +33,7 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
 13. [Security in GraphQL](./docs/security.md).
 14. [NestJS](./docs/nestjs.md).
     - [Query complexity](./docs/nestjs.md#query-complexity).
-    - [Query depth](./docs/nestjs.md#query-depth).
+    - [Query depth and complexity in one package](./docs/best-practices/query-depth-and-complexity.md).
 15. [Subscription](./docs/subscription.md).
 16. [Best practices](./docs/best-practices/index.md).
     - [Serve over HTTP](./docs/best-practices/serve-over-http.md).

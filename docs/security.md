@@ -3,7 +3,7 @@
 - Auth: Authentication & authorization.
 - Operation safe-listing.
   - Or alternatively:
-    - [Depth-limiting](./nestjs.md#query-depth).
+    - [Depth-limiting](./best-practices/query-depth-and-complexity.md).
     - Breadth-limiting.
     - Alias limits.
     - Cycle rejection.

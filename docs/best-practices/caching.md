@@ -111,7 +111,7 @@ Query complexity (and query depth) is important since:
 
 > [!NOTE]
 >
-> Learn more about [query complexity in NestJS here](../nestjs.md#query-complexity) and query depth [here](../nestjs.md#query-depth).
+> Learn more about [query complexity in NestJS here](../nestjs.md#query-complexity) and query depth in NodeJS [here](../best-practices/query-depth-and-complexity.md).
 
 ## Ref
 
