@@ -216,6 +216,17 @@ body: JSON.stringify({
   - To prevent this, you’d have to escape it by adding a backslash to ensure the character is read correctly.
   - Like: "O\'Hara".
 
+## GraphQL is not The Same as REST
+
+- GraphQL was designed at Facebook to handle complex systems with many, many small services (microservices).
+- It lets you make one request to get data from different microservices.
+- Do not write too deep queries, keep them as flat as possible (more on that in [complexity](./nestjs.md#query-complexity)).
+- In each UI component make request for the specific data they need.
+- **Keep resolvers lightweight & simple**: GraphQL’s strength is that it can call many services in parallel to get data efficiently.
+- In REST in one endpoint we usually tend to do a lot of work so that we can:
+  - Return all the data for a page in a single request.
+  - Or to process all the business logics.
+
 ## Ref
 
 - [https://graphql.org/graphql-js/authentication-and-express-middleware/](https://graphql.org/graphql-js/authentication-and-express-middleware/).

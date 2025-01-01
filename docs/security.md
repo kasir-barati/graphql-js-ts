@@ -3,11 +3,11 @@
 - Auth: Authentication & authorization.
 - Operation safe-listing.
   - Or alternatively:
-    - Depth-limiting.
+    - [Depth-limiting](./nestjs.md#query-depth).
     - Breadth-limiting.
     - Alias limits.
     - Cycle rejection.
-    - Cost analysis.
+    - [Cost analysis](./best-practices/cost-analysis.md).
 - Execution timeouts.
 
 ## Cross Site Request Forgery -- CSRF

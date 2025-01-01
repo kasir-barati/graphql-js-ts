@@ -11,7 +11,7 @@
         "jestConfig": "apps/depth-e2e/jest.config.ts",
         "passWithNoTests": true
       },
-      "dependsOn": ["depth:build"]
+      "dependsOn": ["depth:build", "depth:seed", "depth:serve"]
     }
   }
 }

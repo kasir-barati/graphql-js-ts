@@ -57,6 +57,10 @@ They do not need to do anything to benefit from caching. This means that we need
 
 ### Application Level Caching -- Caching Approaches
 
+> [!NOTE]
+>
+> Make sure to read the [consideration section](#considerations)!
+
 - Caching a single resolver:
 
   Here this particular resolver is probably super slow, so we wanna make it faster.
@@ -67,6 +71,9 @@ They do not need to do anything to benefit from caching. This means that we need
   - E.g. [IdentityCache](https://github.com/Shopify/identity_cache) which caches data in a [Memcached](https://memcached.org/).
 
 - Cache all `Queries`.
+
+  - We can do this by resolver level caching with directives.
+  - In Apollo Serve it is well known as [per-field basis server-side caching](https://www.apollographql.com/docs/apollo-server/performance/caching).
 
 > [!NOTE]
 >
@@ -95,7 +102,7 @@ If you have a ton of cacheable requests, then if you implement it right, it will
 
 ### Considerations
 
-Query complexity (AKA query depth) is important since:
+Query complexity (and query depth) is important since:
 
 - Our cache storage might run out of space if we cache a lot of queries.
 - Or on the other hand we might be kicking cached data out of our storage too soon if the cardinality[^2] of our queries are too high.
@@ -104,7 +111,7 @@ Query complexity (AKA query depth) is important since:
 
 > [!NOTE]
 >
-> Learn more about [query complexity in NestJS here](../nestjs.md#query-complexity).
+> Learn more about [query complexity in NestJS here](../nestjs.md#query-complexity) and query depth [here](../nestjs.md#query-depth).
 
 ## Ref
 

@@ -25,7 +25,7 @@ import {
   isEmptyPage,
   isForwardPaging,
   isValidPageMeta,
-} from './utils.pager';
+} from './utils';
 
 export class CursorPager<DTO> {
   private get defaultSort(): SortField<DTO>[] {

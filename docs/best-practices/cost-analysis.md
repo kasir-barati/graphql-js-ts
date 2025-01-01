@@ -74,7 +74,7 @@ By calculating each query's cost we can:
 >
 > \*Query complexity refers to the computational resources needed to fulfill a query.
 >
-> Learn more about [query depth limiting here](https://youtu.be/b7OwR1gs-xA?si=MZa9DmNPTBU_VjW-).
+> Learn more about [query depth limiting here](../nestjs.md#query-depth).
 
 - In NestJS we can do this in our [complexity estimator function](../nestjs.md#complexityEstimatorFunction).
 - E.g., assume we're developing a GraphQL service for a bank and our client wanted to fetch the last 5 transactions of a user.

@@ -7,6 +7,8 @@
 >   - I decided to try out `nestjs-query` since it looks more promising both from filtering capabilities, pagination and auth (learn more [here](https://discord.com/channels/520622812742811698/1313097554543771689/1315660190330392658)).
 > - To lean more about pagination in general [read this](https://github.com/kasir-barati/nestjs-materials/blob/main/docs/designing-restful-api/pagination.md).
 > - To learn more about efficiency in SQL you can read [this](https://github.com/kasir-barati/sql/blob/main/docs/select/pagination.md).
+> - Read this great article in apollo website [Relay-Style Connections and Pagination](https://www.apollographql.com/docs/graphos/schema-design/guides/relay-style-connections).
+> - A related post to this topic from a bigger point of view would be: [Zero, One, Infinity Principle in Software Development](https://dev.to/kasir-barati/zero-one-infinity-principle-in-software-development-39p0).
 
 To traverse the relationship between sets of objects. we can have a field that returns a plural type:
 
@@ -41,6 +43,172 @@ To traverse the relationship between sets of objects. we can have a field that r
   [Cursor-based pagination](https://github.com/kasir-barati/nestjs-materials/blob/main/docs/designing-restful-api/pagination.md#cursorBasedPagination) is the one we'll use.
 
 ## Cursor-based pagination in GraphQL
+
+> [!TIP]
+>
+> Since the "cursor" is opaque, it can be anything. E.g. in [`nestjs-query`](https://tripss.github.io/nestjs-query/docs/graphql/queries/paging#cursor-based-paging) by default it is not using a keyset cursor approach. JFYI, it does not matter what is our ORM/ODM, what matters is to understand that due to the opaque nature of cursor `nestjs-query` by default uses a type offset pagination beneath the cursor-based pagination.
+>
+> learn more about `nestjs-query`'s pagination [here](https://tripss.github.io/nestjs-query/docs/graphql/queries/paging#key-set-based-cursor) and now let's look at the GraphQL query and its generated SQL query by the TypeOrm:
+>
+> <table>
+> <caption>
+> Note that we have both previous page and next page in this particular example.
+> </caption>
+> <thead>
+> <tr>
+> <th>
+> SQL Query
+> </th>
+> <th>
+> GraphQL Query
+> </th>
+> </tr>
+> </thead>
+> <tbody>
+> <tr>
+> <td>
+>
+> ```sql
+> SELECT
+>     "Alert"."id" AS "Alert_id",
+>     "Alert"."title" AS "Alert_title",
+>     "Alert"."userId" AS "Alert_userId",
+>     "Alert"."updatedAt" AS "Alert_updatedAt"
+>     "Alert"."createdAt" AS "Alert_createdAt",
+>     "Alert"."alertTypeId" AS "Alert_alertTypeId",
+>     "Alert"."description" AS "Alert_description",
+> FROM "alert" "Alert"
+> LIMIT 5
+> OFFSET 13
+> ```
+>
+> </td>
+> <td>
+>
+> ```graphql
+> query {
+>   alerts(paging: {
+>     "paging": {
+>       "last": 4,
+>       "before": "YXJyYXljb25uZWN0aW9uOjE4"
+>     }
+>   }) {
+>     edges {
+>       cursor
+>       node {
+>         id
+>         title
+>         createdAt
+>       }
+>     }
+>     pageInfo {
+>       endCursor
+>       hasNextPage
+>       startCursor
+>       hasPreviousPage
+>     }
+>   }
+> }
+> ```
+>
+> </td>
+> </tr>
+> <tr>
+> <td>
+>
+> ```sql
+> SELECT
+>     "Alert"."id" AS "Alert_id",
+>     "Alert"."title" AS "Alert_title",
+>     "Alert"."description" AS "Alert_description",
+>     "Alert"."userId" AS "Alert_userId",
+>     "Alert"."alertTypeId" AS "Alert_alertTypeId",
+>     "Alert"."createdAt" AS "Alert_createdAt",
+>     "Alert"."updatedAt" AS "Alert_updatedAt"
+> FROM "alert" "Alert"
+> LIMIT 7
+> ```
+>
+> </td>
+> <td>
+>
+> ```graphql
+> query {
+>     alerts(paging: {
+>     "paging": {
+>       "first": 6
+>     }
+>   }) {
+>     edges {
+>       cursor
+>       node {
+>         id
+>         title
+>         createdAt
+>       }
+>     }
+>     pageInfo {
+>       endCursor
+>       hasNextPage
+>       startCursor
+>       hasPreviousPage
+>     }
+>   }
+> }
+> ```
+>
+> </td>
+> </tr>
+> <tr>
+> <td>
+>
+> ```sql
+> SELECT
+>     "Alert"."id" AS "Alert_id",
+>     "Alert"."title" AS "Alert_title",
+>     "Alert"."description" AS "Alert_description",
+>     "Alert"."userId" AS "Alert_userId",
+>     "Alert"."alertTypeId" AS "Alert_alertTypeId",
+>     "Alert"."createdAt" AS "Alert_createdAt",
+>     "Alert"."updatedAt" AS "Alert_updatedAt"
+> FROM "alert" "Alert"
+> LIMIT 7
+> OFFSET 6
+> ```
+>
+> </td>
+> <td>
+>
+> ```graphql
+> query {
+>     alerts(paging: {
+>     "paging": {
+>       "first": 6,
+>       "after": "YXJyYXljb25uZWN0aW9uOjU="
+>     }
+>   }) {
+>     edges {
+>       cursor
+>       node {
+>         id
+>         title
+>         createdAt
+>       }
+>     }
+>     pageInfo {
+>       endCursor
+>       hasNextPage
+>       startCursor
+>       hasPreviousPage
+>     }
+>   }
+> }
+> ```
+>
+> </td>
+> </tr>
+> </tbody>
+> </table>
 
 How can we send the cursor to the client?
 
@@ -108,7 +276,7 @@ How can we send the cursor to the client?
 
 - `PostCommentsConnection`:
 
-  - An "object".
+  - **A wrapper type**.
   - Fields:
 
     - `edges`.
@@ -131,15 +299,32 @@ How can we send the cursor to the client?
       <details>
         <summary>Fields inside it</summary>
         <ul>
-          <li><code>startCursor</code> is the first cursor of the "page".</li>
-          <li><code>endCursor</code> is the last cursor of the "page".</li>
+          <li>
+            <code>startCursor</code> is the first cursor of <b>the currently fetched page</b> and not the very first record in our database!
+          </li>
+          <li>
+            <code>endCursor</code> is the last cursor of <b>the currently fetched page</b> and not the very last record in our database!
+          </li>
+          <li>
+            <code>hasNextPage</code> indicates whether there is a next page or not.
+          </li>
+          <li>
+            <code>hasPreviousPage</code> indicates whether there is a previous page or not.
+          </li>
         </ul>
       </details>
 
-    - Additional info related to the connection
+    - Enables modeling additional info/attributes, related to the connection, where they **DO NOT** belong to the entities in our edges.
 
 - `PostCommentEdge`:
+
   - An actual entity in our graph.
+  - **A wrapper type**.
+  - Here can can model other info that do not belong to the post, nor the comment itself. E.g.:
+    - Tone of a comment for a specific post, is it negative, or positive, stuff like that. This info is being generated because of the relationship between comment and post.
+    - Or a specific customer might shop at one business in store and another online. This is an attribute of the relationship between a business and customer.
+  - Without wrapper types (edge & connection), you don't have a place to put this data.
+
 - `commentsConnection`: you can perform forward pagination, backward pagination, **or both**.
 
   - **Forward pagination**:
@@ -156,6 +341,56 @@ How can we send the cursor to the client?
     - `before`:
       - Required.
       - Returns the nodes before that cursor.
+
+  > [!TIP]
+  >
+  > Some general validations for these args:
+  >
+  > ```ts
+  > export function validatePagination(
+  >   forwardPaging: { after: string; first: number },
+  >   backwardPaging: { before: string; last: number },
+  > ) {
+  >   if (forwardPaging.first < 0) {
+  >     throw new Error(
+  >       'ForwardPagingArg.first cannot be less than 0',
+  >     );
+  >   }
+  >
+  >   if (backwardPaging.last < 0) {
+  >     throw new Error(
+  >       'BackwardPagingArg.last cannot be less than 0',
+  >     );
+  >   }
+  >
+  >   if (
+  >     !isNil(backwardPaging.last) &&
+  >     isNil(backwardPaging.before)
+  >   ) {
+  >     throw new Error(
+  >       'BackwardPagingArg property before cannot be undefined when you specify last',
+  >     );
+  >   }
+  >
+  >   if (
+  >     !isNil(forwardPaging.after) &&
+  >     !isNil(backwardPaging.last)
+  >   ) {
+  >     throw new Error(
+  >       'ForwardPagingArg.after cannot be specified with BackwardPagingArg.last',
+  >     );
+  >   }
+  >
+  >   if (
+  >     !isNil(forwardPaging.first) &&
+  >     !isNil(backwardPaging.before)
+  >   ) {
+  >     throw new Error(
+  >       'ForwardPagingArg.first cannot be specified with BackwardPagingArg.before',
+  >     );
+  >   }
+  > }
+  > ```
 
 > [!CAUTION]
 >

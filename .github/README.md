@@ -25,7 +25,7 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
 7. [Document your GraphQL service API](../docs/documentation.md).
 8. [GraphQL request lifecycle](../docs/graphql-req-lifecycle.md).
    - [Common validation errors](../docs/common-errors.md).
-   - [Execution from inside, resolver's args + AST, ...](../docs/execution-from-inside.md)
+   - [Execution from inside, resolver's args, AST, ...](../docs/execution-from-inside.md)
 9. [Code-first approach](../docs/code-first.md).
 10. [Auth](../docs/auth.md).
 11. [How to query information about a GraphQL schema](../docs/introspection.md).
@@ -36,6 +36,8 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
     - [Filtering using `prisma-nestjs-graphql`](../docs/improve-dev-exp/filtering-using-prisma-nestjs-graphql.md).
 13. [Security in GraphQL](../docs/security.md).
 14. [NestJS](../docs/nestjs.md).
+    - [Query complexity](../docs/nestjs.md#query-complexity).
+    - [Query depth](../docs/nestjs.md#query-depth).
 15. [Subscription](../docs/subscription.md).
 16. [Best practices](../docs/best-practices/index.md).
     - [Serve over HTTP](../docs/best-practices/serve-over-http.md).

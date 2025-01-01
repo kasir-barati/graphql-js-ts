@@ -4,14 +4,9 @@
   - [Simplest form](../apps/expressjs-hello-world-e2e/src/expressjs-hello-world/expressjs-hello-world.spec.ts#L5).
   - [Select from sub fields of an object](../apps/todo-backend-e2e/src/todo-backend/create-todo.spec.ts#L16).
   - [Fetch a specific resource](../apps/profile-e2e/src/profile/profile.spec.ts#L11).
+- When we query [response's shape is exactly the same as your query](./intro.md#query-what-you-need) (AKA WYSIWYG).
 
-## Thing you can see
-
-### Similar to WYSIWYG
-
-[Response's shape is exactly the same as your query](./intro.md#query-what-you-need).
-
-### Reusability -- DRY
+## Don't Repeat Yourself (DRY) -- Named Fragments
 
 We need to reuse parts of our queries. For sake of having an easier time to develop and maintain we can use `fragment`s. It shines where we have:
 
@@ -28,7 +23,26 @@ You need to define fragments in your client-side app -- [ref](https://stackoverf
 >
 > You can also pass variables to your `fragment` (learn more [here](https://graphql.org/learn/queries/#using-variables-inside-fragments)).
 
-### Variable
+### Work with generic types and concrete ones -- inline `fragment`s
+
+So assume we have 3 [interfaces](./data-types.md#interfaces--unions):
+
+1. `Fleet` which is a generic type.
+2. `Truck` which is a fleet with a concrete interface,
+3. `Van` which is also a fleet with a concrete interface.
+
+Now we wanna fetch data from a shared endpoint. We will ask for `mileage` which is something defined in Fleet. And we need to get some specific fields based on the returned interface type:
+
+- If it is a truck we wanna add its `capacity`.
+- If it is a van we need to get its `cabinAccess`.
+
+![Select fields based on type with inline fragment](./assets/select-fields-based-on-type.png)
+
+> [!TIP]
+>
+> Named `fragment`s can also be used and this is not restricted to inline `fragment`s.
+
+## Variable
 
 By using variables:
 
@@ -132,25 +146,6 @@ We also have another directive which is `@skip`, but ATM I am failing to see any
 | -------------- | -------------------- | --------------------------------------------------------------------- |
 | `query`.       | Parallel/concurrent. |                                                                       |
 | `mutation`.    | Series.              | E.g. if you call `incrementCredits` twice they run one after another. |
-
-# Work with generic types and concrete ones -- inline `fragment`s
-
-So assume we have 3 [interfaces](./data-types.md#interfaces--unions):
-
-1. `Fleet` which is a generic type.
-2. `Truck` which is a fleet with a concrete interface,
-3. `Van` which is also a fleet with a concrete interface.
-
-Now we wanna fetch data from a shared endpoint. We will ask for `mileage` which is something defined in Fleet. And we need to get some specific fields based on the returned interface type:
-
-- If it is a truck we wanna add its `capacity`.
-- If it is a van we need to get its `cabinAccess`.
-
-![Select fields based on type with inline fragment](./assets/select-fields-based-on-type.png)
-
-> [!TIP]
->
-> Named `fragment`s can also be used and this is not restricted to inline `fragment`s.
 
 # Metadata
 

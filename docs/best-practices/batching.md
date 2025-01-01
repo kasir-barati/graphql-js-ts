@@ -1,5 +1,6 @@
 # Batching technique:
 
+- Related to the topic of ["N+1" issue](../improve-dev-exp/filtering-using-prisma-nestjs-graphql.md#shouldWeUseResolveField).
 - Multiple requests for data from a backend are collected over a short period of time and then dispatched in a single request to an underlying database or microservice by using a tool like [DataLoader](https://github.com/graphql/dataloader).
 - **Note**: Most database engines have built-in baching mechanisms.
 
@@ -12,7 +13,29 @@
   - **Batching**: Fetching .
   - **Caching**: Instead of loading same data from DB for different part of a GraphQL query we'll do it once, and use the cached value going forward.
 
-### Create a Dataloader
+### NestJS + Dataloader
+
+1. ```shell
+   pnpm add dataloader
+   ```
+2. ```shell
+   nx g @nx/node:app --framework nest --directory apps/dataloader-example
+   nest g module dataloader
+   nest g interface dataloader
+   ```
+3. Create a new function that load the data in batch in your repository level like what we did [here](../../apps/dataloader-example/src/post/post.repository.ts#L13) and [here](../../apps/dataloader-example/src/user/user.repository.ts#L13).
+4. You also need to add a new method to your service layer as we did [here](../../apps/dataloader-example/src/post/post.service.ts#L14) for example.
+5. ```shell
+   nest g service dataloader --no-spec
+   ```
+
+   Lastly you need to create a data loader for the things that needs to be batched together.
+
+   > [!CAUTION]
+   >
+   > Note that we do not need to make this service request scoped, i.e. we do not need to annotate the newly created service with `@Injectable({ scope: Scope.REQUEST })`. As you can see it clearly in your terminal that `DataloaderService`'s constructor is being called again and again for each new request :slightly_smiling_face:.
+   >
+   > You can see it by running `apps/dataloader-example` app and checking the logs ([code](../../apps/dataloader-example/src/dataloader/dataloader.service.ts#L17)).
 
 Provide a function that is your batch function:
 
@@ -31,6 +54,10 @@ You can also pass an options to it:
   - By default it's an ES6 `Map` object.
   - Will be thrown away when our Dataloader instance get garbage collected.
   - The default behavior is ok when you're creating a new Dataloader instance on every request.
+
+> [!TIP]
+>
+> My implementation in `apps/dataloader-example` was purely experimental and in a real world app I believe using a lib would be much better. Something like: [`@strv/nestjs-dataloader`](https://www.npmjs.com/package/@strv/nestjs-dataloader) (**although they've changed the license from MIT to BSD-3!**) or [`nestjs-dataloader`](https://github.com/krislefeber/nestjs-dataloader).
 
 ### Caching in Dataloader
 
