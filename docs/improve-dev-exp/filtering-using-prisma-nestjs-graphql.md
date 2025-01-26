@@ -117,6 +117,9 @@
 >      }
 >    }
 >    ```
-> 7. I did a quick npmtrends and it seems that this lib reign supreme in Prisma but the downsides are too many:
+>
+> **Upsides IMO**
+>
+> 1. I did a quick npm trends and it seems that this lib reign supreme in Prisma but the downsides are too many:
 >
 >    ![npmtrends](../assets/npmtrends-prisma-nestjs-graphql.png)
