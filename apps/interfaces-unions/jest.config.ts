@@ -1,3 +1,5 @@
+import type { Config } from 'jest';
+
 export default {
   displayName: 'interfaces',
   preset: '../../jest.preset.js',
@@ -10,4 +12,4 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/interfaces',
-};
+} satisfies Config;

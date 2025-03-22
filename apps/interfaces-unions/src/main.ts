@@ -18,7 +18,6 @@ async function bootstrap() {
   Logger.log(
     `🚀 Application is running on: http://localhost:${PORT}/graphql`,
   );
-  Logger.log(`🚀 Subscribe to: ws://localhost:${PORT}/graphql`);
   Logger.log(
     `🚀 GraphQL IDE is running on: http://localhost:${PORT}/graphql`,
   );

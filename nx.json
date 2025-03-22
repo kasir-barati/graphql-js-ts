@@ -31,7 +31,7 @@
         "apps/dos-attack-example-e2e/**/*",
         "apps/complexity-e2e/**/*",
         "apps/depth-e2e/**/*",
-        "apps/interfaces-e2e/**/*"
+        "apps/interfaces-unions-e2e/**/*"
       ]
     },
     {

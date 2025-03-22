@@ -21,11 +21,6 @@ export class GraphQLConfig implements GqlOptionsFactory {
       autoSchemaFile: join(__dirname, 'src', 'schema.gql'),
       sortSchema: true,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      subscriptions: {
-        'graphql-ws': {
-          path: '/graphql',
-        },
-      },
       debug: this.appConfigs.NODE_ENV !== 'production',
     };
   }

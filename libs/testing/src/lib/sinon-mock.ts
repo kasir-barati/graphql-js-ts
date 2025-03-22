@@ -1,4 +1,4 @@
-import { SinonStub, stub } from 'sinon';
+import { SinonStub, SinonStubStatic, stub } from 'sinon';
 
 import {
   MockGenerator,
@@ -12,7 +12,7 @@ export type SinonMockType<TObject extends MockableEntity> =
   StubbedObject<TObject, SinonStub>;
 
 export const SinonMock: MockGenerator<SinonStub> =
-  createMockImplementationWithStubFunction(stub);
+  createMockImplementationWithStubFunction<SinonStubStatic>(stub);
 
 function createMockImplementationWithStubFunction<TStub>(
   stubFunction: () => TStub,

@@ -1,7 +1,7 @@
 {
-  "name": "interfaces",
+  "name": "interfaces-unions",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/interfaces/src",
+  "sourceRoot": "apps/interfaces-unions/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -22,15 +22,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "interfaces:build",
+        "buildTarget": "interfaces-unions:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "interfaces:build:development"
+          "buildTarget": "interfaces-unions:build:development"
         },
         "production": {
-          "buildTarget": "interfaces:build:production"
+          "buildTarget": "interfaces-unions:build:production"
         }
       }
     },

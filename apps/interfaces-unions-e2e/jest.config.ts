@@ -1,9 +1,14 @@
+import type { Config } from 'jest';
+
 export default {
-  displayName: 'interfaces-e2e',
+  displayName: 'interfaces-unions-e2e',
   preset: '../../jest.preset.js',
   globalSetup: '<rootDir>/src/support/global-setup.ts',
   globalTeardown: '<rootDir>/src/support/global-teardown.ts',
   setupFiles: ['<rootDir>/src/support/test-setup.ts'],
+  setupFilesAfterEnv: [
+    '<rootDir>/src/support/test-setup-after-env.ts',
+  ],
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': [
@@ -14,5 +19,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/interfaces-e2e',
-};
+  coverageDirectory: '../../coverage/interfaces-unions-e2e',
+} satisfies Config;
