@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
 import { validateEnvs } from '@shared';
-import { IsIn, IsOptional } from 'class-validator';
+import { IsIn, IsInt, IsOptional } from 'class-validator';
 
 import { AppConfig } from '../app.type';
 
@@ -14,4 +14,8 @@ class Environment implements AppConfig {
   @IsOptional()
   @IsIn(['development', 'production', 'test'])
   NODE_ENV: 'development' | 'production' | 'test' = 'development';
+
+  @IsOptional()
+  @IsInt()
+  PORT: number = 4004;
 }

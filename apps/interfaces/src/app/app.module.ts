@@ -24,7 +24,6 @@ import { GraphQLConfig } from './configs/graphql.config';
       useClass: GraphQLConfig,
     }),
   ],
-  controllers: [AppResolver],
-  providers: [AppService],
+  providers: [AppService, AppResolver],
 })
 export class AppModule {}
