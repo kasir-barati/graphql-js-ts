@@ -41,4 +41,11 @@ module.exports = [
     // Override or add rules here
     rules: {},
   },
+  {
+    files: ['**/global.d.ts'],
+    rules: {
+      '@typescript-eslint/no-empty-interface': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+    },
+  },
 ];
