@@ -5,5 +5,5 @@ export interface AppConfig {
 }
 
 namespace NodeJS {
-  export interface ProcessEnv extends AppConfig {}
+  export type ProcessEnv = AppConfig
 }

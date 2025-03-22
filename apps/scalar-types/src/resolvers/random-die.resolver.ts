@@ -1,7 +1,7 @@
 import { rollTheDie } from '../utils/roll-the-dice.util';
 
 export class RandomDie {
-  constructor(public readonly sides: number = 6) {}
+  constructor(public readonly sides = 6) {}
 
   rollOnce() {
     return rollTheDie(this.sides);

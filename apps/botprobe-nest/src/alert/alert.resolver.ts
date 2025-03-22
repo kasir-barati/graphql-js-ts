@@ -24,7 +24,7 @@ export class AlertResolver {
       nullable: true,
       defaultValue: 10,
     })
-    first: number = 10,
+    first = 10,
     @Args('after', { nullable: true }) after: string,
     @Args('last', { type: () => Int, nullable: true }) last: number,
     @Args('before', { nullable: true }) before: string,

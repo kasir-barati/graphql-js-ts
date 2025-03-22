@@ -1,3 +1,3 @@
-export function rollTheDie(howManySidesDoTheDieHave: number = 6) {
+export function rollTheDie(howManySidesDoTheDieHave = 6) {
   return 1 + Math.floor(Math.random() * howManySidesDoTheDieHave);
 }

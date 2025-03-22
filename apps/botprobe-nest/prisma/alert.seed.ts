@@ -13,7 +13,7 @@ const dummyAlerts: Prisma.AlertCreateArgs['data'][] = new Array(
       alertTypesIdsIndex = 0;
     }
 
-    let alertTypeId = alertTypesIds[alertTypesIdsIndex++];
+    const alertTypeId = alertTypesIds[alertTypesIdsIndex++];
 
     return {
       title: 'alert title ' + (index + 1),

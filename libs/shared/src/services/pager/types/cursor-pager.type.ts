@@ -75,9 +75,9 @@ export interface QueryResult<DTO> {
 type FilterFieldComparisonType<
   FieldType,
   IsKeys extends true | false,
-> = FieldType extends string | String
+> = FieldType extends string | string
   ? StringFieldComparisons
-  : FieldType extends boolean | Boolean
+  : FieldType extends boolean | boolean
     ? BooleanFieldComparisons
     : FieldType extends
           | number
