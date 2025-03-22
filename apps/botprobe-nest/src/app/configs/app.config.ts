@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { validateEnvs } from '@shared';
 import { IsIn, IsOptional } from 'class-validator';
+
 import { AppConfig } from '../app.type';
 
 export default registerAs('appConfigs', (): AppConfig => {

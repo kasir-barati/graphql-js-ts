@@ -1,4 +1,5 @@
 import { ObjectType } from '@nestjs/graphql';
+
 import { Class } from '../types/utility.type';
 
 export function Exclude<T, K extends keyof T>(

@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { randomUUID } from 'crypto';
+
 import { alertTypesIds } from './alert-type.seed';
 
 let alertTypesIdsIndex = 0;

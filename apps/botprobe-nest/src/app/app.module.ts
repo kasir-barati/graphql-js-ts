@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+
 import { AlertTypeModule } from '../alert-type/alert-type.module';
 import { AlertModule } from '../alert/alert.module';
 import appConfig from './configs/app.config';

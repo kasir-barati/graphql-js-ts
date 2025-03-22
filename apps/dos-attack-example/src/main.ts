@@ -4,6 +4,7 @@ import { GraphQLSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
 import 'reflect-metadata';
 import { ruruHTML } from 'ruru/server';
+
 import { AppDataSource } from './data-source';
 import { Post } from './entities/post.entity';
 import { RootQuery } from './queries/root.query';

@@ -10,6 +10,7 @@ import {
 } from '@nestjs/graphql';
 // import { Exclude } from '@shared';
 import { GraphQLResolveInfo } from 'graphql';
+
 import { AlertTypeCreateManyInput } from '../@generated/alert-type/alert-type-create-many.input';
 import { AlertTypeWhereInput } from '../@generated/alert-type/alert-type-where.input';
 import { AlertType } from '../@generated/alert-type/alert-type.model';

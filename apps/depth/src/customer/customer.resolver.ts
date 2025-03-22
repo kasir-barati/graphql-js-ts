@@ -12,6 +12,7 @@ import {
   Resolver,
   Root,
 } from 'type-graphql';
+
 import { BusinessDto } from '../business/dto/business.dto';
 import { AppDataSource } from '../shared/data-source';
 import { GraphQLResolveContext } from '../shared/dataloader';

@@ -5,6 +5,7 @@ import {
   ID,
   ObjectType,
 } from 'type-graphql';
+
 import { CustomerDto } from '../../customer/dto/customer.dto';
 
 @ObjectType('Business')

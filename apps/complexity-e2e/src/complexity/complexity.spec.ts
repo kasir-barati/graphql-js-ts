@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { GraphQLErrorResponse } from '../support/types/error.type';
 
 describe('POST /graphql', () => {

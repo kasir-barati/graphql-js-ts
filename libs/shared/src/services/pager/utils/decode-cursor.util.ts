@@ -1,5 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
+
 import { Class } from '../../../types/utility.type';
 import { CursorPayload } from '../types/cursor-pager.type';
 

@@ -1,4 +1,5 @@
 import { SinonMock, SinonMockType } from '@testing';
+
 import { TodoRepository } from './todo.repository';
 import { TodoService } from './todo.service';
 

@@ -1,4 +1,5 @@
 import { SinonStub, stub } from 'sinon';
+
 import {
   MockGenerator,
   MockableConstructor,

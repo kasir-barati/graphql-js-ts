@@ -1,4 +1,5 @@
 import { ClassConstructor } from 'class-transformer';
+
 import { validateCursor } from './validate.utils';
 
 export async function cursorDecoder<ReturnType extends object>(

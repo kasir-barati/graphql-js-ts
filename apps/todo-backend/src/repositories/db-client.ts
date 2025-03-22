@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+
 import { DbClient } from '../types/repository.type';
 
 let dbClient: DbClient;

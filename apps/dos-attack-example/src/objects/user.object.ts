@@ -1,4 +1,5 @@
 import { GraphQLID, GraphQLList, GraphQLObjectType } from 'graphql';
+
 import { PostObject } from './post.object';
 
 export const UserObject = new GraphQLObjectType({

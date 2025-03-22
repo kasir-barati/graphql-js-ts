@@ -1,5 +1,6 @@
 import { PrismaService } from '@shared';
 import { SinonMock, SinonMockType } from '@testing';
+
 import { AlertTypeRepository } from './alert-type.repository';
 import { AlertTypeService } from './alert-type.service';
 

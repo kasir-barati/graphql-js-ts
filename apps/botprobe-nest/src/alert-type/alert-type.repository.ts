@@ -6,6 +6,7 @@ import {
   cursorEncoder,
   PrismaService,
 } from '@shared';
+
 import { CursorInput } from './dto/cursor.input';
 
 @Injectable()

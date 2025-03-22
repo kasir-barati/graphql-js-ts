@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { IsInt, IsString } from 'class-validator';
 import { RedisOptions } from 'ioredis';
+
 import { validateEnvs } from '../../../utils/validate.utils';
 
 export default registerAs('pubSubRedisConfigs', (): RedisOptions => {

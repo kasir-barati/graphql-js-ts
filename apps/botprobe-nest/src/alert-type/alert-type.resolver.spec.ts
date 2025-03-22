@@ -1,4 +1,5 @@
 import { SinonMock, SinonMockType } from '@testing';
+
 import { AlertTypeResolver } from './alert-type.resolver';
 import { AlertTypeService } from './alert-type.service';
 

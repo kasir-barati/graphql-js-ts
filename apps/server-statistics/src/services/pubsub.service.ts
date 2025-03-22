@@ -1,5 +1,6 @@
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import Redis from 'ioredis';
+
 import { getEnv } from '../utils/env.util.js';
 
 let redisPubSub: RedisPubSub;

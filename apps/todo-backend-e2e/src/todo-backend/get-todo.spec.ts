@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { GetTodoResponse } from '../support/types/todo.type';
 
 describe('POST /graphql', () => {

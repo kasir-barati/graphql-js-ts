@@ -1,5 +1,6 @@
 import { SinonMock, SinonMockType } from '@testing';
 import { Repository } from 'typeorm';
+
 import { AppService } from './app.service';
 import { Post } from './entities/post.entity';
 import { User } from './entities/user.entity';

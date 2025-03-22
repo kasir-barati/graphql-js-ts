@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComplexityPlugin } from '@shared';
+
 import { DataloaderModule } from '../dataloader/dataloader.module';
 import { DataloaderService } from '../dataloader/dataloader.service';
 import { PostModule } from '../post/post.module';

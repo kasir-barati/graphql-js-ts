@@ -4,6 +4,7 @@ import express from 'express';
 import { buildSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { ruruHTML } from 'ruru/server';
+
 import {
   RandomDie,
   RandomDieWithError,

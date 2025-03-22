@@ -1,4 +1,5 @@
 import { ObjectLiteral } from 'typeorm';
+
 import { FilterQueryBuilder } from './filter-query-builder';
 import { Query } from './types/cursor-pager.type';
 

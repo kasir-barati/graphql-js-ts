@@ -4,6 +4,7 @@ import {
   TypeOrmModuleOptions,
   TypeOrmOptionsFactory,
 } from '@nestjs/typeorm';
+
 import appConfig from './app.config';
 
 export class TypeOrmConfig implements TypeOrmOptionsFactory {

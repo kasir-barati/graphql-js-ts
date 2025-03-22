@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { GraphQLResolveInfo } from 'graphql';
+
 import { AST, ValueOfArgument } from './types';
 
 export function getArguments(ast: AST, info: GraphQLResolveInfo) {

@@ -1,4 +1,5 @@
 import { SinonMock, SinonMockType } from '@testing';
+
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 

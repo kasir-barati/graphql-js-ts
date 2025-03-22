@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { GetTodoFinderResponse } from '../types/todo.type';
 
 export class TodoFinder {

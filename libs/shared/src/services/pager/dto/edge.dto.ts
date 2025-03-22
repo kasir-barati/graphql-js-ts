@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { Field, ObjectType } from 'type-graphql';
+
 import { Class } from '../../../types/utility.type';
 import { EdgeType } from '../types/dto.type';
 

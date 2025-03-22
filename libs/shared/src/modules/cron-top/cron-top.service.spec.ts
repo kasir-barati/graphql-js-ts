@@ -1,5 +1,6 @@
 import { SinonMock, SinonMockType } from '@testing';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
+
 import { CronTopService } from './cron-top.service';
 
 describe('CronTopService', () => {

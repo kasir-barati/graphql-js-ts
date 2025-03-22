@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+
 import { seedAlertTypes } from './alert-type.seed';
 import { seedAlerts } from './alert.seed';
 

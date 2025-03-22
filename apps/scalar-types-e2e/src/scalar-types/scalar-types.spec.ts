@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { SomethingPartialResponse } from '../support/types/something.type';
 
 describe('POST /graphql', () => {

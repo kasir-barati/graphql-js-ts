@@ -9,6 +9,7 @@ import {
   PrismaService,
 } from '@shared';
 import { GraphQLResolveInfo } from 'graphql';
+
 import { AlertTypeCreateManyInput } from '../@generated/alert-type/alert-type-create-many.input';
 import { AlertTypeWhereInput } from '../@generated/alert-type/alert-type-where.input';
 import { AlertTypeRepository } from './alert-type.repository';

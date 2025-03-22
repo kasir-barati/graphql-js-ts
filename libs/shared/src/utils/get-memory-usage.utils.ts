@@ -1,4 +1,5 @@
 import { freemem, totalmem } from 'os';
+
 import { NotNegativeNumber } from '../types/utility.type';
 import { assertNotNegativeNumber } from './assert-not-negative-number.util';
 import { MemoryUnitConvertor } from './memory-unit-convertor.util';

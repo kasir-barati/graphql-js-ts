@@ -7,6 +7,7 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
+
 import { AlertCreateManyInput } from '../@generated/alert/alert-create-many.input';
 import { AlertWhereInput } from '../@generated/alert/alert-where.input';
 import { Alert } from '../@generated/alert/alert.model';

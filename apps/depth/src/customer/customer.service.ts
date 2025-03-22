@@ -1,4 +1,5 @@
 import { CursorPager, PagingDto, QueryService } from '@shared';
+
 import { CustomerEntity } from './customer.entity';
 import { CustomerRepository } from './customer.repository';
 import { SerializedFindAllByBusinessesIds } from './customer.type';

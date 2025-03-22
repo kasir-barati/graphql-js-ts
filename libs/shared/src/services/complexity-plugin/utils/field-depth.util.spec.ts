@@ -1,4 +1,5 @@
 import { FieldNode } from 'graphql';
+
 import { fieldDepth } from './field-depth.util';
 
 describe('fieldDepth', () => {

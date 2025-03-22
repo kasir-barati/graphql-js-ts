@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { cleanup } from '../support/cleanup';
 
 describe('POST /graphql', () => {

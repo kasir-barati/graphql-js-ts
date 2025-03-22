@@ -1,4 +1,5 @@
 import { SinonMock, SinonMockType } from '@testing';
+
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 

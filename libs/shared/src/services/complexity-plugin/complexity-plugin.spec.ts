@@ -1,5 +1,6 @@
 import { GraphQLSchemaHost } from '@nestjs/graphql';
 import { SinonMock, SinonMockType } from '@testing';
+
 import { ComplexityPlugin } from './complexity-plugin';
 
 describe('ComplexityPlugin', () => {

@@ -4,6 +4,7 @@ import { Inject } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { GqlOptionsFactory } from '@nestjs/graphql';
 import { join } from 'path';
+
 import { DataloaderService } from '../../dataloader/dataloader.service';
 import appConfig from './app.config';
 

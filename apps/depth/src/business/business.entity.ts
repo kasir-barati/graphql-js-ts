@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 import { CustomerEntity } from '../customer/customer.entity';
 
 export const BUSINESS_TABLE_NAME = 'businesses';

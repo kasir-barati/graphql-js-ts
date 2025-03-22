@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { GraphQLResolveInfo } from 'graphql';
+
 import { flattenAST } from './flatten-ast.util';
 import { Options } from './types';
 

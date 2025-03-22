@@ -1,4 +1,5 @@
 import { WebsocketClient } from '@testing';
+
 import { GreetResponse } from '../support/types/greet-response.type';
 import {
   HtopResponse,

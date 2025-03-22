@@ -11,6 +11,7 @@ import {
   getComplexity,
   simpleEstimator,
 } from 'graphql-query-complexity';
+
 import { isIntrospection } from '../../get-fields';
 
 @Plugin()

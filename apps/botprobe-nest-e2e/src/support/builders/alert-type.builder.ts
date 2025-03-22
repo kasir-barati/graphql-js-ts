@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { AlertTypeBuilderResponse } from '../types/alert-type.type';
 
 export class AlertTypeBuilder {

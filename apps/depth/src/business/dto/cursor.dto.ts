@@ -1,6 +1,7 @@
 import { CursorPayload } from '@shared';
 import { CursorField } from 'libs/shared/src/services/pager/types/cursor-pager.type';
 import { Field, InputType } from 'type-graphql';
+
 import { BusinessDto } from './business.dto';
 
 @InputType()

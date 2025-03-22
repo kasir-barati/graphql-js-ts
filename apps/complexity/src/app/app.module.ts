@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ComplexityPlugin } from '@shared';
 import { join } from 'path';
+
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import appConfig from './configs/app.config';

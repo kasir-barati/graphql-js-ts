@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { CreateUserBuilderResponse } from '../types/user-response.type';
 
 export class UserBuilder {

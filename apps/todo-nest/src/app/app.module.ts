@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CronTopModule, PubSubModule } from '@shared';
 import { join } from 'path';
+
 import { TodoModule } from '../todo/todo.module';
 import { UserModule } from '../user/user.module';
 import { AppController } from './app.controller';

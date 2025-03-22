@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { CreateUserResponse } from '../support/types/user-response.type';
 
 describe('POST /graphql', () => {

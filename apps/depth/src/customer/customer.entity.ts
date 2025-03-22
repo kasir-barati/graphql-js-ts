@@ -5,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { BusinessEntity } from '../business/business.entity';
 
 export const CUSTOMER_TABLE_NAME = 'customers';

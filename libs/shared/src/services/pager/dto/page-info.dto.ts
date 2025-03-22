@@ -1,4 +1,5 @@
 import { Field, ObjectType } from 'type-graphql';
+
 import { PageInfoType } from '../types/dto.type';
 
 @ObjectType('PageInfo')

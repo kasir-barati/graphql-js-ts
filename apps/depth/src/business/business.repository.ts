@@ -1,4 +1,5 @@
 import { In, Repository } from 'typeorm';
+
 import { BusinessEntity } from './business.entity';
 
 export class BusinessRepository {

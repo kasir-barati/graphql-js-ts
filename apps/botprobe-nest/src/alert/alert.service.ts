@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaSelect } from '@paljs/plugins';
 import { PrismaService } from '@shared';
 import { GraphQLResolveInfo } from 'graphql';
+
 import { AlertCreateManyInput } from '../@generated/alert/alert-create-many.input';
 import { AlertWhereInput } from '../@generated/alert/alert-where.input';
 

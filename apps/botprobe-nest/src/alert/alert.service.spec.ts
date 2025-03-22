@@ -1,5 +1,6 @@
 import { PrismaService } from '@shared';
 import { SinonMock, SinonMockType } from '@testing';
+
 import { AlertService } from './alert.service';
 
 describe('AlertService', () => {

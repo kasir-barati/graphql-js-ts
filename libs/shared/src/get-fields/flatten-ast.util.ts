@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { GraphQLResolveInfo, SchemaDefinitionNode } from 'graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
+
 import { getArguments } from './get-arguments';
 import { getDirectiveResults } from './get-directives';
 import { getSelections } from './get-selections.util';

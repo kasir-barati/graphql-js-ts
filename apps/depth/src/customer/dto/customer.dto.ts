@@ -1,5 +1,6 @@
 import { createConnectionType } from '@shared';
 import { Field, ID, ObjectType } from 'type-graphql';
+
 import { BusinessDto } from '../../business/dto/business.dto';
 
 @ObjectType()

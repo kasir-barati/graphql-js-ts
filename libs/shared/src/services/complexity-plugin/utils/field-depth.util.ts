@@ -1,4 +1,5 @@
 import { FieldNode } from 'graphql';
+
 import { fieldDepthQueryNormalizer } from './field-depth-query-normalizer.util';
 
 /**

@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { GraphQLResolveInfo } from 'graphql';
+
 import { AST, Directive } from './types';
 
 /**

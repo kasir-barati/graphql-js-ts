@@ -3,6 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { ApolloArmor } from '@escape.tech/graphql-armor';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
+
 import { BusinessResolver } from './business/business.resolver';
 import { CustomerResolver } from './customer/customer.resolver';
 import { AppDataSource } from './shared/data-source';

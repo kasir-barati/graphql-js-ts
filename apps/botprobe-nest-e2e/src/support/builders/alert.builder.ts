@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { randomUUID } from 'crypto';
+
 import { AlertBuilderResponse } from '../types/alert.type';
 
 export class AlertBuilder {

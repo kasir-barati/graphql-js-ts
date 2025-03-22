@@ -3,6 +3,7 @@ import {
   GraphQLNonNull,
   GraphQLObjectType,
 } from 'graphql';
+
 import { UserObject } from './user.object';
 
 export const PostObject = new GraphQLObjectType({
