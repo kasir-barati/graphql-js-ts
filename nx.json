@@ -1,6 +1,6 @@
 {
   "installation": {
-    "version": "20.2.2"
+    "version": "20.6.2"
   },
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
