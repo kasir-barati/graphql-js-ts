@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
 import { AppService } from './app.service';
-import { UnionOfRobots } from './types/union-of-robots.type';
+import { RobotInterface } from './types/robot-interface.type';
 
 @Resolver()
 export class AppResolver {
@@ -12,10 +12,10 @@ export class AppResolver {
     return this.appService.getData();
   }
 
-  @Query(() => [UnionOfRobots], {
+  @Query(() => [RobotInterface], {
     description: 'Get all robots',
   })
-  robots(): Array<typeof UnionOfRobots> {
+  robots(): Array<RobotInterface> {
     return this.appService.getRobots();
   }
 }

@@ -1,5 +1,6 @@
 import { registerAs } from '@nestjs/config';
 import { validateEnvs } from '@shared';
+import { Type } from 'class-transformer';
 import { IsIn, IsInt, IsOptional } from 'class-validator';
 
 import { AppConfig } from '../app.type';
@@ -17,5 +18,6 @@ class Environment implements AppConfig {
 
   @IsOptional()
   @IsInt()
-  PORT: number = 4010;
+  @Type(() => Number)
+  PORT = 4010;
 }

@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 
 import { HumanoidRobot } from './types/humanoid.type';
+import { RobotInterface } from './types/robot-interface.type';
 import { ScaraRobot } from './types/scara.type';
-import { UnionOfRobots } from './types/union-of-robots.type';
 
 @Injectable()
 export class AppService {
-  getRobots(): Array<typeof UnionOfRobots> {
+  getRobots(): Array<RobotInterface> {
     const humaniodRobot: HumanoidRobot = {
       id: randomUUID(),
       name: `Humaniod robot`,

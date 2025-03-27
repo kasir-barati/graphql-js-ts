@@ -1,7 +1,7 @@
 import type { Config } from 'jest';
 
 export default {
-  displayName: 'interfaces-unions-e2e',
+  displayName: 'interfaces-e2e',
   preset: '../../jest.preset.js',
   globalSetup: '<rootDir>/src/support/global-setup.ts',
   globalTeardown: '<rootDir>/src/support/global-teardown.ts',
@@ -19,5 +19,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/interfaces-unions-e2e',
+  coverageDirectory: '../../coverage/interfaces-e2e',
 } satisfies Config;

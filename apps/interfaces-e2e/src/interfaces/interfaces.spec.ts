@@ -20,9 +20,7 @@ describe('AppResolver (e2e)', () => {
     const query = /* GraphQL */ `
       query {
         robots {
-          ... on RobotInterface {
-            name
-          }
+          name
           ... on HumanoidRobot {
             height
           }
