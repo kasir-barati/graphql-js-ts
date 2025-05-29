@@ -4,5 +4,5 @@ export interface AppConfig {
   DATABASE_URL: string;
 }
 namespace NodeJS {
-  export type ProcessEnv = AppConfig
+  export type ProcessEnv = AppConfig;
 }
