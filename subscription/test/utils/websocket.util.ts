@@ -9,7 +9,11 @@ export function getWebsocketClient(
 ) {
   const httpServer = app.getHttpServer() as Server;
   const serverAddress = httpServer.address();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+  if (typeof serverAddress === 'string' || serverAddress === null) {
+    throw new Error('Invalid server address');
+  }
+
   const port = serverAddress?.port ?? 3000;
   const websocketUrl = `ws://localhost:${port}/graphql`;
 
