@@ -6,10 +6,18 @@ import { UserType } from './types';
 @Injectable()
 export class UserService {
   findAll(): UserType[] {
-    return [{ id: randomUUID(), greetMe: { someField: 'Find All' } }];
+    return [
+      {
+        id: randomUUID(),
+        greetMe: { parentResolverMessage: "I've found all users" },
+      },
+    ];
   }
 
   findOne(id: string): UserType {
-    return { id, greetMe: { someField: 'Find One' } };
+    return {
+      id,
+      greetMe: { parentResolverMessage: 'I returned the user' },
+    };
   }
 }

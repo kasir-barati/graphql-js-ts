@@ -3,7 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class GreetMeType {
   @Field()
-  someField: string;
+  parentResolverMessage: string;
 
   @Field(() => String, { nullable: true })
   message?: string;

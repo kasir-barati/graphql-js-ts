@@ -6,10 +6,18 @@ import { ProductType } from './types/product.type';
 @Injectable()
 export class ProductService {
   findAll(): ProductType[] {
-    return [{ id: randomUUID(), greetMe: { someField: 'Find All' } }];
+    return [
+      {
+        id: randomUUID(),
+        greetMe: { parentResolverMessage: 'I found all products' },
+      },
+    ];
   }
 
   findOne(id: string): ProductType {
-    return { id, greetMe: { someField: 'Find One' } };
+    return {
+      id,
+      greetMe: { parentResolverMessage: 'I found your product' },
+    };
   }
 }
