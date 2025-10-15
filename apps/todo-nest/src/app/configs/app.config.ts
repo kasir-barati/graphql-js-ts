@@ -4,7 +4,7 @@ import { IsIn, IsInt, IsOptional } from 'class-validator';
 
 import { AppConfig } from '../app.type';
 
-export default registerAs('appConfigs', (): AppConfig => {
+export const appConfig = registerAs('appConfigs', (): AppConfig => {
   const validatedEnvs = validateEnvs(process.env, Environment);
 
   return validatedEnvs;
@@ -17,5 +17,5 @@ class Environment implements AppConfig {
 
   @IsOptional()
   @IsInt()
-  PORT: number = 4004;
+  PORT = 4004;
 }

@@ -7,11 +7,8 @@ import { join } from 'path';
 
 import { TodoModule } from '../todo/todo.module';
 import { UserModule } from '../user/user.module';
-import { AppController } from './app.controller';
 import { AppResolver } from './app.resolver';
-import { AppService } from './app.service';
-import appConfig from './configs/app.config';
-import { GraphQLConfig } from './configs/graphql.config';
+import { GraphQLConfig, appConfig } from './configs';
 
 @Module({
   imports: [
@@ -32,7 +29,6 @@ import { GraphQLConfig } from './configs/graphql.config';
     PubSubModule,
     CronTopModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AppResolver],
+  providers: [AppResolver],
 })
 export class AppModule {}

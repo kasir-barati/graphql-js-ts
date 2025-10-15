@@ -1,9 +1,9 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { ConfigType } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
-import { ConfigType } from '@nestjs/config';
 import { AppModule } from './app/app.module';
-import appConfig from './app/configs/app.config';
+import { appConfig } from './app/configs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +11,12 @@ async function bootstrap() {
     appConfig.KEY,
   );
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
   app.enableCors();
 
   await app.listen(PORT);

@@ -5,7 +5,7 @@ import { ConfigType } from '@nestjs/config';
 import { GqlOptionsFactory } from '@nestjs/graphql';
 import { join } from 'path';
 
-import appConfig from './app.config';
+import { appConfig } from './app.config';
 
 export class GraphQLConfig implements GqlOptionsFactory {
   constructor(

@@ -3,6 +3,7 @@ import {
   Args,
   Float,
   Int,
+  Mutation,
   Parent,
   ResolveField,
   Resolver,
@@ -23,12 +24,21 @@ import {
 } from '@shared';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 
+import { TestInput } from './inputs';
+
 @Resolver(() => Top)
 export class AppResolver {
   constructor(
     @Inject(PUB_SUB_INSTANCE)
     private readonly redisPubSub: RedisPubSub,
   ) {}
+
+  @Mutation(() => Boolean)
+  test(@Args('input') input: TestInput) {
+    console.log(input);
+
+    return true;
+  }
 
   @Subscription(() => String)
   async *greet() {

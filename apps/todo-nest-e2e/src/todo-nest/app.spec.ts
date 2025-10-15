@@ -15,11 +15,20 @@ describe('APP', () => {
     );
   });
 
-  it('should return a message on GET /api', async () => {
-    const res = await axios.get(`/api`);
+  it('should return true', async () => {
+    const query = `#graphql
+      mutation Test($input: TestInput!) {
+        test(input: $input)
+      }
+    `;
 
-    expect(res.status).toBe(200);
-    expect(res.data).toEqual({ message: 'Hello API' });
+    const { status, data } = await axios.post(`/graphql`, {
+      query,
+      variables: { input: { someField: { some: 123 } } },
+    });
+
+    expect(status).toBe(200);
+    expect(data).toEqual({ data: { test: true } });
   });
 
   it('should return memory usage in gigabyte on POST /graphql', async () => {

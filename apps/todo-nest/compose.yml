@@ -1,23 +1,18 @@
 services:
   redis:
-    image: bitnami/redis:7.4.1-debian-12-r2
+    image: redis:7.4.1
     restart: always
     container_name: redis-container
     ports:
-      - ${REDIS_PORT}:${REDIS_PORT_NUMBER}
+      - "${REDIS_PORT}:${REDIS_PORT_NUMBER}"
     volumes:
-      - redis:/bitnami/redis/data
-    environment:
-      REDIS_AOF_ENABLED: yes
-      REDIS_DATABASE: redis
-      REDIS_PORT_NUMBER: ${REDIS_PORT_NUMBER}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      - redis:/data
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+      --port ${REDIS_PORT_NUMBER}
+      --appendonly yes
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "redis-cli -a $$REDIS_PASSWORD -p $$REDIS_PORT_NUMBER ping | grep PONG",
-        ]
+      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD} -p ${REDIS_PORT_NUMBER} ping | grep PONG"]
       interval: 5s
       timeout: 5s
       retries: 5

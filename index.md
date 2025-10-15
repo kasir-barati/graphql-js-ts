@@ -35,6 +35,7 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
     - [Query complexity](./docs/nestjs.md#query-complexity).
     - [Query depth and complexity in one package](./docs/best-practices/query-depth-and-complexity.md).
     - [Write E2E tests for GraphQL](./subscription/README.md).
+    - [Nested field validation with `class-validator` in a GraphQL mutation](./apps/todo-nest/src/app/inputs/test.input.ts).
 15. [Subscription](./docs/subscription.md).
 16. [Best practices](./docs/best-practices/index.md).
     - [Serve over HTTP](./docs/best-practices/serve-over-http.md).
