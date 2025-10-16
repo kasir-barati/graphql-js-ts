@@ -24,7 +24,7 @@ import {
 } from '@shared';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 
-import { TestInput } from './inputs';
+import { DefineUserInput, TestInput } from './inputs';
 
 @Resolver(() => Top)
 export class AppResolver {
@@ -35,6 +35,13 @@ export class AppResolver {
 
   @Mutation(() => Boolean)
   test(@Args('input') input: TestInput) {
+    console.log(input);
+
+    return true;
+  }
+
+  @Mutation(() => Boolean)
+  testOneOf(@Args('input') input: DefineUserInput) {
     console.log(input);
 
     return true;

@@ -1,4 +1,5 @@
 export * from './constants/trigger-name.constant';
+export * from './decorators';
 export * from './dto/edge';
 export * from './dto/exclude';
 export * from './dto/page-info.meta-data';

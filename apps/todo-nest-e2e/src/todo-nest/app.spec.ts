@@ -15,6 +15,33 @@ describe('APP', () => {
     );
   });
 
+  it.each([
+    {
+      moderator: {
+        accessRights: ['READ', 'WRITE'],
+        email: 'jawad@asda.com',
+      },
+    },
+    { admin: { email: 'kasir@asda.com' } },
+  ])(
+    'should return true when calling testOneOf with input %p',
+    async (input) => {
+      const query = `#graphql
+      mutation TestOneOf($input: DefineUserInput!) {
+        testOneOf(input: $input)
+      }
+    `;
+
+      const { status, data } = await axios.post(`/graphql`, {
+        query,
+        variables: { input },
+      });
+
+      expect(status).toBe(200);
+      expect(data).toEqual({ data: { testOneOf: true } });
+    },
+  );
+
   it('should return true', async () => {
     const query = `#graphql
       mutation Test($input: TestInput!) {
