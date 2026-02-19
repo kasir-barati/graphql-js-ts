@@ -429,3 +429,201 @@ How can we send the cursor to the client?
 2. [Understanding pagination: REST, GraphQL, and Relay](https://www.apollographql.com/blog/understanding-pagination-rest-graphql-and-relay).
 3. [Explaining GraphQL Connections](https://www.apollographql.com/blog/explaining-graphql-connections).
 4. [Implementation of Relay-style pagination with Prisma Client JS](https://github.com/prisma/prisma/issues/5016).
+
+# Sorting + Relay Pagination
+
+What is the common practice for adding sorting to a Relay pagination? Does backend need to encode the sorting criteria in the opaque cursor or is this something that needs to be specified with each query?
+
+These were my questions the first time I through about having [Relay pagination](https://relay.dev/graphql/connections.htm) and sorting and this trips up a lot of developers the first time they combine Relay-style cursor pagination with sorting, so here is my two cent:
+
+1. Sorting is provided explicitly as query arguments (e.g., `sortBy: { field: CREATED_AT, direction: DESC }`).
+2. Cursors stay opaque and encode only the position in the current sort order, not the sort rules themselves.
+3. Changing sort order requires a new query starting from the beginning (no `after`/`before` can be reused across different sorts).
+   - For this we cannot really have a validation in the backend.
+   - If client mid air changes their criteria and use the cursor they have the result won't make any sense. In other words this is the responsibility of the client.
+4. Cursors should be stable by including the last item's sort key(s) and a tie-breaker (commonly the item id) so ordering is deterministic.
+
+## Why not just Encode the Sorting Criteria in the Opaque Cursor?
+
+1. Cursors represent a position within a specific ordering; they should **NOT silently** change the ordering.
+2. The client should be explicit about the desired sort to keep queries predictable and cacheable.
+3. If you bind sort to cursor, you will end up with confusing mismatches when the client changes sorting.
+4. Encoding it in the cusror will complicate the cache keys.
+
+```graphql
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  createdAt: String! # ISO-8601
+  lastLoginAt: String
+}
+
+enum UserSortField {
+  NAME
+  CREATED_AT
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+input UserSort {
+  field: UserSortField!
+  direction: SortDirection! = ASC
+}
+
+input UserFilter {
+  active: Boolean
+  query: String
+}
+
+type Query {
+  users(
+    first: Int
+    after: String
+    last: Int
+    before: String
+    filter: UserFilter
+    sortBy: UserSort = { field: CREATED_AT, direction: DESC }
+  ): UserConnection!
+}
+```
+
+What goes into the cursor?
+
+```js
+// @ts-check
+
+const lastItem = { createdAt: new Date(), id: "12345" };
+const cursor = Buffer.from(
+  JSON.stringify({ k: lastItem.createdAt, id: lastItem.id }),
+).toString("base64");
+
+console.log(cursor); // eyJrIjoiMjAyNi0wMi0xOVQyMjowNTozNC4xMjhaIiwiaWQiOiIxMjM0NSJ9
+```
+
+Bascially your cursor is a bookmark to the last item you saw, built from:
+
+- The primary sort key (e.g., createdAt, name) and
+- A tie‑breaker (usually a unique id).
+
+So the server knows exactly where to resume next time -- without repeating or skipping items:
+
+- If you sorted by `createdAt DESC`.
+- And your last item on page 1 had `createdAt = 2025‑01‑01T12:00:00Z`.
+- Your page‑2 query becomes: "Give me items with `createdAt < 2025‑01‑01T12:00:00Z`".
+
+This is known as "keyset pagination" (or “seek” pagination). It’s fast and stable because we don’t rely on OFFSET.
+
+Then what do we mean by a tie‑breaker? Many items can share the same primary sort key:
+
+- Many products can have the same price.
+- Many names can start with "Alex".
+
+A tie‑breaker is a **second field** used to define a unique total order among items that share the same primary sort key, e.g. your SQL query would look like this when you are sorting by newser first (`created_at DESC`):
+
+```sql
+SELECT id, created_at
+FROM users
+WHERE
+  (created_at < TIMESTAMPTZ '2025-01-01T12:00:00Z')
+  OR (
+    created_at = TIMESTAMPTZ '2025-01-01T12:00:00Z'
+    AND id     < 'A'
+  )
+ORDER BY created_at DESC, id DESC
+LIMIT 25;
+```
+
+> [!TIP]
+>
+> It you need to use a lexicographic predicate. To demonstrate this you can first create `users` table and seed it with some dummy data:
+> 
+> ```sql
+> DROP TABLE IF EXISTS users;
+> CREATE TABLE users (
+>  id         TEXT PRIMARY KEY,
+>  created_at TIMESTAMPTZ NOT NULL
+> );
+> INSERT INTO users (created_at, id) VALUES
+>   ('2025-01-01T12:00:00Z', 'B'),
+>   ('2025-01-01T12:00:00Z', 'A'),
+>   ('2024-12-31T23:59:00Z', 'Z');
+> ```
+>
+> Now if you try to fetch data with the assumption that the cursor (last item on the previous page) is (`created_at = '2025-01-01T12:00:00Z', id = 'A'`):
+>
+> ```sql
+> SELECT id, created_at
+> FROM users
+> WHERE
+>   created_at = TIMESTAMPTZ '2025-01-01T12:00:00Z'
+>   AND id     < 'A'
+> ORDER BY created_at DESC, id DESC
+> LIMIT 25;
+> ```
+>
+> This will return:
+>
+> ```
+>  id | created_at 
+> ----+------------
+> (0 rows)
+> ```
+>
+> But if we change our query to lexicographic predicate:
+> ```sql
+> SELECT id, created_at
+> FROM users
+> WHERE
+>   (created_at < TIMESTAMPTZ '2025-01-01T12:00:00Z')
+>   OR (
+>     created_at = TIMESTAMPTZ '2025-01-01T12:00:00Z'
+>     AND id     < 'A'
+>   )
+> ORDER BY created_at DESC, id DESC
+> LIMIT 25;
+> ```
+>
+> Will return:
+>
+> ```
+>  id |       created_at       
+> ----+------------------------
+>  Z  | 2024-12-31 23:59:00+00
+> (1 row)
+> ```
+>
+> **Note**:
+> - For `ASC` order, flip the operators: `>` instead of `<`, and `ORDER BY created_at ASC, id ASC`.
+> - Always include both fields in the `ORDER BY` (primary sort + tie-breaker) to keep the order **deterministic** and avoid duplicates/skips.
+> - If one of the fields can be `NULL`, decide a policy (e.g., `ORDER BY created_at DESC NULLS LAST, id DESC`).
+> - Index matching sorting criteria for better **performance**, in our case `created_at` and `id`:
+>   ```sql
+>   CREATE INDEX IF NOT EXISTS users_created_at_id_desc
+>   ON demo_users (created_at DESC, id DESC);
+>   ```
