@@ -1,5 +1,6 @@
 # Best practices
 
+- [Best practices of CRUD](./input.md).
 - Create different resolvers for different types;
 
   ```graphql
