@@ -84,9 +84,3 @@ export class CreateTemplateInput {
   @Field(() => CreateCssEmailTemplateInput, { nullable: true })
   css?: CreateCssEmailTemplateInput;
 }
-
-@ObjectType('CreateTemplatePayload')
-export class CreateTemplatePayload {
-  @Field(() => EmailTemplate)
-  template: EmailTemplate;
-}

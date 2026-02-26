@@ -2,16 +2,16 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import {
   CreateTemplateInput,
-  CreateTemplatePayload,
   CssEmailTemplate,
+  EmailTemplate,
   EmailTemplateKind,
   HtmlEmailTemplate,
 } from './email-template.types';
 
 @Resolver()
 export class EmailTemplateResolver {
-  @Mutation(() => CreateTemplatePayload)
-  createTemplate(@Args('input') input: CreateTemplateInput): CreateTemplatePayload {
+  @Mutation(() => EmailTemplate)
+  createTemplate(@Args('input') input: CreateTemplateInput): EmailTemplate {
     console.log('createTemplate input:', input);
 
     const now = new Date().toISOString();
@@ -26,7 +26,7 @@ export class EmailTemplateResolver {
       template.subject = input.html.subject ?? '';
       template.styleIds = input.html.styleIds;
 
-      return { template };
+      return template;
     }
 
     if (!input.css) {
@@ -41,6 +41,6 @@ export class EmailTemplateResolver {
     template.createdAt = now;
     template.updatedAt = now;
 
-    return { template };
+    return template;
   }
 }
