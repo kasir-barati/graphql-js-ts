@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { CronTopModule, PubSubModule } from '@shared';
 import { join } from 'path';
 
+import { EmailTemplateResolver } from '../one-of';
 import { TodoModule } from '../todo/todo.module';
 import { UserModule } from '../user/user.module';
 import { AppResolver } from './app.resolver';
@@ -29,6 +30,6 @@ import { GraphQLConfig, appConfig } from './configs';
     PubSubModule,
     CronTopModule,
   ],
-  providers: [AppResolver],
+  providers: [AppResolver, EmailTemplateResolver],
 })
 export class AppModule {}

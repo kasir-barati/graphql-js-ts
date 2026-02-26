@@ -36,7 +36,10 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
     - [Query depth and complexity in one package](./docs/best-practices/query-depth-and-complexity.md).
     - [Write E2E tests for GraphQL](./subscription/README.md).
     - [Nested field validation with `class-validator` in a GraphQL mutation](./apps/todo-nest/src/app/inputs/test.input.ts).
-    - In GraphQL we do not have union types, instead you can use [`@oneOf` directive](https://github.com/graphql/graphql-spec/pull/825), learn more about it [here](https://www.graphql-js.org/docs/oneof-input-objects/). To see how you can do it in NestJS you can check my [`testOneOf` API](./apps/todo-nest/src/app/inputs/define-user.input.ts).
+    - In GraphQL we do not have union types, instead:
+      - You can use [`@oneOf` directive](https://github.com/graphql/graphql-spec/pull/825), learn more about it [here](https://www.graphql-js.org/docs/oneof-input-objects/).
+      - [Here](./apps/todo-nest/src/one-of/email-template.types.ts) is a working example which is using `@oneOf` decorator.
+      - A workaround if you are using an old version of `@nestjs/graphql` you can look at [`testOneOf` API](./apps/todo-nest/src/app/inputs/define-user.input.ts).
 15. [Subscription](./docs/subscription.md).
 16. [Best practices](./docs/best-practices/index.md).
     - [Serve over HTTP](./docs/best-practices/serve-over-http.md).
