@@ -97,7 +97,6 @@ A GraphQL service is running (typically at a URL on a web service):
   ```
 
   So here is a break down of what will happen next:
-
   1. Our client can still use `name` in their codebase.
   2. They can see that `name` is flagged as deprecated.
   3. They refactor their code to use `fullname` instead.
@@ -130,7 +129,6 @@ Code: [https://github.com/kasir-barati/graphql-js-ts/blob/main/apps/hello-world/
 3. ExpressJS to run a web server.
 4. `graphql-http` lib to mount a GraphQL API server on the `/graphql` HTTP endpoint.
 5. `pnpm add ruru`.
-
    - GraphiQL is GraphQL's IDE.
    - You can query and explore your GraphQL API with it.
 

@@ -66,12 +66,10 @@ They do not need to do anything to benefit from caching. This means that we need
   Here this particular resolver is probably super slow, so we wanna make it faster.
 
 - Caching frequently accessed data:
-
   - Our app uses the cache instead of querying it from the underlying DB.
   - E.g. [IdentityCache](https://github.com/Shopify/identity_cache) which caches data in a [Memcached](https://memcached.org/).
 
 - Cache all `Queries`.
-
   - We can do this by resolver level caching with directives.
   - In Apollo Serve it is well known as [per-field basis server-side caching](https://www.apollographql.com/docs/apollo-server/performance/caching).
 

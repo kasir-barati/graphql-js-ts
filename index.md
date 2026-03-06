@@ -47,21 +47,21 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
       >
       > ```graphql
       > mutation {
-      >   createTemplate(input: {
-      >     css:  {
-      >        template: "body { color: red }"
-      >     },
-      >     html: {
-      >        styleIds: [],
-      >        subject: "some",
-      >        template: "html"
+      >   createTemplate(
+      >     input: {
+      >       css: { template: "body { color: red }" }
+      >       html: {
+      >         styleIds: []
+      >         subject: "some"
+      >         template: "html"
+      >       }
       >     }
-      >   }) {
+      >   ) {
       >     id
       >   }
       > }
       > ```
-      
+
 15. [Subscription](./docs/subscription.md).
 16. [Best practices](./docs/best-practices/index.md).
     - [Serve over HTTP](./docs/best-practices/serve-over-http.md).

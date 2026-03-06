@@ -3,7 +3,6 @@
 - Each field defined in a [type system](./glossary.md#typeSystemDefinitionInGraphql) behaves like a function.
 - Each field returns the next type.
 - Each field on each type is backed by a resolver function.
-
   - E.g. when [here](https://github.com/kasir-barati/graphql-js-ts/blob/63439cd4029023736636e039a1ddea2686b974b3/apps/scalar-types/src/main.ts#L30) we are returning a `RandomDie` and inside that type we have `roll` and `rollOnce` which are also considered resolvers.
 
     Though we never really passed them explicitly as resolver to our `rootApi` variable.
@@ -146,9 +145,7 @@ Most of the times when we have not defined a resolver the lib we're using to bui
     - Or `FragmentDefinition`.
   - It contains at least one `OperationDefinition`.
 - An `OperationDefinition` is:
-
   - The [`OperationType`](https://spec.graphql.org/October2021/#OperationType) followed by an optional given `Name`.
-
     - E.g. `query GetUsers...`
 
   - Then usually we define our [`SelectionSet`](https://spec.graphql.org/October2021/#sec-Selection-Sets).

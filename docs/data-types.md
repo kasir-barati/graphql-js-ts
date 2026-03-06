@@ -62,7 +62,6 @@ Code: [https://github.com/kasir-barati/graphql-js-ts/blob/122a487b29ec9c4b8610fe
   | https://github.com/kasir-barati/graphql-js-ts/blob/abe288c3dc3db225fe639250f446fe2a45cfc273/docs/assets/wrong-get-die-query.graphql#L1-L5 | https://github.com/kasir-barati/graphql-js-ts/blob/abe288c3dc3db225fe639250f446fe2a45cfc273/docs/assets/get-die-query.graphql#L1-L9 |
 
   Why should we use this approach?
-
   1. Instead of several separate request you can get them all in one go.
   2. Less bandwidth usage and server load.
   3. It is safe and easy to work with:
@@ -187,7 +186,6 @@ These are what you might call _abstract types_.
   - I.e the types included in a union can have completely unrelated structures, and GraphQL does not enforce that they share any fields.
 - Cannot use `interface` or another `union` inside a `union`.
 - Examples:
-
   - <a href="#auditLogUnionExample" id="auditLogUnionExample">#</a> audit-log example
 
     ![When you have an interface you can utilize it to prevent repetitive work](./assets/unions-example1.png)

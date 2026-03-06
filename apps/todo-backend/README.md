@@ -6,7 +6,6 @@
 4. The I started with writing my API's schema in [`schema.graphql`](./src/schema.graphql).
 5. Then I moved to define their [resolver](./src/resolvers/) bodies.
 6. Initialize Prisma + PostgreSQL:
-
    1. `nx add @nx-tools/nx-prisma`.
    2. `nx g @nx-tools/nx-prisma:configuration --project todo-backend --database postgresql`.
 

@@ -17,7 +17,6 @@
 ![Resolve info key/value pairs](./assets/resolve-info-interface.png)
 
 - `fieldNodes`:
-
   - Contains an excerpt of the query AST.
   - This excerpt starts at the current field (i.e. author) rather than at the root of the query (The entire query AST which starts at the root is stored in `operation`).
 

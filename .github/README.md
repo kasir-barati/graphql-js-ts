@@ -43,6 +43,28 @@ You can find a good definition usually in [glossary](../docs/glossary.md).
       - You can use [`@oneOf` directive](https://github.com/graphql/graphql-spec/pull/825), learn more about it [here](https://www.graphql-js.org/docs/oneof-input-objects/).
       - [Here](../apps/todo-nest/src/one-of/email-template.types.ts) is a working example which is using `@oneOf` decorator.
       - A workaround if you are using an old version of `@nestjs/graphql` you can look at [`testOneOf` API](../apps/todo-nest/src/app/inputs/define-user.input.ts).
+
+      > 🛑 **Caution**
+      >
+      > This directive won't allow you to send both fields at the same time. E.g. in our [`CreateTemplateInput`](https://github.com/kasir-barati/graphql-js-ts/blob/e9d1220f3fc458dad89fa7bd5fdf3fe9cddf592f/apps/todo-nest/src/one-of/email-template.types.ts#L79-L86) you can only specify either `html` or `css`. I.e. this query will fail with `OneOf Input Object \"CreateTemplateInput\" must specify exactly one key.`:
+      >
+      > ```graphql
+      > mutation {
+      >   createTemplate(
+      >     input: {
+      >       css: { template: "body { color: red }" }
+      >       html: {
+      >         styleIds: []
+      >         subject: "some"
+      >         template: "html"
+      >       }
+      >     }
+      >   ) {
+      >     id
+      >   }
+      > }
+      > ```
+
 15. [Subscription](../docs/subscription.md).
 16. [Best practices](../docs/best-practices/index.md).
     - [Serve over HTTP](../docs/best-practices/serve-over-http.md).

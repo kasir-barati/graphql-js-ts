@@ -35,7 +35,6 @@ To traverse the relationship between sets of objects. we can have a field that r
   ![Slicing or pagination in GraphQL with first as argument](../assets/slicing-pagination.png)
 
   But this is not gonna cut it when our client needs to paginate. Here are some API designs we can have:
-
   1. `comments(first:2 offset:2)` returns the next two in the list.
   2. `comments(first:2 after:$commentId)` returns the next two after the last comment we fetched.
   3. `comments(first:2 after:$commentCursor)` returns the next two comments from where the cursor points to.
@@ -234,12 +233,10 @@ How can we send the cursor to the client?
 
 - Our `comments` field should give us a list of edges.
 - An edge has both:
-
   - A cursor.
   - The underlying node.
 
 - We can also ask for additional information about the connection itself, e.g.:
-
   - How many comments is written for that post?
   - Is there more connections (comments to fetch)?
   - Etc.
@@ -275,10 +272,8 @@ How can we send the cursor to the client?
 ![Cursor-based connections pagination](../assets/graphql-cursor-based-connections-pagination.png)
 
 - `PostCommentsConnection`:
-
   - **A wrapper type**.
   - Fields:
-
     - `edges`.
 
       <details>
@@ -317,7 +312,6 @@ How can we send the cursor to the client?
     - Enables modeling additional info/attributes, related to the connection, where they **DO NOT** belong to the entities in our edges.
 
 - `PostCommentEdge`:
-
   - An actual entity in our graph.
   - **A wrapper type**.
   - Here can can model other info that do not belong to the post, nor the comment itself. E.g.:
@@ -326,7 +320,6 @@ How can we send the cursor to the client?
   - Without wrapper types (edge & connection), you don't have a place to put this data.
 
 - `commentsConnection`: you can perform forward pagination, backward pagination, **or both**.
-
   - **Forward pagination**:
     - `first`:
       - Mandatory.
@@ -518,10 +511,10 @@ What goes into the cursor?
 ```js
 // @ts-check
 
-const lastItem = { createdAt: new Date(), id: "12345" };
+const lastItem = { createdAt: new Date(), id: '12345' };
 const cursor = Buffer.from(
   JSON.stringify({ k: lastItem.createdAt, id: lastItem.id }),
-).toString("base64");
+).toString('base64');
 
 console.log(cursor); // eyJrIjoiMjAyNi0wMi0xOVQyMjowNTozNC4xMjhaIiwiaWQiOiIxMjM0NSJ9
 ```
@@ -562,7 +555,7 @@ LIMIT 25;
 > [!TIP]
 >
 > It you need to use a lexicographic predicate. To demonstrate this you can first create `users` table and seed it with some dummy data:
-> 
+>
 > ```sql
 > DROP TABLE IF EXISTS users;
 > CREATE TABLE users (
@@ -590,12 +583,13 @@ LIMIT 25;
 > This will return:
 >
 > ```
->  id | created_at 
+>  id | created_at
 > ----+------------
 > (0 rows)
 > ```
 >
 > But if we change our query to lexicographic predicate:
+>
 > ```sql
 > SELECT id, created_at
 > FROM users
@@ -612,13 +606,14 @@ LIMIT 25;
 > Will return:
 >
 > ```
->  id |       created_at       
+>  id |       created_at
 > ----+------------------------
 >  Z  | 2024-12-31 23:59:00+00
 > (1 row)
 > ```
 >
 > **Note**:
+>
 > - For `ASC` order, flip the operators: `>` instead of `<`, and `ORDER BY created_at ASC, id ASC`.
 > - Always include both fields in the `ORDER BY` (primary sort + tie-breaker) to keep the order **deterministic** and avoid duplicates/skips.
 > - If one of the fields can be `NULL`, decide a policy (e.g., `ORDER BY created_at DESC NULLS LAST, id DESC`).

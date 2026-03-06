@@ -11,7 +11,6 @@
   ```
 
   If:
-
   - you expect to add more types(car manufacturer) in the near future. This prevents potential messiness.
   - Your client need to perform queries like "sort Huawei cars by their rating ascending, Volvo cars by their ratings descending".
     - Here we just changed one of the parameters. But this can get even messier as decide to change more parameters.
@@ -22,7 +21,6 @@
   > If adding separate queries is not doable consider the next suggestion.
 
 - [Homogenize two or more resolvers into a single one with unions](../data-types.md#union). Then to simplify your query you can:
-
   - Filter using arguments.
   - Use [fragments](../queries-and-mutations.md#dont-repeat-yourself-dry----named-fragments).
   - Use [directives](../queries-and-mutations.md#directives).

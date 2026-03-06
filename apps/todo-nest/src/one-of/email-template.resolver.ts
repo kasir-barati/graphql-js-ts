@@ -11,7 +11,9 @@ import {
 @Resolver()
 export class EmailTemplateResolver {
   @Mutation(() => EmailTemplate)
-  createTemplate(@Args('input') input: CreateTemplateInput): EmailTemplate {
+  createTemplate(
+    @Args('input') input: CreateTemplateInput,
+  ): EmailTemplate {
     console.log('createTemplate input:', input);
 
     const now = new Date().toISOString();

@@ -5,7 +5,6 @@
    ```
 
    Note that `@graphql-codegen/*` are our plugins. We utilize them to generate types automatically:
-
    - `@graphql-codegen/typescript-resolvers`: creates a `Resolvers` type that you can use to add a type to your resolver map, ensuring your resolvers return values match the field types specified by your schema.
 
 2. ```shell

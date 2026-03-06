@@ -94,15 +94,15 @@ type FilterFieldComparisonType<
               StringFieldComparisons &
               Filter<FieldType>
           : CommonFieldComparisonType<FieldType> | Filter<FieldType>;
-interface StringFieldComparisons
-  extends CommonFieldComparisonType<string> {
+interface StringFieldComparisons extends CommonFieldComparisonType<string> {
   like?: string;
   notLike?: string;
   iLike?: string;
   notILike?: string;
 }
-interface CommonFieldComparisonType<FieldType>
-  extends BooleanFieldComparisons {
+interface CommonFieldComparisonType<
+  FieldType,
+> extends BooleanFieldComparisons {
   eq?: FieldType;
   neq?: FieldType;
   gt?: FieldType;

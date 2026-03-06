@@ -54,7 +54,6 @@
 > ![Mandatory Query object type in GraphQL](./assets/mandatory-query-object-type.png)
 
 - `Query`, `Mutation`, and `Subscription` are entry points of my GraphQL API.
-
   - Note that they should start with a capital letter and the same name as they are listed here.
   - If you want to use a custom name, you can do it. But then you need to tell GraphQL about it:
 

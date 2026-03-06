@@ -46,10 +46,8 @@
 4. Check `apps/botprobe-nest` to see what goes inside those files.
 5. And to see how you should write e2e tests read the `apps/botprobe-nest-e2e`.
 6. Use `///` to customize the generated code:
-
    - [`/// @HideField()`](https://github.com/unlight/prisma-nestjs-graphql?tab=readme-ov-file#hidefield).
    - For class-validator you need to:
-
      1. ```shell
         pnpm add class-validator class-transformer
         ```

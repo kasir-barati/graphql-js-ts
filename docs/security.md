@@ -42,7 +42,6 @@
 - There are tools that can help us to do this:
   - [`graphql-query-complexity`](https://www.npmjs.com/package/graphql-query-complexity).
 - It is directly related to your GraphQL schema design:
-
   - If you can send the following query to your GraphQL service:
 
     ```graphql

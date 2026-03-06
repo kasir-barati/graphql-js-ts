@@ -3,7 +3,6 @@
 - GraphQL + TS = better type safety when writing GraphQL queries, end-to-end typing.
 <!-- - We use [Apollo server](https://www.apollographql.com/docs/apollo-server). To do that we need [`@nestjs/apollo`](https://www.npmjs.com/package/@nestjs/apollo).
 - We will use [Mercurius](https://github.com/mercurius-js/mercurius) which uses [Fastify](https://fastify.dev/) to implement:
-
   - GraphQL servers.
   - Gateways.
 
@@ -193,7 +192,6 @@ To change data on the server you need to create an `Input` object type most of t
 
 1. Write one E2E test for it.
 2. Then start with implementation:
-
    1. Use `@Mutation` decorator to annotate the method which will serve as your resolver.
    2. ```shell
       cd apps/todo-nest && my-touch src/todo/dto/create-todo-input.dto.ts
