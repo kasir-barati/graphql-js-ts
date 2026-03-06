@@ -8,7 +8,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build", "prisma-generate", "compose:up"],
+      "dependsOn": ["prisma-generate", "build", "prisma-push", "compose:up"],
       "options": {
         "buildTarget": "todo-nest:build",
         "runBuildTargetDependencies": false,
