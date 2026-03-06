@@ -9,5 +9,6 @@ nx serve todo-nest
 
 Then you can see:
 
+- The GraphQL API playground: http://localhost:4004/graphql
 - PgAdmin (find its username pass in the compose file): http://localhost:5050
 - Redis Insight: http://localhost:5540

@@ -8,7 +8,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["prisma-generate", "build", "prisma-push", "compose:up"],
+      "dependsOn": ["prisma-generate", "build", "compose:up"],
       "options": {
         "buildTarget": "todo-nest:build",
         "runBuildTargetDependencies": false,
@@ -58,7 +58,11 @@
       "executor": "@nx-tools/nx-prisma:format"
     },
     "prisma-generate": {
-      "executor": "@nx-tools/nx-prisma:generate"
+      "executor": "@nx-tools/nx-prisma:generate",
+      "dependsOn": ["prisma-push"],
+      "options": {
+        "dotenvPath": "{projectRoot}/.env"
+      }
     },
     "prisma-migrate": {
       "executor": "@nx-tools/nx-prisma:migrate"
@@ -67,7 +71,11 @@
       "executor": "@nx-tools/nx-prisma:pull"
     },
     "prisma-push": {
-      "executor": "@nx-tools/nx-prisma:push"
+      "executor": "@nx-tools/nx-prisma:push",
+      "dependsOn": ["compose:up"],
+      "options": {
+        "dotenvPath": "{projectRoot}/.env"
+      }
     },
     "prisma-reset": {
       "executor": "@nx-tools/nx-prisma:reset"
