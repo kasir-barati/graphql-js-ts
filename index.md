@@ -30,6 +30,7 @@ You can find a good definition usually in [glossary](./docs/glossary.md).
     - [Use a `schema.graphql` file](./docs/improve-dev-exp/use-schema-graphql-files.md)
     - [Strongly typed resolvers, context, ...](./docs/improve-dev-exp/strongly-typed.md).
     - [Filtering using `prisma-nestjs-graphql`](./docs/improve-dev-exp/filtering-using-prisma-nestjs-graphql.md).
+    - [Use exported enum from Prisma](./docs/prisma/use-enum.md).
 13. [Security in GraphQL](./docs/security.md).
 14. [NestJS](./docs/nestjs.md).
     - [Query complexity](./docs/nestjs.md#query-complexity).
