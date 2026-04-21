@@ -22,7 +22,12 @@ model User {
 
 ```ts
 // resolver.ts
-import { ObjectType, Field, Int, registerEnumType } from '@nestjs/graphql';
+import {
+  ObjectType,
+  Field,
+  Int,
+  registerEnumType,
+} from '@nestjs/graphql';
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { UserStatus } from '@prisma/client';
 
@@ -40,11 +45,12 @@ export class User {
   status: UserStatus;
 }
 
-
 @Resolver(() => User)
 export class UserResolver {
   @Query(() => User)
-  async user(@Args('status', { type: () => UserStatus }) status: UserStatus) {
+  async user(
+    @Args('status', { type: () => UserStatus }) status: UserStatus,
+  ) {
     return {
       id: 1,
       status,
